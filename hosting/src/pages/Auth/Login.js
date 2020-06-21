@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { Link,useHistory  } from "react-router-dom";
-import { auth, googleAuth } from "../firebaseConfig"
+import { auth, googleAuth } from "../../firebaseConfig"
 
 const SignIn = () => {
     const history = useHistory();
@@ -12,7 +12,7 @@ const SignIn = () => {
 
             auth.signInWithEmailAndPassword(email, password).then((e)=>{
                 history.push({
-                    pathname: '/home',
+                    pathname: '/dashboard/',
                     state: { userid: e.user.uid }
                   })
                 

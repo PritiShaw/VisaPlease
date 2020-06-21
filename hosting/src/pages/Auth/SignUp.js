@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "../firebaseConfig"
-import {generateUserDocument} from "../utils/firestore"
+import { auth } from "../../firebaseConfig"
+import {generateUserDocument} from "../../utils/firestore"
 
 const SignIn = () => {
     const [firstName, setFirstName] = useState('');
