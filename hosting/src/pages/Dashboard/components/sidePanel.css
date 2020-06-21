@@ -1,0 +1,10 @@
+.sidepanel {
+    list-style-type:none;
+    height: 100vh;
+    background-color: white;
+}
+
+.sidepanel li {
+    padding-top: 2.5em;
+}
+

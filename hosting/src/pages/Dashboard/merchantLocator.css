@@ -1,0 +1,19 @@
+.col-sm-3{
+    font-size: large;
+}
+.radius-dropdown{
+    width: 60px;
+}
+.name-dropdown{
+    width: inherit;
+}
+
+.btn-primary{
+    padding-top: 6px;
+    margin-top: 45px;
+    margin-right: 91px;
+}
+
+.radius{
+    padding-left: 127px;
+}

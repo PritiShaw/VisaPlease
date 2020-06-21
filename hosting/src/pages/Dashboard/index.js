@@ -21,21 +21,35 @@ const Dashboard = ({ location }) => {
     // fetchInfo()
   });
   return (
-    <div>
-      <div className="col-sm-3">
-        <SidePanel/>
+    <Router>
+      <nav className="navbar navbar-expand-lg navbar-light border-bottom">
+        <div className="container">
+          <Link className="navbar-brand visa" to={"/sign-in"}>VISA</Link>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link">LogOut</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div >
+        <div className="row w-100">
+          <div className="col-sm-3">
+              <SidePanel />
+          </div>
+          <div className="col-sm-9">
+            <Switch>
+              <Route path="/dashboard/" exact component={Calculator} />
+              <Route path="/dashboard/calculator" component={Calculator} />
+              <Route path="/dashboard/locator" component={MerchantLocator} />
+            </Switch>
+        </div>
+        </div>
       </div>
-      <div className="col-sm-9">
-        <Router>
-          <Switch>
-            <Route path="/dashboard/" exact component={Calculator} />
-            {/* Upar wala me */}
-            <Route path="/dashboard/calculator" component={Calculator} />
-            <Route path="/dashboard/locator" component={MerchantLocator} />
-          </Switch>
-        </Router>
-      </div>
-    </div>    
+    </Router>
+
   )
 };
 export default Dashboard;

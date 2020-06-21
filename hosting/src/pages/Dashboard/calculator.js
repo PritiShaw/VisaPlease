@@ -1,12 +1,12 @@
 import React from "react";
 
-class Calculator extends React.Component{
-    render(){
-        return(
-            <div>
-            Calculator
+const Calculator = () => {
+    return(
+        <div className="col-12 py-5">
+            <div className="col-12">
+                <h2>Calculator</h2>
             </div>
-        )
-    }
+        </div>
+    )
 }
 export default Calculator;

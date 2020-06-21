@@ -1,8 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import "./sidePanel.css";
 
 const sidePanel = () => {
   return (
-    <h1>MENU</h1>
+    <div>
+      <ul className="sidepanel">
+        <li>
+          <Link to="/dashboard/calculator">Calculator</Link>
+        </li>
+        <li>
+          <Link to="/dashboard/locator">Merchant</Link> 
+          {/* checkakr lena parht */}
+        </li>
+      </ul>
+    </div>
   );
 };
 
