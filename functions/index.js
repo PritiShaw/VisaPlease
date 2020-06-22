@@ -11,6 +11,7 @@ exports.merchantLocator = functions.https.onRequest(async (request, response) =>
         'Authorization': 'Basic QjFOTVkwU1FDWUxYWThLTzZHSzkyMUk3Q3BrSURDdUFlWk5BcEtUM2VJdDZhNUVSbzpBQTJYcUFmNW9BTURpY2VpeVlTdDc5OFI1WUJoZEl2Qm90MFdVcA==',
         'Content-Type': 'application/json'
       } 
+    response.set('Access-Control-Allow-Origin', '*');
     requestAPI.post({
         url: "https://sandbox.api.visa.com/merchantlocator/v1/locator",
         headers: headers,
@@ -21,7 +22,7 @@ exports.merchantLocator = functions.https.onRequest(async (request, response) =>
         }
       }, function(error, httpResponse, body) {
           if (error) {
-            response.send('{"status":500}');
+            response.send('{"status":500,"error":"'+error+'"}');
             console.log(error);
           }
           else {

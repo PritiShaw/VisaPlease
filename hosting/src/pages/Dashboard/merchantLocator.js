@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 import "./merchantLocator.css"
 
-function searchButtonClick(){
-    
-}
 const MerchantLocator = () => {
+    const [searchResults, setSearchResults] = useState([]);
+    const searchButtonClick = () => {
+        var result = []
+        fetch("http://localhost:5001/visa-please/us-central1/merchantLocator")
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                data["merchantLocatorServiceResponse"]["response"].map(({ responseValues }) => {
+                    result.push({
+                        "name": responseValues["visaStoreName"],
+                        "distance": responseValues["distance"],
+                        "gps": responseValues["locationAddressLatitude"] + "," + responseValues["locationAddressLongitude"]
+                    })
+                })
+                setSearchResults(result)
+            })
+    }
+
     return (
         <div className="col-12 py-3 bg-light text-dark">
             <div className="col-12">
@@ -12,7 +28,7 @@ const MerchantLocator = () => {
             </div>
             <hr />
             <div className="col-12">
-                <p>Descirption ya kuchHAa one line me</p>
+                <p>Descirption ya kuch dena hai one line me</p>
             </div>
 
             <div className="container">
@@ -43,6 +59,27 @@ const MerchantLocator = () => {
                         <center><button type="button" className="btn btn-primary" onClick={() => searchButtonClick()}>Search</button></center>
                     </div>
                 </div>
+            </div>
+            <div className="col-12 my-5">
+                <h3>Result</h3>
+                <table className="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>GPS Coordinates</th>
+                        <th>Distance</th>
+                    </tr>
+                    {
+                        searchResults.map((result) => {
+                            return (
+                                <tr>
+                                    <td>{result["name"]}</td>
+                                    <td>{result["gps"]}</td>
+                                    <td>{result["distance"]}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </table>
             </div>
         </div>
     )
