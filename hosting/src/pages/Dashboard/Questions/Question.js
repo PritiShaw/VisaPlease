@@ -52,7 +52,7 @@ const Question2 = (props) => {
         <Form onSubmit={submit}>
         <Form.Group >
         <Form.Label>Your anuual revenue last year(in $)</Form.Label>
-        <Form.Control type="number" placeholder="anuual revenue last year" />
+        <Form.Control type="number" placeholder="$" />
       </Form.Group>
       
       <Form.Group >
@@ -77,13 +77,13 @@ const Question2 = (props) => {
 
       <Form.Group >
       <Form.Label>Net profit last year($)</Form.Label>
-      <Form.Control type="number" placeholder="net profit last year" />
+      <Form.Control type="number" placeholder="$" />
     </Form.Group>
       
 
     <Form.Group >
     <Form.Label>Cost of investment last year($)</Form.Label>
-    <Form.Control type="number" placeholder="Cost of investment last year" />
+    <Form.Control type="number" placeholder="$" />
   </Form.Group>
     
 <Form.Group >
