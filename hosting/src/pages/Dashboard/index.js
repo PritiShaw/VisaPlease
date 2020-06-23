@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Calculator from "./calculator"
 import MerchantLocator from "./merchantLocator";
-
+// import AddSupplier from "./Questions/AddSupplier";
 import SidePanel from "./components/sidePanel"
 
 const Dashboard = ({ location }) => {
@@ -42,8 +42,9 @@ const Dashboard = ({ location }) => {
           <div className="col-sm-9">
             <Switch>
               <Route path="/dashboard/" exact component={Calculator} />
-              <Route path="/dashboard/calculator" component={Calculator} />
+              <Route path="/dashboard/calculator" exact component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
+              
             </Switch>
         </div>
         </div>

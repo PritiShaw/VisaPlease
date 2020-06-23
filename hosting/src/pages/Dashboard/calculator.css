@@ -1,0 +1,13 @@
+.calculator .col-12 .py-5{
+    background-color: white;
+    padding: 20px;
+    border: 2px black solid;
+    border-radius: 500px;
+}
+.ques{
+    color: white;
+}
+.addsupplier{
+    background-color: darkgreen;
+    color: black;
+}

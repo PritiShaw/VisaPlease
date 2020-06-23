@@ -1,8 +1,8 @@
 const functions = require('firebase-functions');
 const fs = require('fs')
 const requestAPI = require('request');
-// var request = require('request');
-// // Create and Deploy Your First Cloud Functions
+// var request = require('request');                                    
+// // Create and Deploy Your First Cloud Functions                       
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
 exports.merchantLocator = functions.https.onRequest(async (request, response) => {   
@@ -11,7 +11,7 @@ exports.merchantLocator = functions.https.onRequest(async (request, response) =>
         'Authorization': 'Basic QjFOTVkwU1FDWUxYWThLTzZHSzkyMUk3Q3BrSURDdUFlWk5BcEtUM2VJdDZhNUVSbzpBQTJYcUFmNW9BTURpY2VpeVlTdDc5OFI1WUJoZEl2Qm90MFdVcA==',
         'Content-Type': 'application/json'
       } 
-    response.set('Access-Control-Allow-Origin', '*');
+    response.set('Access-Control-Allow-Origin' , '*');
     requestAPI.post({
         url: "https://sandbox.api.visa.com/merchantlocator/v1/locator",
         headers: headers,
