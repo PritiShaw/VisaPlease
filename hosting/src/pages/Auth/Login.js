@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { Link,useHistory  } from "react-router-dom";
-import { auth, googleAuth } from "../../firebaseConfig"
+import { auth } from "../../firebaseConfig"
 
 const SignIn = () => {
     const history = useHistory();
@@ -21,10 +21,7 @@ const SignIn = () => {
                 console.error("Error signing in with password and email", error);
             });
         };
-    const googleSignIn = () => {
-        auth.signInWithPopup(googleAuth);
-    }
-
+    
     return (
         <div className="mt-8">
             <h3>Sign In</h3>
