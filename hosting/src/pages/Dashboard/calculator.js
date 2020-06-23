@@ -9,6 +9,8 @@ import {Question1} from "./Questions/Question"
 import {Question2} from "./Questions/Question"
 import {Question3} from "./Questions/Question"
 import {Question4} from "./Questions/Question"
+import {Question5a} from "./Questions/Question"
+import {Question5b} from "./Questions/Question"
 class Calculator extends React.Component{
     state={
         visible:1
@@ -23,10 +25,10 @@ class Calculator extends React.Component{
         return( 
         <div claculator> 
         <div className="col-12 py-5">
-                <h2>Calculator</h2>
+                <h2>Recovery Score Calculator</h2>
                 <h4>Fill out the following information to know your Recovery Score</h4>
                 </div>
-                <h4>Getting to know you:</h4>
+                <h4>About you:</h4>
                 <Question1  display={this.state.visible} Visibility={this.Visibility}/><br/><br/><br/><br/>
                 <h4>Fulfilment of general criteria for a loan (%):</h4>
                 <Question2  display={this.state.visible} Visibility={this.Visibility}/><br/><br/><br/><br/>
@@ -34,8 +36,11 @@ class Calculator extends React.Component{
                 <Question3  display={this.state.visible} Visibility={this.Visibility}/><br/><br/><br/><br/>
                 <h4>Online presence of business (%):</h4>
                 <Question4  display={this.state.visible} Visibility={this.Visibility}/><br/><br/><br/><br/>
-                <h4>Evaluation of suppliers</h4>        
-                
+                <h4>Evaluation of suppliers</h4> 
+                <h5>a) Accessibility to suppliers </h5>       
+                <Question5a  display={this.state.visible} Visibility={this.Visibility}/><br/><br/><br/><br/>
+                <h5>b) Reliability of suppliers</h5>
+                <Question5b  display={this.state.visible} Visibility={this.Visibility}/><br/><br/><br/><br/>
         </div>
     )}
     

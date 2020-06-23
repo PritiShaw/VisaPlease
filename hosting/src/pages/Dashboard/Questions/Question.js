@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 // import "./calculator.css";
 // import "../../App.css";
@@ -19,11 +16,11 @@ const Question1 = (props) => {
         <Form onSubmit={submit}>
         <Form.Group >
         <Form.Label>Company name</Form.Label>
-        <Form.Control type="text" placeholder="your company name"/>
+        <Form.Control type="text" placeholder="Company Name"/>
       </Form.Group>
       <Form.Group >
         <Form.Label>Company location</Form.Label>
-        <Form.Control type="text" placeholder="your company address" />
+        <Form.Control type="text" placeholder="Company Address" />
       </Form.Group>
       <Form.Group >
         <Form.Label>Merchant category</Form.Label>
@@ -35,7 +32,7 @@ const Question1 = (props) => {
           <option>5</option>
         </Form.Control>
       </Form.Group>
-      <Button variant="primary" type="submit" size="lg" block >
+      <Button variant="primary" type="submit" size="lg"> 
     Submit
   </Button>
   </Form>
@@ -43,13 +40,6 @@ const Question1 = (props) => {
     )
 }
 export {Question1};
-
-
-
-
-
-
-
 
 const Question2 = (props) => {
     const submit=(e)=>{
@@ -111,7 +101,7 @@ const Question2 = (props) => {
 </Form.Group>
 
 
-<Button variant="primary" type="submit" size="lg" block >
+<Button variant="primary" type="submit" size="lg">
             Submit
           </Button>
       
@@ -172,7 +162,7 @@ const Question3 = (props) => {
     </Form.Control>
   </Form.Group>
 
-<Button variant="primary" type="submit" size="lg" block >
+<Button variant="primary" type="submit" size="lg">
             Submit
           </Button>
       
@@ -181,13 +171,6 @@ const Question3 = (props) => {
     )
 }
 export {Question3};
-
-
-
-
-
-
-
 
 const Question4 = (props) => {
     const submit=(e)=>{
@@ -200,7 +183,7 @@ const Question4 = (props) => {
         <Form onSubmit={submit}>
         
         <Form.Group >
-        <Form.Label>Does the company have any online website for business?</Form.Label>
+        <Form.Label>Does your company have an online website for business?</Form.Label>
         <Form.Control as="select">
         <option>Yes</option>
         <option>No</option>
@@ -208,7 +191,7 @@ const Question4 = (props) => {
         </Form.Group>
 
         <Form.Group >
-        <Form.Label>Does the company provide online ordering or delivery?</Form.Label>
+        <Form.Label>Does your company provide online ordering/delivery?</Form.Label>
         <Form.Control as="select">
         <option>Yes</option>
         <option>No</option>
@@ -223,7 +206,7 @@ const Question4 = (props) => {
         </Form.Control>
         </Form.Group>
 
-<Button variant="primary" type="submit" size="lg" block >
+<Button variant="primary" type="submit" size="lg">
             Submit
           </Button>
   </Form>
@@ -232,6 +215,127 @@ const Question4 = (props) => {
 }
 export {Question4};
 
+const Question5a = (props) => {
+  const submit=(e)=>{
+      e.preventDefault();
+      props.Visibility(6);
+   alert("hello");
+  }
+  return(
+      <div style={props.display<4 ? {pointerEvents: "none", opacity: "0.4"} : {}}>
+      <Form onSubmit={submit}>
+      
+      <Form.Group >
+      <Form.Label>How many suppliers do you have?</Form.Label>
+      <Form.Control type="number" placeholder="Number" />
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>What is the name of your supplier company?</Form.Label>
+      <Form.Control type="text" placeholder="Company Name"/>  
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Is the supplier company open now?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Is the supplier in the same country or in another country?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Does your supplier provide world-wide delivery now?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Which global shipping services does your supplier use? </Form.Label>
+      <Form.Control as="select">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Does supplier provide local delivery?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Within what distance (x) is considered accessible to you?</Form.Label>
+      <Form.Control type="number" placeholder="Enter Radius" />
+      </Form.Group>
+
+<Button variant="primary" type="submit" size="lg">
+          Submit
+        </Button>
+</Form>
+</div>
+  )
+}
+export {Question5a};
+
+
+const Question5b = (props) => {
+  const submit=(e)=>{
+      e.preventDefault();
+      props.Visibility(7);
+   alert("hello");
+  }
+  return(
+      <div style={props.display<4 ? {pointerEvents: "none", opacity: "0.4"} : {}}>
+      <Form onSubmit={submit}>
+      
+      <Form.Group >
+      <Form.Label>Did your suppliers support you throughout the crisis?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Are your suppliers recovering?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      <Form.Group >
+      <Form.Label>Are your current suppliers able to satisfy your future requirements?</Form.Label>
+      <Form.Control as="select">
+      <option>Yes</option>
+      <option>No</option>
+      </Form.Control>
+      </Form.Group>
+
+      
+<Button variant="primary" type="submit" size="lg">
+          Submit
+        </Button>
+</Form>
+</div>
+  )
+}
+export {Question5b};
 
 
 
