@@ -5,7 +5,7 @@ const MerchantLocator = () => {
     const [searchResults, setSearchResults] = useState([]);
     const searchButtonClick = () => {
         var result = []
-        fetch("http://localhost:5001/visa-please/us-central1/merchantLocator")
+        fetch("https://visa-please-functions.vercel.app/api/locator")
             .then(response => {
                 return response.json();
             })
