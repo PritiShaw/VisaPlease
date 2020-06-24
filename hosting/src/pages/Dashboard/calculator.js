@@ -11,7 +11,7 @@ class Calculator extends React.Component{
     state={
         visible:1
     }
-    Visibility=(x)=>{
+    Visibility=(x)=>{ 
         this.setState((state) => {
             return {visible: x};
           });

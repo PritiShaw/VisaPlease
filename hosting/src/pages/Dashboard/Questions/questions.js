@@ -69,6 +69,10 @@ const Question2 = (props) => {
       props.setGroupNumber(3)
     }
   }
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(1);
+  }
   return (
     <div>
       <Form onSubmit={submit}>
@@ -95,6 +99,10 @@ const Question2 = (props) => {
           <Form.Label> What is the percentage of business owned by local shareholders(%)</Form.Label>
           <Form.Control type="number" placeholder="%" value={answer4} onChange={(e) => setAnswer4(e.target.value)} />
         </Form.Group>
+
+        <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+          Prev
+        </Button>
 
         <Button variant="primary" type="submit" size="lg">
           Next
@@ -124,6 +132,10 @@ const Question3 = (props) => {
       props.setAnswers(props.presentAns)
       props.setGroupNumber(4)
     }
+  }
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(2);
   }
   return (
     <div>
@@ -156,11 +168,12 @@ const Question3 = (props) => {
           <Form.Label>What was your net sales last year?</Form.Label>
           <Form.Control type="number" placeholder="Number of units" value={answer5} onChange={(e) => setAnswer5(e.target.value)} />
         </Form.Group>
-
-
+        <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+          Prev
+        </Button>
         <Button variant="primary" type="submit" size="lg">
           Next
-      </Button>
+        </Button>
 
       </Form>
     </div>
@@ -188,6 +201,10 @@ const Question4 = (props) => {
       props.setAnswers(props.presentAns)
       props.setGroupNumber(4.5)
     }
+  }
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(3);
   }
   return (
     <div>
@@ -225,10 +242,13 @@ const Question4 = (props) => {
           <Form.Control type="number" placeholder="$" value={answer6} onChange={(e) => setAnswer6(e.target.value)} />
         </Form.Group>
 
-        <Button variant="primary" type="submit" size="lg">
-          Submit
-      </Button>
+        <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+          Prev
+        </Button>
 
+        <Button variant="primary" type="submit" size="lg">
+          Next
+      </Button>
       </Form>
     </div>
   )
@@ -255,6 +275,10 @@ const Question4b = (props) => {
       props.setAnswers(props.presentAns)
       props.setGroupNumber(5)
     }
+  }
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(4);
   }
   return (
     <div>
@@ -292,10 +316,14 @@ const Question4b = (props) => {
           <Form.Control type="number" placeholder="$" value={answer6} onChange={(e) => setAnswer6(e.target.value)} />
         </Form.Group>
 
-        <Button variant="primary" type="submit" size="lg">
-          Submit
-      </Button>
 
+        <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+          Prev
+        </Button>
+        <Button variant="primary" type="submit" size="lg">
+          Next
+        </Button>
+      
       </Form>
     </div>
   )
@@ -314,8 +342,13 @@ const Question5 = (props) => {
       props.presentAns["company.mohtly_revenue"] = answer2
       props.presentAns["company.monthly_cash"] = answer3
       props.setAnswers(props.presentAns)
-      props.setGroupNumber(7)
+      props.setGroupNumber(6)
     }
+  }
+  
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(4.5);
   }
   return (
     <div>
@@ -347,14 +380,181 @@ const Question5 = (props) => {
             <option>No</option>
           </Form.Control>
         </Form.Group>
-
+        <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+        Prev
+      </Button>
         <Button variant="primary" type="submit" size="lg">
           Next
       </Button>
+      
+      </Form>
+    </div>
+  )
+}
+const Question6 = (props) => {
+
+  const submit = (e) => {
+    e.preventDefault(); 
+    props.setGroupNumber(7)
+  }
+  
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(5);
+  } 
+  const setSupplier=(e)=>{
+    const x=e.target.value;
+    props.setnoOfSuppliers(x);
+  }
+
+  
+  return (
+    <div>
+      <Form onSubmit={submit}>
+       
+      <Form.Group >
+          <Form.Label>How many suppliers do you have?</Form.Label>
+          <Form.Control type="number" placeholder="No of Suppliers" onChange={setSupplier} />
+      </Form.Group>
+      
+      <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+        Prev
+      </Button>
+        <Button variant="primary" type="submit" size="lg">
+          Next
+      </Button>
+      
       </Form>
     </div>
   )
 }
 
 
-export { Question1, Question2, Question3, Question4, Question4b, Question5 };
+
+const Question7 = (props) => {
+
+  const submit = (e) => {
+    e.preventDefault();
+      props.setGroupNumber(props.numb+1);
+  }
+  
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(props.numb-1);
+  }
+  return (
+    <div>
+    <h4>Enter information of supplier {props.numb-props.supplier}</h4>
+      <Form onSubmit={submit}>
+        
+      <Form.Group >
+      <Form.Label>What is the name of Supplier's company?</Form.Label>
+      <Form.Control type="text" placeholder="Company Name" />
+    </Form.Group>
+        
+
+    <Form.Group >
+    <Form.Label>Is supplier's company open now?</Form.Label>
+    <Form.Control as="select" >
+      <option></option>
+      <option>Yes</option>
+      <option>No</option>
+    </Form.Control>
+  </Form.Group>
+ 
+ 
+  <Form.Group >
+  <Form.Label>Is supplier is from another country?</Form.Label>
+  <Form.Control as="select" >
+     <option></option>
+     <option>Yes</option>
+     <option>No</option>
+    </Form.Control>
+  </Form.Group>
+  
+  
+  <Form.Group >
+  <Form.Label>Does supplier provide world wide delivery?</Form.Label>
+  <Form.Control as="select" >
+     <option></option>
+     <option>Yes</option>
+     <option>No</option>
+    </Form.Control>
+  </Form.Group>
+
+  
+
+  <Form.Group >
+  <Form.Label> Which global shipping service is being used by supplier?</Form.Label>
+  <Form.Control as="select" >
+    <option></option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </Form.Control>
+</Form.Group>
+
+
+
+<Form.Group >
+  <Form.Label>Does supplier provide local delivery?</Form.Label>
+  <Form.Control as="select" >
+     <option></option>
+     <option>Yes</option>
+     <option>No</option>
+    </Form.Control>
+  </Form.Group>
+
+  
+  <Form.Group >
+  <Form.Label>Within what distance is considered accessible for you to travel and buy your supplies?(in meters)</Form.Label>
+  <Form.Control type="number" placeholder="meters" />
+</Form.Group>
+
+<Form.Group >
+<Form.Label>Did your supplier support you throughout the pandemic?</Form.Label>
+<Form.Control as="select" >
+   <option></option>
+   <option>Yes</option>
+   <option>No</option>
+  </Form.Control>
+</Form.Group>
+
+<Form.Group >
+<Form.Label>Are your suppliers recovering?</Form.Label>
+<Form.Control as="select" >
+   <option></option>
+   <option>Yes</option>
+   <option>No</option>
+  </Form.Control>
+</Form.Group>
+
+<Form.Group >
+<Form.Label>Are your current supplier able to satisfy your future requirements?</Form.Label>
+<Form.Control as="select" >
+   <option></option>
+   <option>Yes</option>
+   <option>No</option>
+  </Form.Control>
+</Form.Group>
+
+        
+        <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+        Prev
+      </Button>
+        <Button variant="primary" type="submit" size="lg">
+          Next
+      </Button>
+      
+      </Form>
+    </div>
+  )
+}
+
+
+
+export { Question1, Question2, Question3, Question4, Question4b, Question5 ,Question6,Question7 };
+
+
