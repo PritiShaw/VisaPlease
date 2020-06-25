@@ -3,7 +3,30 @@ const requestAPI = require('request');
 const cors = require('micro-cors')();
 
 const handler = async (request, response) => {
-  let payload = " \n{\n\"header\": {\n\"messageDateTime\": \"2020-06-18T04:37:30.903\",\n\"requestMessageId\": \"Request_001\",\n\"startIndex\": \"0\"\n},\n\"searchAttrList\": {\n\"merchantName\": \"Starbucks\",\n\"merchantCountryCode\": \"840\",\n\"latitude\": \"37.363922\",\n\"longitude\": \"-121.929163\",\n\"distance\": \"2\",\n\"distanceUnit\": \"M\"\n},\n\"responseAttrList\": [\n\"GNLOCATOR\"\n],\n\"searchOptions\": {\n\"maxRecords\": \"5\",\n\"matchIndicators\": \"true\",\n\"matchScore\": \"true\"\n}\n}";
+
+  let payload = {
+    "header": {
+      "messageDateTime": "2020-06-18T04:37:30.903",
+      "requestMessageId": "Request_001",
+      "startIndex": "0"
+    },
+    "searchAttrList": {
+      "merchantName": request.body.merchantName,
+      "merchantCountryCode": request.body.countryCode,
+      "latitude": request.body.lat,
+      "longitude": request.body.long,
+      "distance": request.body.radius,
+      "distanceUnit": "M"
+    },
+    "responseAttrList": [
+      "GNLOCATOR"
+    ],
+    "searchOptions": {
+      "maxRecords": "10",
+      "matchIndicators": "true",
+      "matchScore": "true"
+    }
+  };
   let headers = {
     'Authorization': 'Basic QjFOTVkwU1FDWUxYWThLTzZHSzkyMUk3Q3BrSURDdUFlWk5BcEtUM2VJdDZhNUVSbzpBQTJYcUFmNW9BTURpY2VpeVlTdDc5OFI1WUJoZEl2Qm90MFdVcA==',
     'Content-Type': 'application/json'
@@ -11,7 +34,7 @@ const handler = async (request, response) => {
   requestAPI.post({
     url: "https://sandbox.api.visa.com/merchantlocator/v1/locator",
     headers: headers,
-    body: payload,
+    body: JSON.stringify(payload),
     agentOptions: {
       cert: fs.readFileSync(__dirname + "/cred/cert.pem"),
       key: fs.readFileSync(__dirname + "/cred/privateKey.pem")

@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 import "./merchantLocator.css"
+import { apiDomain } from "../../config.js"
 
 const MerchantLocator = () => {
     const [searchResults, setSearchResults] = useState([]);
+    const [merchant_Name, setMerchant_Name] = useState("")
+    const [radius2, setRadius2] = useState("")
+
     const searchButtonClick = () => {
         var result = []
-        fetch("https://visa-please.vercel.app/api/merchantLocator")
+        fetch(apiDomain + "/api/merchantLocator", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                merchantName: merchant_Name,
+                countryCode: '840',
+                lat: "37.363922",
+                long: "-121.929163",
+                radius: radius2
+            })
+        })
             .then(response => {
                 return response.json();
             })
@@ -37,7 +53,8 @@ const MerchantLocator = () => {
                         <h6 className="radius">Radius (m): </h6>
                     </div>
                     <div className="col-sm-3">
-                        <select className="form-control" className="radius-dropdown" >
+                        <select className="form-control" className="radius-dropdown" value={radius2} onChange={(e) => setRadius2(e.target.value)} >
+                            <option></option>
                             <option>5</option>
                             <option>10</option>
                             <option>20</option>
@@ -48,7 +65,8 @@ const MerchantLocator = () => {
                         <h6>Merchant Name: </h6>
                     </div>
                     <div className="col-sm-3">
-                        <select className="form-control" className="name-dropdown" >
+                        <select className="form-control" className="name-dropdown" value={merchant_Name} onChange={(e) => setMerchant_Name(e.target.value)} >
+                            <option></option>
                             <option>Starbucks</option>
                             <option>PQR</option>
                             <option>MNO</option>
