@@ -390,40 +390,40 @@ const Question5 = (props) => {
     </div>
   )
 }
-const Question6 = (props) => {
+// const Question6 = (props) => {
 
-  const submit = (e) => {
-    e.preventDefault();
-    const x=e.target.elements.supp.value;
-    props.setNoOfSuppliers(x); 
-    props.setGroupNumber(7)
-  }
+//   const submit = (e) => {
+//     e.preventDefault();
+//     const x=e.target.elements.supp.value;
+//     props.setNoOfSuppliers(x); 
+//     props.setGroupNumber(7)
+//   }
   
-  const prevQues = (e) =>{
-    e.preventDefault();
-    props.setGroupNumber(5);
-  } 
+//   const prevQues = (e) =>{
+//     e.preventDefault();
+//     props.setGroupNumber(5);
+//   } 
 
   
-  return (
-    <div>
-      <Form onSubmit={submit}>
+//   return (
+//     <div>
+//       <Form onSubmit={submit}>
        
-      <Form.Group >
-          <Form.Label>How many suppliers do you have?</Form.Label>
-          <Form.Control name="supp" type="number" placeholder="No of Suppliers"  />
-      </Form.Group>
+//       <Form.Group >
+//           <Form.Label>How many suppliers do you have?</Form.Label>
+//           <Form.Control name="supp" type="number" placeholder="No of Suppliers"  />
+//       </Form.Group>
       
-      <Button onClick={prevQues} variant="primary" type="submit" size="lg">
-        Prev
-      </Button>
-        <Button variant="primary" type="submit" size="lg">
-          Next
-      </Button>      
-      </Form>
-    </div>
-  )
-}
+//       <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+//         Prev
+//       </Button>
+//         <Button variant="primary" type="submit" size="lg">
+//           Next
+//       </Button>      
+//       </Form>
+//     </div>
+//   )
+// }
 
 // const Question7 = (props) => {
 
