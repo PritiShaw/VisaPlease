@@ -1,0 +1,126 @@
+{
+  "merchantLocatorServiceResponse": {
+    "response": [
+      {
+        "matchIndicators": { "merchantCountryCode": "Y", "merchantName": "Y" },
+        "matchScore": "8.578574",
+        "responseValues": {
+          "merchantCountryCode": "840",
+          "merchantStreetAddress": "1661 AIRPORT BLVD # 3E",
+          "merchantPostalCode": "95110-1216",
+          "merchantState": "CA",
+          "merchantCity": "SAN JOSE",
+          "paymentAcceptanceMethod": ["F2F"],
+          "terminalType": ["SWIPE", "CHIP", "PAYWAVE"],
+          "firstTranDateRange": "In more than 365 days",
+          "lastTranDateRange": "In last 365 days",
+          "merchantCategoryCode": ["5814"],
+          "distance": "1.0 m",
+          "visaMerchantName": "STARBUCKS1",
+          "visaStoreName": "STARBUCKS1",
+          "locationAddressLatitude": "37.363363",
+          "locationAddressLongitude": "-121.921986",
+          "visaStoreId": "177066014",
+          "visaMerchantId": "29992901",
+          "merchantUrl": [],
+          "merchantCategoryCodeDesc": ["FAST FOOD RESTAURANTS"],
+          "visaEnterpriseName": "STARBUCKS CORPORATION",
+          "primaryMerchantCategoryCode": "5814"
+        }
+      },
+
+      {
+        "matchIndicators": { "merchantCountryCode": "Y", "merchantName": "Y" },
+        "matchScore": "8.578574",
+        "responseValues": {
+          "merchantCountryCode": "840",
+          "merchantStreetAddress": "1661 AIRPORT BLVD # 3E",
+          "merchantPostalCode": "95110-1216",
+          "merchantState": "CA",
+          "merchantCity": "SAN JOSE",
+          "paymentAcceptanceMethod": ["F2F"],
+          "terminalType": ["SWIPE", "CHIP", "PAYWAVE"],
+          "firstTranDateRange": "In more than 365 days",
+          "lastTranDateRange": "In last 365 days",
+          "merchantCategoryCode": ["5814"],
+          "distance": "2.0 m",
+          "visaMerchantName": "STARBUCKS",
+          "visaStoreName": "STARBUCKS2",
+          "locationAddressLatitude": "37.363363",
+          "locationAddressLongitude": "-121.921986",
+          "visaStoreId": "177066014",
+          "visaMerchantId": "29992901",
+          "merchantUrl": [],
+          "merchantCategoryCodeDesc": ["FAST FOOD RESTAURANTS"],
+          "visaEnterpriseName": "STARBUCKS CORPORATION",
+          "primaryMerchantCategoryCode": "5814"
+        }
+      },
+
+      {
+        "matchIndicators": { "merchantCountryCode": "Y", "merchantName": "Y" },
+        "matchScore": "8.578574",
+        "responseValues": {
+          "merchantCountryCode": "840",
+          "merchantStreetAddress": "1661 AIRPORT BLVD # 3E",
+          "merchantPostalCode": "95110-1216",
+          "merchantState": "CA",
+          "merchantCity": "SAN JOSE",
+          "paymentAcceptanceMethod": ["F2F"],
+          "terminalType": ["SWIPE", "CHIP", "PAYWAVE"],
+          "firstTranDateRange": "In more than 365 days",
+          "lastTranDateRange": "In last 365 days",
+          "merchantCategoryCode": ["5814"],
+          "distance": "6 m",
+          "visaMerchantName": "STARBUCKS",
+          "visaStoreName": "STARBUCKS3",
+          "locationAddressLatitude": "37.363363",
+          "locationAddressLongitude": "-121.921986",
+          "visaStoreId": "177066014",
+          "visaMerchantId": "29992901",
+          "merchantUrl": [],
+          "merchantCategoryCodeDesc": ["FAST FOOD RESTAURANTS"],
+          "visaEnterpriseName": "STARBUCKS CORPORATION",
+          "primaryMerchantCategoryCode": "5814"
+        }
+      },
+      {
+        "matchIndicators": { "merchantCountryCode": "Y", "merchantName": "Y" },
+        "matchScore": "8.578574",
+        "responseValues": {
+          "merchantCountryCode": "840",
+          "merchantStreetAddress": "1661 AIRPORT BLVD # 3E",
+          "merchantPostalCode": "95110-1216",
+          "merchantState": "CA",
+          "merchantCity": "SAN JOSE",
+          "paymentAcceptanceMethod": ["F2F"],
+          "terminalType": ["SWIPE", "CHIP", "PAYWAVE"],
+          "firstTranDateRange": "In more than 365 days",
+          "lastTranDateRange": "In last 365 days",
+          "merchantCategoryCode": ["5814"],
+          "distance": "11 m",
+          "visaMerchantName": "STARBUCKS",
+          "visaStoreName": "STARBUCKS4",
+          "locationAddressLatitude": "37.363363",
+          "locationAddressLongitude": "-121.921986",
+          "visaStoreId": "177066014",
+          "visaMerchantId": "29992901",
+          "merchantUrl": [],
+          "merchantCategoryCodeDesc": ["FAST FOOD RESTAURANTS"],
+          "visaEnterpriseName": "STARBUCKS CORPORATION",
+          "primaryMerchantCategoryCode": "5814"
+        }
+      }
+    ],
+    "header": {
+      "startIndex": "0",
+      "numRecordsMatched": 1,
+      "numRecordsReturned": 1,
+      "requestMessageId": "Request_001",
+      "messageDateTime": "2020-06-25T08:28:54.479",
+      "responseMessageId": "68VDP1882320200625082854479",
+      "endIndex": "0"
+    },
+    "status": { "statusDescription": "Success", "statusCode": "CDI000" }
+  }
+}
