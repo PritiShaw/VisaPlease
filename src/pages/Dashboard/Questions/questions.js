@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Col } from "react-bootstrap"
 
 
-const Question1 = (props) => { 
+const Question1 = (props) => {
   const [answer1, setAnswer1] = useState("")
   const [answer2, setAnswer2] = useState("")
   const [answer3, setAnswer3] = useState("")
@@ -53,10 +53,10 @@ const Question1 = (props) => {
 
 const Question2 = (props) => {
 
-  const [answer1, setAnswer1] = useState(0)
-  const [answer2, setAnswer2] = useState(0)
-  const [answer3, setAnswer3] = useState(0)
-  const [answer4, setAnswer4] = useState(0)
+  const [answer1, setAnswer1] = useState()
+  const [answer2, setAnswer2] = useState()
+  const [answer3, setAnswer3] = useState()
+  const [answer4, setAnswer4] = useState()
 
   const submit = (e) => {
     e.preventDefault();
@@ -115,11 +115,11 @@ const Question2 = (props) => {
 
 const Question3 = (props) => {
 
-  const [answer1, setAnswer1] = useState(0)
-  const [answer2, setAnswer2] = useState(0)
-  const [answer3, setAnswer3] = useState(0)
-  const [answer4, setAnswer4] = useState(0)
-  const [answer5, setAnswer5] = useState(0)
+  const [answer1, setAnswer1] = useState()
+  const [answer2, setAnswer2] = useState()
+  const [answer3, setAnswer3] = useState()
+  const [answer4, setAnswer4] = useState()
+  const [answer5, setAnswer5] = useState()
 
   const submit = (e) => {
     e.preventDefault();
@@ -182,12 +182,12 @@ const Question3 = (props) => {
 
 const Question4 = (props) => {
 
-  const [answer1, setAnswer1] = useState(0)
-  const [answer2, setAnswer2] = useState(0)
-  const [answer3, setAnswer3] = useState(0)
-  const [answer4, setAnswer4] = useState(0)
-  const [answer5, setAnswer5] = useState(0)
-  const [answer6, setAnswer6] = useState(0)
+  const [answer1, setAnswer1] = useState()
+  const [answer2, setAnswer2] = useState()
+  const [answer3, setAnswer3] = useState()
+  const [answer4, setAnswer4] = useState()
+  const [answer5, setAnswer5] = useState()
+  const [answer6, setAnswer6] = useState()
 
   const submit = (e) => {
     e.preventDefault();
@@ -256,12 +256,12 @@ const Question4 = (props) => {
 
 const Question4b = (props) => {
 
-  const [answer1, setAnswer1] = useState(0)
-  const [answer2, setAnswer2] = useState(0)
-  const [answer3, setAnswer3] = useState(0)
-  const [answer4, setAnswer4] = useState(0)
-  const [answer5, setAnswer5] = useState(0)
-  const [answer6, setAnswer6] = useState(0)
+  const [answer1, setAnswer1] = useState()
+  const [answer2, setAnswer2] = useState()
+  const [answer3, setAnswer3] = useState()
+  const [answer4, setAnswer4] = useState()
+  const [answer5, setAnswer5] = useState()
+  const [answer6, setAnswer6] = useState()
 
   const submit = (e) => {
     e.preventDefault();
@@ -331,9 +331,9 @@ const Question4b = (props) => {
 
 const Question5 = (props) => {
 
-  const [answer1, setAnswer1] = useState("")
-  const [answer2, setAnswer2] = useState("")
-  const [answer3, setAnswer3] = useState("")
+  const [answer1, setAnswer1] = useState()
+  const [answer2, setAnswer2] = useState()
+  const [answer3, setAnswer3] = useState()
 
   const submit = (e) => {
     e.preventDefault();
@@ -394,9 +394,7 @@ const Question5 = (props) => {
 const Question6 = (props) => {
 
   const submit = (e) => {
-    e.preventDefault();
-    const x=e.target.elements.supp.value;
-    props.setNoOfSuppliers(x); 
+    e.preventDefault(); 
     props.setGroupNumber(7)
   }
   
@@ -404,6 +402,10 @@ const Question6 = (props) => {
     e.preventDefault();
     props.setGroupNumber(5);
   } 
+  const setSupplier=(e)=>{
+    const x=e.target.value;
+    props.setnoOfSuppliers(x);
+  }
 
   
   return (
@@ -412,7 +414,7 @@ const Question6 = (props) => {
        
       <Form.Group >
           <Form.Label>How many suppliers do you have?</Form.Label>
-          <Form.Control name="supp" type="number" placeholder="No of Suppliers"  />
+          <Form.Control type="number" placeholder="No of Suppliers" onChange={setSupplier} />
       </Form.Group>
       
       <Button onClick={prevQues} variant="primary" type="submit" size="lg">
@@ -433,18 +435,16 @@ const Question7 = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    const x=props.numb;
-      props.setGroupNumber(x+1);
+      props.setGroupNumber(props.numb+1);
   }
   
   const prevQues = (e) =>{
     e.preventDefault();
-    const y=props.numb;
-    props.setGroupNumber(y-1);
+    props.setGroupNumber(props.numb-1);
   }
   return (
     <div>
-    <h4>Enter information of supplier </h4>
+    <h4>Enter information of supplier {props.numb-props.supplier}</h4>
       <Form onSubmit={submit}>
         
       <Form.Group >

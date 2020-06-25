@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col"
 import {Link} from "react-router-dom"
 import QuestionHandler from "./Questions"
 
-class Calculator extends React.Component{ 
+class Calculator extends React.Component{
     state={
         visible:1
     }
