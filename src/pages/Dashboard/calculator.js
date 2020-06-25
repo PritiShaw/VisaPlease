@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col"
 import { Link } from "react-router-dom"
 import QuestionHandler from "./Questions"
 
+
 const Calculator = (props) => {
     return (
         <div>

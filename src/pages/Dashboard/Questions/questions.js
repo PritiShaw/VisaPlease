@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Col } from "react-bootstrap"
 
 
-const Question1 = (props) => {
+const Question1 = (props) => { 
   const [answer1, setAnswer1] = useState("")
   const [answer2, setAnswer2] = useState("")
   const [answer3, setAnswer3] = useState("")
@@ -53,10 +53,10 @@ const Question1 = (props) => {
 
 const Question2 = (props) => {
 
-  const [answer1, setAnswer1] = useState()
-  const [answer2, setAnswer2] = useState()
-  const [answer3, setAnswer3] = useState()
-  const [answer4, setAnswer4] = useState()
+  const [answer1, setAnswer1] = useState(0)
+  const [answer2, setAnswer2] = useState(0)
+  const [answer3, setAnswer3] = useState(0)
+  const [answer4, setAnswer4] = useState(0)
 
   const submit = (e) => {
     e.preventDefault();
@@ -115,11 +115,11 @@ const Question2 = (props) => {
 
 const Question3 = (props) => {
 
-  const [answer1, setAnswer1] = useState()
-  const [answer2, setAnswer2] = useState()
-  const [answer3, setAnswer3] = useState()
-  const [answer4, setAnswer4] = useState()
-  const [answer5, setAnswer5] = useState()
+  const [answer1, setAnswer1] = useState(0)
+  const [answer2, setAnswer2] = useState(0)
+  const [answer3, setAnswer3] = useState(0)
+  const [answer4, setAnswer4] = useState(0)
+  const [answer5, setAnswer5] = useState(0)
 
   const submit = (e) => {
     e.preventDefault();
@@ -182,12 +182,12 @@ const Question3 = (props) => {
 
 const Question4 = (props) => {
 
-  const [answer1, setAnswer1] = useState()
-  const [answer2, setAnswer2] = useState()
-  const [answer3, setAnswer3] = useState()
-  const [answer4, setAnswer4] = useState()
-  const [answer5, setAnswer5] = useState()
-  const [answer6, setAnswer6] = useState()
+  const [answer1, setAnswer1] = useState(0)
+  const [answer2, setAnswer2] = useState(0)
+  const [answer3, setAnswer3] = useState(0)
+  const [answer4, setAnswer4] = useState(0)
+  const [answer5, setAnswer5] = useState(0)
+  const [answer6, setAnswer6] = useState(0)
 
   const submit = (e) => {
     e.preventDefault();
@@ -256,12 +256,12 @@ const Question4 = (props) => {
 
 const Question4b = (props) => {
 
-  const [answer1, setAnswer1] = useState()
-  const [answer2, setAnswer2] = useState()
-  const [answer3, setAnswer3] = useState()
-  const [answer4, setAnswer4] = useState()
-  const [answer5, setAnswer5] = useState()
-  const [answer6, setAnswer6] = useState()
+  const [answer1, setAnswer1] = useState(0)
+  const [answer2, setAnswer2] = useState(0)
+  const [answer3, setAnswer3] = useState(0)
+  const [answer4, setAnswer4] = useState(0)
+  const [answer5, setAnswer5] = useState(0)
+  const [answer6, setAnswer6] = useState(0)
 
   const submit = (e) => {
     e.preventDefault();
@@ -331,9 +331,9 @@ const Question4b = (props) => {
 
 const Question5 = (props) => {
 
-  const [answer1, setAnswer1] = useState()
-  const [answer2, setAnswer2] = useState()
-  const [answer3, setAnswer3] = useState()
+  const [answer1, setAnswer1] = useState("")
+  const [answer2, setAnswer2] = useState("")
+  const [answer3, setAnswer3] = useState("")
 
   const submit = (e) => {
     e.preventDefault();
@@ -385,12 +385,174 @@ const Question5 = (props) => {
       </Button>
         <Button variant="primary" type="submit" size="lg">
           Next
-      </Button>
-
+      </Button>      
       </Form>
     </div>
   )
 }
+const Question6 = (props) => {
+
+  const submit = (e) => {
+    e.preventDefault();
+    const x=e.target.elements.supp.value;
+    props.setNoOfSuppliers(x); 
+    props.setGroupNumber(7)
+  }
+  
+  const prevQues = (e) =>{
+    e.preventDefault();
+    props.setGroupNumber(5);
+  } 
+
+  
+  return (
+    <div>
+      <Form onSubmit={submit}>
+       
+      <Form.Group >
+          <Form.Label>How many suppliers do you have?</Form.Label>
+          <Form.Control name="supp" type="number" placeholder="No of Suppliers"  />
+      </Form.Group>
+      
+      <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+        Prev
+      </Button>
+        <Button variant="primary" type="submit" size="lg">
+          Next
+      </Button>      
+      </Form>
+    </div>
+  )
+}
+
+// const Question7 = (props) => {
+
+//   const submit = (e) => {
+//     e.preventDefault();
+//     const x=props.numb;
+//       props.setGroupNumber(x+1);
+//   }
+  
+//   const prevQues = (e) =>{
+//     e.preventDefault();
+//     const y=props.numb;
+//     props.setGroupNumber(y-1);
+//   }
+//   return (
+//     <div>
+//     <h4>Enter information of supplier </h4>
+//       <Form onSubmit={submit}>
+        
+//       <Form.Group >
+//       <Form.Label>What is the name of Supplier's company?</Form.Label>
+//       <Form.Control type="text" placeholder="Company Name" />
+//     </Form.Group>
+        
+
+//     <Form.Group >
+//     <Form.Label>Is supplier's company open now?</Form.Label>
+//     <Form.Control as="select" >
+//       <option></option>
+//       <option>Yes</option>
+//       <option>No</option>
+//     </Form.Control>
+//   </Form.Group>
+ 
+ 
+//   <Form.Group >
+//   <Form.Label>Is supplier is from another country?</Form.Label>
+//   <Form.Control as="select" >
+//      <option></option>
+//      <option>Yes</option>
+//      <option>No</option>
+//     </Form.Control>
+//   </Form.Group>
+  
+  
+//   <Form.Group >
+//   <Form.Label>Does supplier provide world wide delivery?</Form.Label>
+//   <Form.Control as="select" >
+//      <option></option>
+//      <option>Yes</option>
+//      <option>No</option>
+//     </Form.Control>
+//   </Form.Group>
+
+  
+
+//   <Form.Group >
+//   <Form.Label> Which global shipping service is being used by supplier?</Form.Label>
+//   <Form.Control as="select" >
+//     <option></option>
+//     <option>1</option>
+//     <option>2</option>
+//     <option>3</option>
+//     <option>4</option>
+//     <option>5</option>
+//   </Form.Control>
+// </Form.Group>
+
+
+
+// <Form.Group >
+//   <Form.Label>Does supplier provide local delivery?</Form.Label>
+//   <Form.Control as="select" >
+//      <option></option>
+//      <option>Yes</option>
+//      <option>No</option>
+//     </Form.Control>
+//   </Form.Group>
+
+  
+//   <Form.Group >
+//   <Form.Label>Within what distance is considered accessible for you to travel and buy your supplies?(in meters)</Form.Label>
+//   <Form.Control type="number" placeholder="meters" />
+// </Form.Group>
+
+// <Form.Group >
+// <Form.Label>Did your supplier support you throughout the pandemic?</Form.Label>
+// <Form.Control as="select" >
+//    <option></option>
+//    <option>Yes</option>
+//    <option>No</option>
+//   </Form.Control>
+// </Form.Group>
+
+// <Form.Group >
+// <Form.Label>Are your suppliers recovering?</Form.Label>
+// <Form.Control as="select" >
+//    <option></option>
+//    <option>Yes</option>
+//    <option>No</option>
+//   </Form.Control>
+// </Form.Group>
+
+// <Form.Group >
+// <Form.Label>Are your current supplier able to satisfy your future requirements?</Form.Label>
+// <Form.Control as="select" >
+//    <option></option>
+//    <option>Yes</option>
+//    <option>No</option>
+//   </Form.Control>
+// </Form.Group>
+
+        
+//         <Button onClick={prevQues} variant="primary" type="submit" size="lg">
+//         Prev
+//       </Button>
+//         <Button variant="primary" type="submit" size="lg">
+//           Next
+//       </Button>
+      
+//       </Form>
+//     </div>
+//   )
+// }
+
+
+
+// export { Question1, Question2, Question3, Question4, Question4b, Question5 ,Question6,Question7 };
+
 // const Question6 = (props) => {
 
 //   const submit = (e) => {
@@ -556,5 +718,3 @@ const Question5 = (props) => {
 
 
 export { Question1, Question2, Question3, Question4, Question4b, Question5};
-
-

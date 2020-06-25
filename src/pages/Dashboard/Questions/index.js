@@ -22,25 +22,28 @@ const Questions = () => {
     }
 
     const questionRenderer = () => {
-        if (groupNumber == 1)
-            return <Question1 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        else if (groupNumber == 2)
-            return <Question2 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        else if (groupNumber == 3)
-            return <Question3 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        else if (groupNumber == 4)
-            return <Question4 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        else if (groupNumber == 4.5)
-            return <Question4b setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        else if (groupNumber == 5)
-            return <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        // else if (groupNumber == 6)
-        //     return <Question6 setnoOfSuppliers={setnoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        // else if (groupNumber <= 6 + { noOfSuppliers })
-        //     return <Question7 numb={groupNumber} supplier={noOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-        else if (groupNumber == 6)
+        console.log(groupNumber)
+        console.log(noOfSuppliers)
+        if(groupNumber==1)
+            return <Question1 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber==2)
+            return <Question2 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber==3)
+            return <Question3 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber==4)
+            return <Question4 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber==4.5)
+            return <Question4b setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber==5)
+             return <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+//         else if(groupNumber==6&&noOfSuppliers!==0)
+//             return <Question6 setNoOfSuppliers={setNoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+//         else if(groupNumber<=6+noOfSuppliers)
+//             return <Question7 numb={groupNumber} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+//         else if(groupNumber>6+noOfSuppliers)
+         else if(groupNumber==6)
             return <div><h3>Are you sure?</h3><center><button className="btn btn-primary btn-lg" onClick={() => submitAll()}>Yes</button></center></div>
-        else
+         else
             return <h3>Internal Error</h3>
     }
     return (
