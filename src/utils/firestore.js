@@ -1,4 +1,7 @@
-import { firestore } from "../firebaseConfig"
+import { firestore } from "../firebaseConfig";
+
+const USER_COLLECTION = "users";
+const ANSWER_COLLECTION = "questionnare";
 
 const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
@@ -7,30 +10,29 @@ const generateUserDocument = async (user, additionalData) => {
   if (!snapshot.exists) {
     const { email, displayName, photoURL } = user;
     try {
-      await userRef.set({   
+      await userRef.set({
         email,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.error("Error creating user document", error);
     }
   }
-}
+};
 
-
-const storeRecoveryQuestionnaire = async (userid, data) => {
-  const userRef = firestore.doc(`questionnaire/${userid}`);
+const storeRecoveryQuestionnaire = async (userid, data, timestamp) => {
+  const userRef = firestore.doc(`questionnaire/abc/${userid}/25.06.2020`);
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
     try {
       await userRef.set(data);
       alert("Saved");
-      return true
+      return true;
     } catch (error) {
       console.error("Error updating user document", error);
-      alert("Failed to save")
-      return false
+      alert("Failed to save");
+      return false;
     }
   }
-}
-export { generateUserDocument, storeRecoveryQuestionnaire }
+};
+export { generateUserDocument, storeRecoveryQuestionnaire };

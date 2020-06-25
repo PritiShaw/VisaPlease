@@ -11,8 +11,11 @@ const sidePanel = () => {
           <Link to="/dashboard/calculator">Calculator</Link>
         </li>
         <li>
-          <Link to="/dashboard/locator">Merchant</Link> 
+          <Link to="/dashboard/locator">Merchant</Link>
           {/* checkakr lena parht */}
+        </li>
+        <li>
+          <Link to="/dashboard/track">Track</Link>
         </li>
       </ul>
     </div>
