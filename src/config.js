@@ -1,0 +1,1 @@
+export const apiDomain = "https://visa-please.vercel.app"
