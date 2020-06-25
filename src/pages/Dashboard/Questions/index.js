@@ -6,16 +6,18 @@ const Questions = () => {
     
     const [answers, setAnswers] = useState({});    
     const [groupNumber, setGroupNumber] = useState(1);
-    const [noOfSuppliers, setnoOfSuppliers] = useState({});
+    const [noOfSuppliers, setNoOfSuppliers] = useState(1);
     const setSubAnswers = (key,answer) =>{
         answers[key] = answer
-        setAnswers(answers)
+        setAnswers(answers) 
     } 
     const submitAll = () =>{
         //handle firebase
     }
     
     const questionRenderer = () => {
+        console.log(groupNumber)
+        console.log(noOfSuppliers)
         if(groupNumber==1)
             return <Question1 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
         else if(groupNumber==2)
@@ -28,10 +30,10 @@ const Questions = () => {
             return <Question4b setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
         else if(groupNumber==5)
             return <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
-        else if(groupNumber==6)
-            return <Question6 setnoOfSuppliers={setnoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
-        else if(groupNumber<=6+{noOfSuppliers})
-        return <Question7 numb={groupNumber} supplier={noOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber==6&&noOfSuppliers!==0)
+            return <Question6 setNoOfSuppliers={setNoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+        else if(groupNumber<=6+noOfSuppliers)
+            return <Question7 numb={groupNumber} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
         else if(groupNumber>6+noOfSuppliers)
             return <div><h3>Are you sure?</h3><button onClick={()=>submitAll()}>Yes</button></div>
         else
