@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { auth, firestore } from "../../firebaseConfig";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 import Calculator from "./calculator"
 import MerchantLocator from "./merchantLocator";
 // import AddSupplier from "./Questions/AddSupplier";
 import SidePanel from "./components/sidePanel"
 
-const Dashboard = ({ location }) => {
-  //  const userid = location.state.userid
-  //  const [firstName, setFirstName] = useState();
+const Dashboard = () => {
+  const cookies = new Cookies();
+  const userid = cookies.get('userid');
+  const [firstName, setFirstName] = useState();
 
   useEffect(() => {
     async function fetchInfo() {
-      //  const userRef = firestore.doc(`users/${userid}`);
-      //  const snapshot = await userRef.get();
-      //  const userData = snapshot.data();
-      //  setFirstName(userData.firstName)
+      const userRef = firestore.doc(`users/${userid}`);
+      const snapshot = await userRef.get();
+      const userData = snapshot.data();
+      setFirstName(userData.firstName)
     }
-    // fetchInfo()
+    fetchInfo()
   });
   return (
     <Router>
@@ -37,16 +39,16 @@ const Dashboard = ({ location }) => {
       <div >
         <div className="row w-100">
           <div className="col-sm-3">
-              <SidePanel />
+            <SidePanel />
           </div>
           <div className="col-sm-9">
             <Switch>
-              <Route path="/dashboard/" exact component={Calculator} />
-              <Route path="/dashboard/calculator" exact component={Calculator} />
+              {/* <Route path="/dashboard" exact component={Calculator} /> */}
+              <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
-              
+
             </Switch>
-        </div>
+          </div>
         </div>
       </div>
     </Router>
