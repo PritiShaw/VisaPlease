@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
-import { Link,useHistory  } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebaseConfig"
+import Cookies from 'universal-cookie';
 
 const SignIn = () => {
     const history = useHistory();
@@ -10,18 +11,20 @@ const SignIn = () => {
     const signInWithEmailAndPasswordHandler =
         () => {
 
-            auth.signInWithEmailAndPassword(email, password).then((e)=>{
+            auth.signInWithEmailAndPassword(email, password).then((e) => {
+                const cookies = new Cookies();
+                cookies.set('userid', e.user.uid, { path: '/' });
                 history.push({
                     pathname: '/dashboard/',
                     state: { userid: e.user.uid }
-                  })
-                
+                })
+
             }).catch(error => {
                 setError("Error signing in with password and email!");
                 console.error("Error signing in with password and email", error);
             });
         };
-    
+
     return (
         <div className="mt-8">
             <h3>Sign In</h3>
@@ -48,6 +51,8 @@ const SignIn = () => {
             <p className="forgot-password text-right">
                 Forgot <a href="#">password?</a>
             </p>
+            <hr />
+            {error}
         </div>
     );
 };

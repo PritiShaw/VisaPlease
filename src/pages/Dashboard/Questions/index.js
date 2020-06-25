@@ -1,20 +1,26 @@
-import React,{useState} from 'react';
-import { Question1, Question2, Question3, Question4, Question4b, Question5 ,Question6,Question7} from './questions';
-import { BreadcrumbItem } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import Cookies from 'universal-cookie';
+
+import { Question1, Question2, Question3, Question4, Question4b, Question5 } from './questions';
+import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
 
 const Questions = () => {
-    
-    const [answers, setAnswers] = useState({});    
+    const cookies = new Cookies();
+    const userid = cookies.get('userid')
+    if(userid==undefined)
+        alert("Unauthorized")
+    const [answers, setAnswers] = useState({});
     const [groupNumber, setGroupNumber] = useState(1);
-    const [noOfSuppliers, setNoOfSuppliers] = useState(1);
-    const setSubAnswers = (key,answer) =>{
-        answers[key] = answer
-        setAnswers(answers) 
-    } 
-    const submitAll = () =>{
-        //handle firebase
-    }
+    const [noOfSuppliers, setnoOfSuppliers] = useState({});
     
+    const history = useHistory();
+    const submitAll = () => {
+        console.log(userid,answers)
+        if (storeRecoveryQuestionnaire(userid,answers))
+            history.push('/dashboard/')
+    }
+
     const questionRenderer = () => {
         console.log(groupNumber)
         console.log(noOfSuppliers)
@@ -29,14 +35,15 @@ const Questions = () => {
         else if(groupNumber==4.5)
             return <Question4b setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
         else if(groupNumber==5)
-            return <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
-        else if(groupNumber==6&&noOfSuppliers!==0)
-            return <Question6 setNoOfSuppliers={setNoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
-        else if(groupNumber<=6+noOfSuppliers)
-            return <Question7 numb={groupNumber} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
-        else if(groupNumber>6+noOfSuppliers)
-            return <div><h3>Are you sure?</h3><button onClick={()=>submitAll()}>Yes</button></div>
-        else
+             return <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+//         else if(groupNumber==6&&noOfSuppliers!==0)
+//             return <Question6 setNoOfSuppliers={setNoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+//         else if(groupNumber<=6+noOfSuppliers)
+//             return <Question7 numb={groupNumber} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+//         else if(groupNumber>6+noOfSuppliers)
+         else if(groupNumber==6)
+            return <div><h3>Are you sure?</h3><center><button className="btn btn-primary btn-lg" onClick={() => submitAll()}>Yes</button></center></div>
+         else
             return <h3>Internal Error</h3>
     }
     return (
