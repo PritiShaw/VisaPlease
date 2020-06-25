@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import "./merchantLocator.css";
+//import "./merchantLocator.css";
+import { Form } from 'react-bootstrap';
 import { apiDomain } from "../../config.js"
 import data from "../../data/data.json";
 
 const MerchantLocator = () => {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([])
   const [merchant_Name, setMerchant_Name] = useState("")
   const [radius2, setRadius2] = useState("")
+
+  const [criteriaSelector, setCriteriaSelector] = useState(0)
+
   const searchButtonClick = () => {
     var result = [];
     fetch(apiDomain + "/api/merchantLocator", {
@@ -36,39 +40,7 @@ const MerchantLocator = () => {
         setSearchResults(result)
       })
 
-
-
   };
-  //     result.push(
-  //       {
-  //         name: "Starbucks 1",
-  //         distance: 1,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 2",
-  //         distance: 2,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 3",
-  //         distance: 6,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 4",
-  //         distance: 7,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 5",
-  //         distance: 12,
-  //         gps: "123, 234",
-  //       }
-  //     );
-  //     setSearchResults(result);
-  //   };
-
   return (
     <div className="col-12 py-3 bg-light text-dark">
       <div className="col-12">
@@ -76,37 +48,77 @@ const MerchantLocator = () => {
       </div>
       <hr />
       <div className="col-12">
-        <p>Descirption ya kuch dena hai one line me</p>
+        <p>To locate desired local suppliers</p>
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-sm-3">
-            <h6 className="radius">Radius (m): </h6>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label>Radius</label>
+              <div className="input-group">
+                <input className="radius-input form-control"></input>
+                <div class="input-group-append">
+                  <select className="radiusUnit-dropdown form-control" >
+                    <option>meter(m)</option>
+                    <option>kilometer(Km)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col-sm-3">
-            <select className="form-control" className="radius-dropdown" value={radius2} onChange={(e) => setRadius2(e.target.value)} >
-              <option></option>
-              <option>5</option>
-              <option>10</option>
-              <option>20</option>
-              <option>50</option>
-            </select>
+          <div className="col-sm-12">
+            <label>Search by</label>
           </div>
-          <div className="col-sm-3" className="merchant-name">
-            <h6>Merchant Name: </h6>
+          <div className="col-sm-5" onClick={() => setCriteriaSelector(0)}>
+            <div className="form-group">
+            {
+              criteriaSelector == 1 ? <h3 className="my-4 text-center">Merchant Details</h3>: (
+                <>
+                  <input className="form-control" placeholder="Merchant Name" />
+                  <input className="form-control" placeholder="Merchant Country code" />            
+                </>
+              )
+            }
+            </div>
           </div>
-          <div className="col-sm-3">
-            <select className="form-control" className="name-dropdown" value={merchant_Name} onChange={(e) => setMerchant_Name(e.target.value)} >
-              <option></option>
-              <option>Starbucks</option>
-              <option>PQR</option>
-              <option>MNO</option>
-              <option>XYZ</option>
-            </select>
+          <div className="col-sm-2 text-center v-100"><h4 className="my-4">OR</h4></div>
+          <div className="col-sm-5" onClick={() => setCriteriaSelector(1)}>
+            <div className="form-group">
+              {
+                criteriaSelector == 0 ? <h3 className="my-4 text-center">Merchant Category</h3> :<>
+                <label>Merchant Category</label>
+                <select className="form-control" >
+                  <option>Carpenter</option>
+                  <option>Fastfood</option>
+                </select>         
+                </>
+              }
+            </div>            
           </div>
-          <div className="button-search" className="col-sm-12">
-            <center><button type="button" className="btn btn-primary" onClick={() => searchButtonClick()}>Search</button></center>
+          <div className="col-sm-12">
+
           </div>
+        </div>
+        <br />
+        {/*             
+        <div className="row">
+          <div className="col-sm-12" className="merchant-name">
+            
+            <Form>
+              <Form.Group >
+                <Form.Label>Using merchant name and merchant country code</Form.Label>
+                <Form.Control type="radio" placeholder="Company Name" />
+              </Form.Group>
+              <Form.Group >
+                <Form.Label>Using merchant category code</Form.Label>
+                <Form.Control type="radio" placeholder="Company Address" />
+              </Form.Group>
+            </Form> 
+          </div>
+        </div>
+*/}
+        <div className="button-search" className="col-sm-12">
+          <center><button type="button" className="btn btn-primary btn-lg w-25" onClick={() => searchButtonClick()}>Search</button></center>
         </div>
       </div>
       <div className="col-12 my-5">
