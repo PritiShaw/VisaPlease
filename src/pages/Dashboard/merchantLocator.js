@@ -26,36 +26,6 @@ const MerchantLocator = () => {
         setSearchResults(result);
       });
   };
-  //     result.push(
-  //       {
-  //         name: "Starbucks 1",
-  //         distance: 1,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 2",
-  //         distance: 2,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 3",
-  //         distance: 6,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 4",
-  //         distance: 7,
-  //         gps: "123, 234",
-  //       },
-  //       {
-  //         name: "Starbucks 5",
-  //         distance: 12,
-  //         gps: "123, 234",
-  //       }
-  //     );
-  //     setSearchResults(result);
-  //   };
-
   return (
     <div className="col-12 py-3 bg-light text-dark">
       <div className="col-12">
@@ -63,13 +33,24 @@ const MerchantLocator = () => {
       </div>
       <hr />
       <div className="col-12">
-        <p>Descirption ya kuch dena hai one line me</p>
+        <p>To locate desired local suppliers</p>
       </div>
 
       <div className="container">
         <div className="row">
-          <div className="col-sm-3">
-            <h6 className="radius">Radius (m): </h6>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label>Radius</label>
+              <div className="input-group">
+                <input className="radius-input form-control"></input>
+                <div class="input-group-append">
+                  <select className="radiusUnit-dropdown form-control" >
+                    <option>meter(m)</option>
+                    <option>kilometer(Km)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="col-sm-3">
             <select
@@ -84,8 +65,17 @@ const MerchantLocator = () => {
               <option value="4">50</option>
             </select>
           </div>
-          <div className="col-sm-3" className="merchant-name">
-            <h6>Merchant Name: </h6>
+          <div className="col-sm-5" onClick={() => setCriteriaSelector(0)}>
+            <div className="form-group">
+            {
+              criteriaSelector == 1 ? <h3 className="my-4 text-center">Merchant Details</h3>: (
+                <>
+                  <input className="form-control" placeholder="Merchant Name" />
+                  <input className="form-control" placeholder="Merchant Country code" />            
+                </>
+              )
+            }
+            </div>
           </div>
           <div className="col-sm-3">
             <select className="form-control" className="name-dropdown">
@@ -106,6 +96,27 @@ const MerchantLocator = () => {
               </button>
             </center>
           </div>
+        </div>
+        <br />
+        {/*             
+        <div className="row">
+          <div className="col-sm-12" className="merchant-name">
+            
+            <Form>
+              <Form.Group >
+                <Form.Label>Using merchant name and merchant country code</Form.Label>
+                <Form.Control type="radio" placeholder="Company Name" />
+              </Form.Group>
+              <Form.Group >
+                <Form.Label>Using merchant category code</Form.Label>
+                <Form.Control type="radio" placeholder="Company Address" />
+              </Form.Group>
+            </Form> 
+          </div>
+        </div>
+*/}
+        <div className="button-search" className="col-sm-12">
+          <center><button type="button" className="btn btn-primary btn-lg w-25" onClick={() => searchButtonClick()}>Search</button></center>
         </div>
       </div>
       <div className="col-12 my-5">
