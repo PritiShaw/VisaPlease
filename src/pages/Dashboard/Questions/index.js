@@ -44,6 +44,7 @@ const Questions = () => {
     console.log(userid, answers);
     if (storeRecoveryQuestionnaire(userid, answers, datetime))
       history.push("/dashboard/");
+    console.log(answers)
   };
 
   const questionRenderer = () => {
