@@ -11,12 +11,10 @@ const handler = async (request, response) => {
       "startIndex": "0"
     },
     "searchAttrList": {
-      "merchantName": request.body.merchantName,
-      "merchantCountryCode": request.body.countryCode,
       "latitude": request.body.lat,
       "longitude": request.body.long,
       "distance": request.body.radius,
-      "distanceUnit": "M"
+      "distanceUnit": request.body.distanceUnit,
     },
     "responseAttrList": [
       "GNLOCATOR"
@@ -27,6 +25,13 @@ const handler = async (request, response) => {
       "matchScore": "true"
     }
   };
+  if (request.body.criteriaSelector == 1) {
+    payload["searchAttrList"]["merchantCategoryCode"] = request.body.categoryCode
+  }
+  else {
+    payload["searchAttrList"]["merchantName"] = request.body.merchantName
+    payload["searchAttrList"]["merchantCountryCode"] = request.body.countryCode
+  }
   let headers = {
     'Authorization': 'Basic QjFOTVkwU1FDWUxYWThLTzZHSzkyMUk3Q3BrSURDdUFlWk5BcEtUM2VJdDZhNUVSbzpBQTJYcUFmNW9BTURpY2VpeVlTdDc5OFI1WUJoZEl2Qm90MFdVcA==',
     'Content-Type': 'application/json'
@@ -48,6 +53,7 @@ const handler = async (request, response) => {
       response.send(body);
     }
   });
+  // response.send('{"status":400,"error":"Unknown"}');
 }
 
 module.exports = cors(handler);
