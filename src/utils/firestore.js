@@ -40,6 +40,8 @@ const storeRecoveryQuestionnaire = async (userid, data, timestamp) => {
   }
 };
 
+//Returns a list of overall scores for all attempts
+
 const getAllOverallScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
@@ -54,8 +56,35 @@ const getAllOverallScore = async (userid) => {
         const data2 = data.overall_score;
         overall_score.push(data2);
         console.log(overall_score);
+        return overall_score;
       });
     });
 };
 
-export { generateUserDocument, storeRecoveryQuestionnaire, getAllOverallScore };
+//Returns an array of arrays of parameter scores for all attempts
+const getAllPartScore = async (userid, param) => {
+  firestore
+    .collection(ANSWER_COLLECTION)
+    .doc(`abc`)
+    .collection(userid)
+    .get()
+    .then((snapshot) => {
+      // console.log(snapshot);
+      const score = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const data2 = data.partscore;
+        console.log(data2);
+        score.push(data2);
+        console.log(score);
+        return score;
+      });
+    });
+};
+
+export {
+  generateUserDocument,
+  storeRecoveryQuestionnaire,
+  getAllOverallScore,
+  getAllPartScore,
+};
