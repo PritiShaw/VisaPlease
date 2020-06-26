@@ -22,9 +22,10 @@ const Questions = () => {
 
   const history = useHistory();
   const submitAll = () => {
-    console.log(userid, answers);
+    //console.log(userid, answers);
     if (storeRecoveryQuestionnaire(userid, answers))
       history.push("/dashboard/");
+    console.log(answers)
   };
 
   const questionRenderer = () => {
