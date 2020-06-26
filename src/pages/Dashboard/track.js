@@ -1,7 +1,11 @@
 import CanvasJSReact from "./../../assets/canvasjs.react";
 import React from "react";
 import { Container } from "react-bootstrap";
-import { getAllOverallScore, getAllPartScore } from "../../utils/firestore.js";
+import {
+  getAllOverallScore,
+  getAllPartScore,
+  getAnswersLatestAttempt,
+} from "../../utils/firestore.js";
 import Cookies from "universal-cookie";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
@@ -10,6 +14,7 @@ class Track extends React.Component {
   state = {
     overall_scores: null,
     part_scores: null,
+    answers: null,
   };
 
   componentDidMount() {
@@ -17,7 +22,8 @@ class Track extends React.Component {
     const userid = cookies.get("userid");
     this.setState({
       overall_scores: getAllOverallScore(userid),
-      part_scores: getAllPartScore(userid, 1),
+      part_scores: getAllPartScore(userid),
+      answers: getAnswersLatestAttempt(userid),
     });
     console.log(this.state.overall_scores);
   }
