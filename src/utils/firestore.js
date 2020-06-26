@@ -1,7 +1,7 @@
-import { firestore } from "../firebaseConfig";
+import { firestore, auth } from "../firebaseConfig";
 
 const USER_COLLECTION = "users";
-const ANSWER_COLLECTION = "questionnare";
+const ANSWER_COLLECTION = "questionnaire";
 
 const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
@@ -21,7 +21,11 @@ const generateUserDocument = async (user, additionalData) => {
 };
 
 const storeRecoveryQuestionnaire = async (userid, data, timestamp) => {
-  const userRef = firestore.doc(`questionnaire/abc/${userid}/25.06.2020`);
+  const userRef = firestore
+    .collection(ANSWER_COLLECTION)
+    .doc("abc")
+    .collection(userid)
+    .doc(timestamp);
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
     try {
@@ -35,4 +39,23 @@ const storeRecoveryQuestionnaire = async (userid, data, timestamp) => {
     }
   }
 };
-export { generateUserDocument, storeRecoveryQuestionnaire };
+
+const getAllOverallScore = async (userid) => {
+  firestore
+    .collection(ANSWER_COLLECTION)
+    .doc(`abc`)
+    .collection(userid)
+    .get()
+    .then((snapshot) => {
+      console.log(snapshot);
+      const overall_score = [];
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const data2 = data.overall_score;
+        overall_score.push(data2);
+        console.log(overall_score);
+      });
+    });
+};
+
+export { generateUserDocument, storeRecoveryQuestionnaire, getAllOverallScore };

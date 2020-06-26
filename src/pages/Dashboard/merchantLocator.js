@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-//import "./merchantLocator.css";
-import { Form } from 'react-bootstrap';
-import { apiDomain } from "../../config.js"
+import { Form } from "react-bootstrap";
+import { apiDomain } from "../../config.js";
 import data from "../../data/data.json";
 
 const MerchantLocator = () => {
@@ -13,14 +12,14 @@ const MerchantLocator = () => {
   const [merchantCountryCode, setMerchantCountryCode] = useState("")
   const [merchantCategory, setMerchantCategory] = useState("1750")
 
-  const [criteriaSelector, setCriteriaSelector] = useState(0)
+  const [criteriaSelector, setCriteriaSelector] = useState(0);
 
   const searchButtonClick = () => {
     var result = [];
     fetch(apiDomain + "/api/merchantLocator", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         lat: "37.363922",
@@ -52,7 +51,6 @@ const MerchantLocator = () => {
         else
           setSearchResults(undefined)
       })
-
   };
 
   return (
@@ -85,6 +83,7 @@ const MerchantLocator = () => {
           </div>
           <div className="col-sm-5" onClick={() => setCriteriaSelector(0)}>
             <div className="form-group">
+
               {
                 criteriaSelector == 1 ? <h3 className="my-4 text-center">Merchant Details</h3> : (
                   <>
@@ -95,7 +94,9 @@ const MerchantLocator = () => {
               }
             </div>
           </div>
-          <div className="col-sm-2 text-center v-100"><h4 className="my-4">OR</h4></div>
+          <div className="col-sm-2 text-center v-100">
+            <h4 className="my-4">OR</h4>
+          </div>
           <div className="col-sm-5" onClick={() => setCriteriaSelector(1)}>
             <div className="form-group">
               {
@@ -114,8 +115,8 @@ const MerchantLocator = () => {
             </div>
           </div>
           <div className="col-sm-12">
-
           </div>
+          <div className="col-sm-12"></div>
         </div>
         <br />
         {/*             
@@ -136,7 +137,15 @@ const MerchantLocator = () => {
         </div>
 */}
         <div className="button-search" className="col-sm-12">
-          <center><button type="button" className="btn btn-primary btn-lg w-25" onClick={() => searchButtonClick()}>Search</button></center>
+          <center>
+            <button
+              type="button"
+              className="btn btn-primary btn-lg w-25"
+              onClick={() => searchButtonClick()}
+            >
+              Search
+            </button>
+          </center>
         </div>
       </div>
       <div className="col-12 my-5">
