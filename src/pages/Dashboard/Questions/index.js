@@ -10,7 +10,11 @@ import {
   Question4b,
   Question5,
 } from "./questions";
-import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
+
+import {
+  storeRecoveryQuestionnaire,
+  getAllOverallScore,
+} from "../../../utils/firestore";
 
 const Questions = () => {
   const cookies = new Cookies();
@@ -20,10 +24,25 @@ const Questions = () => {
   const [groupNumber, setGroupNumber] = useState(1);
   const [noOfSuppliers, setnoOfSuppliers] = useState({});
 
+  var currentdate = new Date();
+  var datetime =
+    currentdate.getDate() +
+    "." +
+    (currentdate.getMonth() + 1) +
+    "." +
+    currentdate.getFullYear() +
+    " @ " +
+    currentdate.getHours() +
+    ":" +
+    currentdate.getMinutes() +
+    ":" +
+    currentdate.getSeconds();
+
   const history = useHistory();
+
   const submitAll = () => {
     console.log(userid, answers);
-    if (storeRecoveryQuestionnaire(userid, answers))
+    if (storeRecoveryQuestionnaire(userid, answers, datetime))
       history.push("/dashboard/");
   };
 

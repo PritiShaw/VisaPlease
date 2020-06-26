@@ -1,10 +1,25 @@
 import CanvasJSReact from "./../../assets/canvasjs.react";
 import React from "react";
 import { Container } from "react-bootstrap";
+import { getAllOverallScore } from "../../utils/firestore.js";
+import Cookies from "universal-cookie";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class Track extends React.Component {
+  state = {
+    overall_scores: null,
+  };
+
+  componentDidMount() {
+    const cookies = new Cookies();
+    const userid = cookies.get("userid");
+    this.setState({
+      overall_scores: getAllOverallScore(userid),
+    });
+    console.log(this.state.overall_scores);
+  }
+
   render() {
     const options = {
       animationEnabled: true,
