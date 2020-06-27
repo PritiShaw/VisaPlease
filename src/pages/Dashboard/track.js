@@ -31,10 +31,10 @@ class Track extends React.Component {
   render() {
     const options = {
       animationEnabled: true,
-      height: 200,
-      width: 300,
+      height: 600,
+      width: 1000,
       title: {
-        text: "Overall Score",
+        text: "Track your score",
       },
       axisX: {
         valueFormatString: "MMM",
@@ -66,6 +66,10 @@ class Track extends React.Component {
     return (
       <React.Fragment>
         <Container maxWidth="sm">
+          <br></br>
+          <br></br>
+          <br></br>
+          <h1>Hi "name" !</h1>
           <CanvasJSChart
             options={options}
             /* onRef = {ref => this.chart = ref} */

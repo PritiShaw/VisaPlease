@@ -69,15 +69,14 @@ changeHandler10=(e)=>{
         return(
 
             <div>
-            <h4>Enter information of supplier </h4>
             <Form id="myForm" onSubmit={this.submit}>
-          
+          <br/><br/>
                 <Form.Group >
                 <Form.Label>What is the name of Supplier's company?</Form.Label>
                 <Form.Control type="text" placeholder="Company Name" value={this.state.answer1} onChange={this.changeHandler1}/>
             </Form.Group>
                 
-        
+            <br/><br/>
             <Form.Group >
             <Form.Label>Is supplier's company open now?</Form.Label>
             <Form.Control as="select" value={this.state.answer2} onChange={this.changeHandler2}>
@@ -87,7 +86,7 @@ changeHandler10=(e)=>{
             </Form.Control>
             </Form.Group>
         
-        
+            <br/><br/>
             <Form.Group >
             <Form.Label>Is supplier is from another country?</Form.Label>
             <Form.Control as="select" value={this.state.answer3} onChange={this.changeHandler3}>
@@ -96,7 +95,7 @@ changeHandler10=(e)=>{
             <option>No</option>
             </Form.Control>
             </Form.Group>
-            
+            <br/><br/>
             
             <Form.Group >
             <Form.Label>Does supplier provide world wide delivery?</Form.Label>
@@ -107,7 +106,7 @@ changeHandler10=(e)=>{
             </Form.Control>
             </Form.Group>
         
-            
+            <br/><br/>
         
             <Form.Group >
             <Form.Label> Which global shipping service is being used by supplier?</Form.Label>
@@ -120,7 +119,7 @@ changeHandler10=(e)=>{
             <option>5</option>
             </Form.Control>
         </Form.Group>
-        
+        <br/><br/>
         
         
         <Form.Group >
@@ -132,12 +131,12 @@ changeHandler10=(e)=>{
             </Form.Control>
             </Form.Group>
         
-            
+            <br/><br/>
             <Form.Group >
             <Form.Label>Within what distance is considered accessible for you to travel and buy your supplies?(in meters)</Form.Label>
             <Form.Control type="number" placeholder="meters" value={this.state.answer7} onChange={this.changeHandler7}/>
         </Form.Group>
-        
+        <br/><br/>
         <Form.Group >
         <Form.Label>Did your supplier support you throughout the pandemic?</Form.Label>
         <Form.Control as="select" value={this.state.answer8} onChange={this.changeHandler8}>
@@ -146,7 +145,7 @@ changeHandler10=(e)=>{
             <option>No</option>
             </Form.Control>
         </Form.Group>
-        
+        <br/><br/>
         <Form.Group >
         <Form.Label>Are your suppliers recovering?</Form.Label>
         <Form.Control as="select" value={this.state.answer9} onChange={this.changeHandler9}>
@@ -155,7 +154,7 @@ changeHandler10=(e)=>{
             <option>No</option>
             </Form.Control>
         </Form.Group>
-        
+        <br/><br/>
         <Form.Group >
         <Form.Label>Are your current supplier able to satisfy your future requirements?</Form.Label>
         <Form.Control as="select" value={this.state.answer10} onChange={this.changeHandler10}>
@@ -164,10 +163,10 @@ changeHandler10=(e)=>{
             <option>No</option>
             </Form.Control>
         </Form.Group>
-        
+        <br/><br/>
                 
                 <Button variant="primary" type="submit" size="lg">
-                Add
+                Add Supplier
                 </Button>
   
             </Form>

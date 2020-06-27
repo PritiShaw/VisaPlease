@@ -48,7 +48,7 @@ const Dashboard = () => {
               {/* <Route path="/dashboard" exact component={Calculator} /> */}
               <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
-              <Route path="/dashboard/track" component={Track} />
+              <Route path="/dashboard" component={Track} />
             </Switch>
           </div>
         </div>
