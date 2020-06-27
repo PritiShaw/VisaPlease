@@ -16,18 +16,12 @@ import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
 
 const Questions = () => {
   const cookies = new Cookies();
-  const userid = cookies.get("userid");  
-  const history = useHistory();
-
+  const userid = cookies.get("userid");
+  if (userid === undefined) alert("Unauthorized");
   const [answers, setAnswers] = useState({});
   const [groupNumber, setGroupNumber] = useState(1);
-  const [noOfSuppliers, setnoOfSuppliers] = useState({});
   
-  if (userid == undefined) {
-    history.push("/auth/");
-    window.location.reload();
-  }
-
+  const history = useHistory();
   const submitAll = () => {
     console.log(userid, answers);
     if (storeRecoveryQuestionnaire(userid, answers))
@@ -36,7 +30,7 @@ const Questions = () => {
 
   const questionRenderer = () => {
     
-    if(groupNumber==1)
+    if(groupNumber===1)
     {
         const now=0;
         return (<div><br/><br/><p>Step 1 of 7:</p><ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
@@ -45,7 +39,7 @@ const Questions = () => {
                  </div>)
     }
     
-    else if(groupNumber==2)
+    else if(groupNumber===2)
         {
             const now=20;
             return (<div><br/><br/><p>Step 2 of 7:</p>
@@ -54,7 +48,7 @@ const Questions = () => {
                      
                      </div>)
         }
-        else if(groupNumber==3)
+        else if(groupNumber===3)
         {
             const now=40;
             return (<div>
@@ -64,7 +58,7 @@ const Questions = () => {
                      
                      </div>)
         }
-        else if(groupNumber==4)
+        else if(groupNumber===4)
         {
             const now=60;
             return (<div>
@@ -74,7 +68,7 @@ const Questions = () => {
                      
                      </div>)
         }
-        else if(groupNumber==4.5)
+        else if(groupNumber===4.5)
         {
             const now=70;
             return (<div>
@@ -84,7 +78,7 @@ const Questions = () => {
                      
                      </div>)
         }
-        else if(groupNumber==5)
+        else if(groupNumber===5)
         {
             const now=80;
             return (<div>
@@ -100,7 +94,7 @@ const Questions = () => {
     //             return <Question7 numb={groupNumber} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
     //         else if(groupNumber>6+noOfSuppliers)
     
-    else if(groupNumber==6)
+    else if(groupNumber===6)
         {
             const now=90;
             return (<div>
@@ -112,7 +106,7 @@ const Questions = () => {
         }
     
     
-    else if (groupNumber == 7)
+    else if (groupNumber === 7)
       return (
         <div><ProgressBar 
             now={100} label={100} />

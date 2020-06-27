@@ -22,36 +22,36 @@ const SignIn = () => {
             });
         };
 
-    return (
-        <div className="mt-8">
-            <div id="log">
-                <h3>Sign In</h3>
-
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
-                </div>
-
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
+        return (
+            <div className="mt-8">
+                <div id="log">
+                    <h3>Sign In</h3>
+    
+                    <div className="form-group">
+                        <label>Email address</label>
+                        <input type="email" className="form-control" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                    </div>
+    
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input type="password" className="form-control" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                    </div>
+    
+                    <div className="form-group">
+                        <div className="custom-control custom-checkbox">
+                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
+                            <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
+                        </div>
                     </div>
                 </div>
+                <button type="submit" className="btn btn-primary btn-block" onClick={() => signInWithEmailAndPasswordHandler()}>Submit</button>
+                {/* <button type="submit" className="btn btn-primary btn-block" onClick={() => googleSignIn()}>Login with Google</button> */}
+                <p className="forgot-password text-right">
+                    Forgot <a href="#">password?</a>
+                </p>
+                <hr />
+                {error}
             </div>
-            <button type="submit" className="btn btn-primary btn-block" onClick={() => signInWithEmailAndPasswordHandler()}>Submit</button>
-            {/* <button type="submit" className="btn btn-primary btn-block" onClick={() => googleSignIn()}>Login with Google</button> */}
-            <p className="forgot-password text-right">
-                Forgot <a href="#">password?</a>
-            </p>
-            <hr />
-            {error}
-        </div>
-    );
-};
-export default SignIn;
+        );
+    };
+    export default SignIn;

@@ -21,3 +21,31 @@
 #margin-left{
     margin-left: 120px;
 }
+#supplier{
+    text-align: center;
+    font-size: 30px;
+    font-style: italic;
+}
+#faded{
+    background-color: #fdbb0a;
+    color: black;
+    border-width: 0px;
+    float:right;
+}
+#supply{
+    font-size: 23px;
+    font-weight: 500;
+}
+#single{
+    max-width: 40%;
+    
+}
+ 
+#shift{
+    float: right;
+    margin-right: 300px;
+}
+#next{
+    float: right;
+    margin-bottom: 40px;
+}
