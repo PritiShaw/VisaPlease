@@ -20,13 +20,20 @@ const generateUserDocument = async (user, additionalData) => {
   }
 };
 
+const getUserDocument = async (userid) => {
+  const userRef = firestore.doc(`users/${userid}`);
+  await userRef.get().then(function (doc) {
+    return doc.data()
+  }).catch(function (error) {
+    console.log(error)
+    return undefined
+  });
+};
+
+
 const storeRecoveryQuestionnaire = async (userid, data) => {
-  const time = Date.now();  
-  const userRef = firestore
-    .collection(ANSWER_COLLECTION)
-    .doc("abc")
-    .collection(userid)
-    .doc(time);
+  const time = new Date();
+  const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString()}`);
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
@@ -36,7 +43,7 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
       return true;
     } catch (error) {
       console.error("Error updating user document", error);
-      alert("Failed to save");
+      alert("Failed to save, try again");
       return false;
     }
   }
@@ -47,7 +54,7 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
 const getAllOverallScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
-    .doc(`abc`)
+    .doc(`responses`)
     .collection(userid)
     .get()
     .then((snapshot) => {
@@ -66,7 +73,7 @@ const getAllOverallScore = async (userid) => {
 const getAllPartScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
-    .doc(`abc`)
+    .doc(`responses`)
     .collection(userid)
     .get()
     .then((snapshot) => {
@@ -88,7 +95,7 @@ const getAnswersLatestAttempt = async (userid) => {
   var latestAnswers = [];
   var ref = firestore
     .collection(ANSWER_COLLECTION)
-    .doc(`abc`)
+    .doc(`responses`)
     .collection(userid);
   const latestsnap = await ref.orderBy("createdAt", "desc").limit(1).get();
   console.log(latestsnap);
@@ -112,6 +119,7 @@ const getAnswersLatestAttempt = async (userid) => {
 //};
 
 export {
+  getUserDocument,
   generateUserDocument,
   storeRecoveryQuestionnaire,
   getAllOverallScore,
