@@ -13,24 +13,22 @@ import {
 } from "./questions";
 import {ProgressBar} from "react-bootstrap";
 import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
+import { calculateRecoveryScore } from "./score_calculator";
 
 const Questions = () => {
   const cookies = new Cookies();
-  const userid = cookies.get("userid");  
-  const history = useHistory();
-
+  const userid = cookies.get("userid");
+  if (userid == undefined) alert("Unauthorized");
   const [answers, setAnswers] = useState({});
   const [groupNumber, setGroupNumber] = useState(1);
   const [noOfSuppliers, setnoOfSuppliers] = useState({});
-  
-  if (userid == undefined) {
-    history.push("/auth/");
-    window.location.reload();
-  }
 
+  const history = useHistory();
   const submitAll = () => {
     console.log(userid, answers);
-    if (storeRecoveryQuestionnaire(userid, answers))
+    var answers_with_scores = calculateRecoveryScore(userid,answers);
+    console.log(userid, answers);
+    if (storeRecoveryQuestionnaire(userid, answers_with_scores))
       history.push("/dashboard/");
   };
 

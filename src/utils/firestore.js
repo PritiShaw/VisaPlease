@@ -20,12 +20,13 @@ const generateUserDocument = async (user, additionalData) => {
   }
 };
 
-const storeRecoveryQuestionnaire = async (userid, data, timestampin) => {
+const storeRecoveryQuestionnaire = async (userid, data) => {
+  const time = Date.now();  
   const userRef = firestore
     .collection(ANSWER_COLLECTION)
     .doc("abc")
     .collection(userid)
-    .doc(timestampin);
+    .doc(time);
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
