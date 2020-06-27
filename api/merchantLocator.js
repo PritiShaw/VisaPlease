@@ -8,7 +8,7 @@ const handler = async (request, response) => {
     "header": {
       "messageDateTime": "2020-06-18T04:37:30.903",
       "requestMessageId": "Request_001",
-      "startIndex": request.body.startIndex.toString(),
+      "startIndex": request.body.startIndex.toString()
     },
     "searchAttrList": {
       "latitude": request.body.lat,
