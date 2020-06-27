@@ -22,9 +22,9 @@ const generateUserDocument = async (user, additionalData) => {
 
 const getUserDocument = async (userid) => {
   const userRef = firestore.doc(`users/${userid}`);
-  await userRef.get().then(function(doc) {
+  await userRef.get().then(function (doc) {
     return doc.data()
-  }).catch(function(error) {
+  }).catch(function (error) {
     console.log(error)
     return undefined
   });
@@ -36,7 +36,6 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
   const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString()}`);
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
-  console.log(snapshot)
   if (!snapshot.exists) {
     try {
       await userRef.set({ ...data, createdAt: timestamp() });
