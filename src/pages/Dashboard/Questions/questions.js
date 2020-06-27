@@ -98,9 +98,8 @@ const Question2 = (props) => {
   <Form.Group >
           <Form.Label>Are you a sole proprietor, independent contractor, or self-employed?</Form.Label>
           <Form.Control as="select" value={answer3} onChange={(e) => setAnswer3(e.target.value)}>
-            <option>self-employed</option>
-            <option>sole proprietor</option>
-            <option>independent contractor</option>
+            <option>Yes</option>
+            <option>No</option>
           </Form.Control>
         </Form.Group>
 
