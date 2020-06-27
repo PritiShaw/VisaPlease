@@ -15,6 +15,9 @@
     color: #1a1f71;
     font-weight: 700;
 }
-#visa , #log{
+#visa , #log {
     color: #1a1f71;
+}
+#margin-left{
+    margin-left: 120px;
 }

@@ -6,6 +6,7 @@ import "./sidePanel.css";
 const sidePanel = () => {
   return (
     <div>
+    <br/><br/>
       <ul className="sidepanel">
         <li>
           <Link to="/dashboard/calculator" className="link">Calculator</Link>

@@ -7,7 +7,7 @@ import Calculator from "./calculator";
 import MerchantLocator from "./merchantLocator";
 // import AddSupplier from "./Questions/AddSupplier";
 import SidePanel from "./components/sidePanel";
-
+import "./calculator.css"
 const Dashboard = () => {
   const cookies = new Cookies();
   const userid = cookies.get("userid");
@@ -24,15 +24,15 @@ const Dashboard = () => {
   });
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-light border-bottom ">
+      <nav className="navbar navbar-expand-lg navbar-light border-bottom fixed-top">
         <div className="container">
-          <Link className="navbar-brand visa" to={"/sign-in"}>
+          <Link id="visa" className="navbar-brand visa" to={"/sign-in"}>
             VISA
           </Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link className="nav-link">LogOut</Link>
+                <Link id="Login" className="nav-link">LogOut</Link>
               </li>
             </ul>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Cookies from "universal-cookie";
-
+import "../calculator.css";
 import {
   Question1,
   Question2,
@@ -125,7 +125,7 @@ const Questions = () => {
       );
     else return <h3>Internal Error</h3>;
   };
-  return <div>{questionRenderer()}</div>;
+  return <div id="ques">{questionRenderer()}</div>;
 };
 
 export default Questions;
