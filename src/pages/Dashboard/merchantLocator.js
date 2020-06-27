@@ -38,7 +38,7 @@ const MerchantLocator = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("hi");
+        console.log(JSON.stringify(data));
         if ("response" in data["merchantLocatorServiceResponse"]) {
           data["merchantLocatorServiceResponse"]["response"].map(
             ({ responseValues }) => {
