@@ -16,13 +16,18 @@ import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
 
 const Questions = () => {
   const cookies = new Cookies();
-  const userid = cookies.get("userid");
-  if (userid == undefined) alert("Unauthorized");
+  const userid = cookies.get("userid");  
+  const history = useHistory();
+
   const [answers, setAnswers] = useState({});
   const [groupNumber, setGroupNumber] = useState(1);
   const [noOfSuppliers, setnoOfSuppliers] = useState({});
+  
+  if (userid == undefined) {
+    history.push("/auth/");
+    window.location.reload();
+  }
 
-  const history = useHistory();
   const submitAll = () => {
     console.log(userid, answers);
     if (storeRecoveryQuestionnaire(userid, answers))

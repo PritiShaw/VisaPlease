@@ -20,6 +20,7 @@ const handler = async (request, response) => {
       "GNLOCATOR"
     ],
     "searchOptions": {
+      "startIndex": request.body.startIndex,
       "maxRecords": "10",
       "matchIndicators": "true",
       "matchScore": "true"
