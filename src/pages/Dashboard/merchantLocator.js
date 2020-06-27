@@ -4,19 +4,19 @@ import { apiDomain } from "../../config.js";
 import data from "../../data/data.json";
 
 const MerchantLocator = () => {
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState([]);
 
-  const [radiusInput, setRadiusInput] = useState(50)
-  const [radiusUnit, setRadiusUnit] = useState("M")
-  const [merchant_Name, setMerchant_Name] = useState("")
-  const [merchantCountryCode, setMerchantCountryCode] = useState("")
-  const [merchantCategory, setMerchantCategory] = useState("1750")
-  const [startIndex, setStartIndex] = useState(0)
+  const [radiusInput, setRadiusInput] = useState(50);
+  const [radiusUnit, setRadiusUnit] = useState("M");
+  const [merchant_Name, setMerchant_Name] = useState("");
+  const [merchantCountryCode, setMerchantCountryCode] = useState("");
+  const [merchantCategory, setMerchantCategory] = useState("1750");
+  const [startIndex, setStartIndex] = useState(0);
   const [criteriaSelector, setCriteriaSelector] = useState(0);
 
   const searchButtonClick = () => {
     var result = [];
-    setSearchResults([])
+    setSearchResults([]);
     fetch(apiDomain + "/api/merchantLocator", {
       method: "POST",
       headers: {
@@ -30,29 +30,37 @@ const MerchantLocator = () => {
         merchantName: merchant_Name,
         countryCode: merchantCountryCode,
         categoryCode: criteriaSelector == 1 ? [merchantCategory] : [],
-        criteriaSelector : criteriaSelector,
-        startIndex : startIndex
-      }
-      )
-    }).then(response => {
-      return response.json();
+        criteriaSelector: criteriaSelector,
+        startIndex: startIndex,
+      }),
     })
-      .then((data) => {
-        if("response" in data["merchantLocatorServiceResponse"]){
-          data["merchantLocatorServiceResponse"]["response"].map(({ responseValues }) => {
-            result.push({
-              "name": responseValues["visaStoreName"],
-              "storeId": responseValues["visaStoreId"],
-              "address": responseValues["merchantStreetAddress"] + ", " + responseValues["merchantCity"] + ", " + responseValues["merchantPostalCode"] + ", " + responseValues["merchantState"],
-              "distance": responseValues["distance"],
-              "payment_Method": responseValues["paymentAcceptanceMethod"],
-            })
-          })
-          setSearchResults(result)
-        }
-        else
-          setSearchResults(undefined)
+      .then((response) => {
+        return response.json();
       })
+      .then((data) => {
+        console.log("hi");
+        if ("response" in data["merchantLocatorServiceResponse"]) {
+          data["merchantLocatorServiceResponse"]["response"].map(
+            ({ responseValues }) => {
+              result.push({
+                name: responseValues["visaStoreName"],
+                storeId: responseValues["visaStoreId"],
+                address:
+                  responseValues["merchantStreetAddress"] +
+                  ", " +
+                  responseValues["merchantCity"] +
+                  ", " +
+                  responseValues["merchantPostalCode"] +
+                  ", " +
+                  responseValues["merchantState"],
+                distance: responseValues["distance"],
+                payment_Method: responseValues["paymentAcceptanceMethod"],
+              });
+            }
+          );
+          setSearchResults(result);
+        } else setSearchResults(undefined);
+      });
   };
 
   return (
@@ -68,11 +76,22 @@ const MerchantLocator = () => {
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group">
-              <label >Radius</label>
+              <label>Radius</label>
               <div className="input-group">
-                <input className="radius-input form-control" type="number" min="0" max="100" value={radiusInput} onChange={(e) => setRadiusInput(e.target.value)}></input>
+                <input
+                  className="radius-input form-control"
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={radiusInput}
+                  onChange={(e) => setRadiusInput(e.target.value)}
+                ></input>
                 <div class="input-group-append">
-                  <select className="radiusUnit-dropdown form-control" value={radiusUnit} onChange={(e) => setRadiusUnit(e.target.value)} >
+                  <select
+                    className="radiusUnit-dropdown form-control"
+                    value={radiusUnit}
+                    onChange={(e) => setRadiusUnit(e.target.value)}
+                  >
                     <option value="M">meter(m)</option>
                     <option value="KM">kilometer(Km)</option>
                   </select>
@@ -85,15 +104,24 @@ const MerchantLocator = () => {
           </div>
           <div className="col-sm-5" onClick={() => setCriteriaSelector(0)}>
             <div className="form-group">
-
-              {
-                criteriaSelector == 1 ? <h3 className="my-4 text-center">Merchant Details</h3> : (
-                  <>
-                    <input className="form-control" placeholder="Merchant Name" value={merchant_Name} onChange={(e) => setMerchant_Name(e.target.value)} />
-                    <input className="form-control" placeholder="Merchant Country code" value={merchantCountryCode} onChange={(e) => setMerchantCountryCode(e.target.value)} />
-                  </>
-                )
-              }
+              {criteriaSelector == 1 ? (
+                <h3 className="my-4 text-center">Merchant Details</h3>
+              ) : (
+                <>
+                  <input
+                    className="form-control"
+                    placeholder="Merchant Name"
+                    value={merchant_Name}
+                    onChange={(e) => setMerchant_Name(e.target.value)}
+                  />
+                  <input
+                    className="form-control"
+                    placeholder="Merchant Country code"
+                    value={merchantCountryCode}
+                    onChange={(e) => setMerchantCountryCode(e.target.value)}
+                  />
+                </>
+              )}
             </div>
           </div>
           <div className="col-sm-2 text-center v-100">
@@ -101,10 +129,16 @@ const MerchantLocator = () => {
           </div>
           <div className="col-sm-5" onClick={() => setCriteriaSelector(1)}>
             <div className="form-group">
-              {
-                criteriaSelector == 0 ? <h3 className="my-4 text-center">Merchant Category</h3> : <>
+              {criteriaSelector == 0 ? (
+                <h3 className="my-4 text-center">Merchant Category</h3>
+              ) : (
+                <>
                   <label>Merchant Category</label>
-                  <select className="form-control" value={merchantCategory} onChange={(e) => setMerchantCategory(e.target.value)} >
+                  <select
+                    className="form-control"
+                    value={merchantCategory}
+                    onChange={(e) => setMerchantCategory(e.target.value)}
+                  >
                     <option value="1750">Carpentery</option>
                     <option value="5137">Clothing</option>
                     <option value="5039">Construction</option>
@@ -113,11 +147,10 @@ const MerchantLocator = () => {
                     <option value="5251">Hardware</option>
                   </select>
                 </>
-              }
+              )}
             </div>
           </div>
-          <div className="col-sm-12">
-          </div>
+          <div className="col-sm-12"></div>
           <div className="col-sm-12"></div>
         </div>
         <br />
@@ -160,20 +193,23 @@ const MerchantLocator = () => {
             <th>Payment Method</th>
             <th>Visa storeID</th>
           </tr>
-          {
-            searchResults?(searchResults.map((result) => {
-                return (
-                  <tr>
-                    <td>{result["name"]}</td>
-                    <td>{result["address"]}</td>
-                    <td>{result["distance"]}</td>
-                    <td>{result["payment_Method"].join(", ")}</td>
-                    <td>{result["storeId"]}</td>
-                  </tr>
-                )
-              })
-            ):<tr><td colSpan="5">No results found</td></tr>
-          }
+          {searchResults ? (
+            searchResults.map((result) => {
+              return (
+                <tr>
+                  <td>{result["name"]}</td>
+                  <td>{result["address"]}</td>
+                  <td>{result["distance"]}</td>
+                  <td>{result["payment_Method"].join(", ")}</td>
+                  <td>{result["storeId"]}</td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan="5">No results found</td>
+            </tr>
+          )}
         </table>
       </div>
     </div>
