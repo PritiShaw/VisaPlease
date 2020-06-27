@@ -7,8 +7,8 @@ const handler = async (request, response) => {
   let payload = {
     "header": {
       "messageDateTime": "2020-06-18T04:37:30.903",
-      "requestMessageId": "Request_001",
-      "startIndex": request.body.startIndex.toString()
+      "requestMessageId": Math.random().toString(36).substring(11);,
+      "startIndex": "0"
     },
     "searchAttrList": {
       "latitude": request.body.lat,
