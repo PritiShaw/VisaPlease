@@ -33,7 +33,7 @@ const getUserDocument = async (userid) => {
 
 const storeRecoveryQuestionnaire = async (userid, data) => {
   const time = new Date();
-  const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString()}`);
+  const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString("en-US")}`);
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
