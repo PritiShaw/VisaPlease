@@ -7,10 +7,10 @@ import {
   InfoWindow,
 } from "react-google-maps";
 
-import * as parksData from "../../src/data/data.json";
+import * as suppliersData from "../../src/data/data.json";
 
 function Map() {
-  const [selectedPark, setSelectedPark] = useState(null);
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
 
   //     useEffect(() => {
   //       const listener = e => {
@@ -26,28 +26,32 @@ function Map() {
   //     }, []);
 
   return (
-    <GoogleMap defaultZoom={10} defaultCenter={{ lat: 45.4211, lng: -75.6903 }}>
-      {parksData.features.map((park) => (
+    <GoogleMap
+      defaultZoom={10}
+      defaultCenter={{ lat: 37.363922, lng: -121.929163 }}
+    >
+      {suppliersData.merchantLocatorServiceResponse.response.map((supplier) => (
         <Marker
-          key={park.properties.PARK_ID}
+          key={supplier.responseValues.visaStoreName}
           position={{
-            lat: park.geometry.coordinates[1],
-            lng: park.geometry.coordinates[0],
+            lat: supplier.responseValues.locationAddressLatitude,
+            lng: supplier.responseValues.locationAddressLongitude,
           }}
           onClick={() => {
-            setSelectedPark(park);
+            setSelectedSupplier(supplier);
           }}
         />
       ))}
 
-      {selectedPark && (
+      {selectedSupplier && (
         <InfoWindow
           position={{
-            lat: selectedPark.geometry.coordinates[1],
-            lng: selectedPark.geometry.coordinates[0],
+            lat: selectedSupplier.responseValues.locationAddressLatitude,
+
+            lng: selectedSupplier.responseValues.locationAddressLongitude,
           }}
           onCloseClick={() => {
-            setSelectedPark(null);
+            setSelectedSupplier(null);
           }}
         >
           <div>park def</div>
