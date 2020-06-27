@@ -66,6 +66,9 @@ const MerchantLocator = () => {
   return (
     <div className="col-12 py-3 bg-light text-dark">
       <div className="col-12">
+        <br></br>
+        <br></br>
+        <br></br>
         <h2>Merchant Locator</h2>
       </div>
       <hr />
