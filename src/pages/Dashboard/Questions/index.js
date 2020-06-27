@@ -18,18 +18,21 @@ import { calculateRecoveryScore } from "./score_calculator";
 const Questions = () => {
   const cookies = new Cookies();
   const userid = cookies.get("userid");
-  if (userid == undefined) alert("Unauthorized");
+  const history = useHistory();
+   if (userid == undefined) {	
+    history.push("/auth/");	
+    window.location.reload();	
+  }
   const [answers, setAnswers] = useState({});
   const [groupNumber, setGroupNumber] = useState(1);
   const [noOfSuppliers, setnoOfSuppliers] = useState({});
 
-  const history = useHistory();
   const submitAll = () => {
-    console.log(userid, answers);
     var answers_with_scores = calculateRecoveryScore(userid,answers);
-    console.log(userid, answers);
-    if (storeRecoveryQuestionnaire(userid, answers_with_scores))
+    if (storeRecoveryQuestionnaire(userid, answers_with_scores)){
       history.push("/dashboard/");
+      window.location.reload();
+    }
   };
 
   const questionRenderer = () => {
