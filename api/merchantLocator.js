@@ -8,7 +8,7 @@ const handler = async (request, response) => {
     "header": {
       "messageDateTime": "2020-06-18T04:37:30.903",
       "requestMessageId": "Request_001",
-      "startIndex": "0"
+      "startIndex": request.body.startIndex,
     },
     "searchAttrList": {
       "latitude": request.body.lat,
@@ -20,7 +20,6 @@ const handler = async (request, response) => {
       "GNLOCATOR"
     ],
     "searchOptions": {
-      "startIndex": request.body.startIndex,
       "maxRecords": "10",
       "matchIndicators": "true",
       "matchScore": "true"
