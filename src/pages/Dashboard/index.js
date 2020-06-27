@@ -6,7 +6,6 @@ import Track from "./../Dashboard/track";
 import Calculator from "./calculator";
 import Profile from "../Dashboard/Profile"
 import MerchantLocator from "./merchantLocator";
-// import AddSupplier from "./Questions/AddSupplier";
 import SidePanel from "./components/sidePanel";
 import "./calculator.css"
 const Dashboard = () => {
@@ -18,11 +17,18 @@ const Dashboard = () => {
     async function fetchInfo() {
       const userRef = firestore.doc(`users/${userid}`);
       const snapshot = await userRef.get();
-      const userData = snapshot.data();
+      const userData = snapshot.data();      
+      if(!userData)
+        window.location = "/auth"
       setFirstName(userData.firstName);
     }
     fetchInfo();
   });
+
+  const logout = async () => {
+    await cookies.remove("userid", { path: '/' })
+    window.location = "/auth"
+  }
   return (
     <Router>
       <nav className="navbar navbar-expand-lg navbar-light border-bottom fixed-top">
@@ -36,7 +42,7 @@ const Dashboard = () => {
                 <Link id="Login" className="nav-link" to="/dashboard/profile">Profile</Link>
               </li>
               <li className="nav-item">
-                <Link id="Login" className="nav-link">LogOut</Link>
+                <Link id="Login" className="nav-link" onClick={()=>logout()}>LogOut</Link>
               </li>
             </ul>
           </div>
