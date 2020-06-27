@@ -1,8 +1,22 @@
 .sidepanel {
     list-style-type:none;
+    margin: 0;
+  padding: 0;
+  width: 20%;
+  background-color: #1a1f71;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
 .sidepanel li {
     padding-top: 2.5em;
 }
 
+.link {
+    color: #FFF;
+    margin: 10%;
+  }
+.link:hover {
+     color: #00F
+  }

@@ -24,7 +24,7 @@ const Dashboard = () => {
   });
   return (
     <Router>
-      <nav className="navbar navbar-expand-lg navbar-light border-bottom">
+      <nav className="navbar navbar-expand-lg navbar-light border-bottom ">
         <div className="container">
           <Link className="navbar-brand visa" to={"/sign-in"}>
             VISA
