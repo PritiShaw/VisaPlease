@@ -7,7 +7,11 @@ const sidePanel = () => {
   return (
     <div>
     <br/><br/>
+    
       <ul className="sidepanel">
+      <li>
+          <Link to="/dashboard" className="link">Dashboard</Link>
+        </li>
         <li>
           <Link to="/dashboard/calculator" className="link">Calculator</Link>
         </li>
@@ -15,9 +19,7 @@ const sidePanel = () => {
           <Link to="/dashboard/locator" className="link">Merchant</Link>
           {/* checkakr lena parht */}
         </li>
-        <li>
-          <Link to="/dashboard/track" className="link">Track</Link>
-        </li>
+        
       </ul>
     </div>
   );
