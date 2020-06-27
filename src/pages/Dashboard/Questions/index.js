@@ -9,12 +9,10 @@ import {
   Question4,
   Question4b,
   Question5,
+  AddSupplier
 } from "./questions";
-
-import {
-  storeRecoveryQuestionnaire,
-  getAllOverallScore,
-} from "../../../utils/firestore";
+import {ProgressBar} from "react-bootstrap";
+import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
 
 const Questions = () => {
   const cookies = new Cookies();
@@ -24,88 +22,96 @@ const Questions = () => {
   const [groupNumber, setGroupNumber] = useState(1);
   const [noOfSuppliers, setnoOfSuppliers] = useState({});
 
-  var currentdate = new Date();
-  var datetime =
-    currentdate.getDate() +
-    "." +
-    (currentdate.getMonth() + 1) +
-    "." +
-    currentdate.getFullYear() +
-    " @ " +
-    currentdate.getHours() +
-    ":" +
-    currentdate.getMinutes() +
-    ":" +
-    currentdate.getSeconds();
-
   const history = useHistory();
-
   const submitAll = () => {
     console.log(userid, answers);
-    if (storeRecoveryQuestionnaire(userid, answers, datetime))
+    if (storeRecoveryQuestionnaire(userid, answers))
       history.push("/dashboard/");
-    console.log(answers)
   };
 
   const questionRenderer = () => {
-    console.log(groupNumber);
-    console.log(noOfSuppliers);
-    if (groupNumber == 1)
-      return (
-        <Question1
-          setGroupNumber={setGroupNumber}
-          presentAns={answers}
-          setAnswers={setAnswers}
-        />
-      );
-    else if (groupNumber == 2)
-      return (
-        <Question2
-          setGroupNumber={setGroupNumber}
-          presentAns={answers}
-          setAnswers={setAnswers}
-        />
-      );
-    else if (groupNumber == 3)
-      return (
-        <Question3
-          setGroupNumber={setGroupNumber}
-          presentAns={answers}
-          setAnswers={setAnswers}
-        />
-      );
-    else if (groupNumber == 4)
-      return (
-        <Question4
-          setGroupNumber={setGroupNumber}
-          presentAns={answers}
-          setAnswers={setAnswers}
-        />
-      );
-    else if (groupNumber == 4.5)
-      return (
-        <Question4b
-          setGroupNumber={setGroupNumber}
-          presentAns={answers}
-          setAnswers={setAnswers}
-        />
-      );
-    else if (groupNumber == 5)
-      return (
-        <Question5
-          setGroupNumber={setGroupNumber}
-          presentAns={answers}
-          setAnswers={setAnswers}
-        />
-      );
+    
+    if(groupNumber==1)
+    {
+        const now=0;
+        return (<div><br/><br/><p>Step 1 of 7:</p><ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                 <Question1 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
+                 
+                 </div>)
+    }
+    
+    else if(groupNumber==2)
+        {
+            const now=20;
+            return (<div><br/><br/><p>Step 2 of 7:</p>
+                <ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                    <Question2 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>    
+                     
+                     </div>)
+        }
+        else if(groupNumber==3)
+        {
+            const now=40;
+            return (<div>
+                <br/><br/><p>Step 3 of 7:</p>
+                <ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                <Question3 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>    
+                     
+                     </div>)
+        }
+        else if(groupNumber==4)
+        {
+            const now=60;
+            return (<div>
+                <br/><br/><p>Step 4 of 7:</p>
+                <ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                <Question4 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>    
+                     
+                     </div>)
+        }
+        else if(groupNumber==4.5)
+        {
+            const now=70;
+            return (<div>
+                <br/><br/><p>Step 5 of 7:</p>
+                <ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                <Question4b setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>    
+                     
+                     </div>)
+        }
+        else if(groupNumber==5)
+        {
+            const now=80;
+            return (<div>
+                <br/><br/><p>Step 6 of 7:</p>
+                <ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/> 
+                     
+                     </div>)
+        }
     //         else if(groupNumber==6&&noOfSuppliers!==0)
     //             return <Question6 setNoOfSuppliers={setNoOfSuppliers} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
     //         else if(groupNumber<=6+noOfSuppliers)
     //             return <Question7 numb={groupNumber} setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers}/>
     //         else if(groupNumber>6+noOfSuppliers)
-    else if (groupNumber == 6)
+    
+    else if(groupNumber==6)
+        {
+            const now=90;
+            return (<div>
+                <br/><br/><p>Step 7 of 7:</p>
+                <ProgressBar now={now} label={`${now}%`} /><br/><br/><br/>
+                <AddSupplier setGroupNumber={setGroupNumber} /> 
+                     
+                     </div>)
+        }
+    
+    
+    else if (groupNumber == 7)
       return (
-        <div>
+        <div><ProgressBar 
+            now={100} label={100} />
+            <br/><br/><br/>
           <h3>Are you sure?</h3>
           <center>
             <button

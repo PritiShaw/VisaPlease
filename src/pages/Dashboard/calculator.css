@@ -11,3 +11,10 @@
     background-color: darkgreen;
     color: black;
 }
+#Login , #signup{
+    color: #1a1f71;
+    font-weight: 700;
+}
+#visa , #log{
+    color: #1a1f71;
+}

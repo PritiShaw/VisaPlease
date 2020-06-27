@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { generateUserDocument } from "../../utils/firestore";
-
+import "../Dashboard/calculator.css"
 const SignIn = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,6 +23,7 @@ const SignIn = () => {
 
   return (
     <div className="sign-up">
+    <div id="log">
       <h3>Sign Up</h3>
 
       <div className="form-group">
@@ -68,7 +69,7 @@ const SignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-
+</div>
       <button
         type="submit"
         className="btn btn-primary btn-block"
@@ -77,7 +78,7 @@ const SignIn = () => {
         Sign Up
       </button>
       <p className="forgot-password text-right">
-        Already registered <a href="#">sign in?</a>
+        Already registered <Link to="/auth/login">sign in?</Link>
       </p>
     </div>
   );

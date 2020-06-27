@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import "../Dashboard/calculator.css"
 import Login from "./Login";
 import SignUp from "./SignUp";
 
@@ -10,14 +10,14 @@ const Authentication = () => {
             <div className="App">
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top">
                     <div className="container">
-                        <Link className="navbar-brand visa" to={"/sign-in"}>VISA</Link>
+                        <Link className="navbar-brand visa" id="visa" to={"/sign-in"}>VISA</Link>
                         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item">
-                                    <Link className="nav-link" to={"/auth/login"}>Login</Link>
+                                    <Link className="nav-link" id="Login" to={"/auth/login"}>Login</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to={"/auth/register"}>Sign up</Link>
+                                    <Link className="nav-link" id="signup" to={"/auth/register"}>Sign up</Link>
                                 </li>
                             </ul>
                         </div>
