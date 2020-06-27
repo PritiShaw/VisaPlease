@@ -24,7 +24,7 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
   const time = Date.now();  
   const userRef = firestore
     .collection(ANSWER_COLLECTION)
-    .doc("abc")
+    .doc("responses")
     .collection(userid)
     .doc(time);
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
@@ -47,7 +47,7 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
 const getAllOverallScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
-    .doc(`abc`)
+    .doc(`responses`)
     .collection(userid)
     .get()
     .then((snapshot) => {
@@ -66,7 +66,7 @@ const getAllOverallScore = async (userid) => {
 const getAllPartScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
-    .doc(`abc`)
+    .doc(`responses`)
     .collection(userid)
     .get()
     .then((snapshot) => {
@@ -88,7 +88,7 @@ const getAnswersLatestAttempt = async (userid) => {
   var latestAnswers = [];
   var ref = firestore
     .collection(ANSWER_COLLECTION)
-    .doc(`abc`)
+    .doc(`responses`)
     .collection(userid);
   const latestsnap = await ref.orderBy("createdAt", "desc").limit(1).get();
   console.log(latestsnap);
