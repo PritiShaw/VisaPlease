@@ -14,11 +14,8 @@ const SignIn = () => {
             auth.signInWithEmailAndPassword(email, password).then((e) => {
                 const cookies = new Cookies();
                 cookies.set('userid', e.user.uid, { path: '/' });
-                history.push({
-                    pathname: '/dashboard/',
-                    state: { userid: e.user.uid }
-                })
-
+                history.push('/dashboard/')
+                window.location.reload()
             }).catch(error => {
                 setError("Error signing in with password and email!");
                 console.error("Error signing in with password and email", error);

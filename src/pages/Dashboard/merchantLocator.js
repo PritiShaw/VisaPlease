@@ -6,16 +6,17 @@ import data from "../../data/data.json";
 const MerchantLocator = () => {
   const [searchResults, setSearchResults] = useState([])
 
-  const [radiusInput, setRadiusInput] = useState("")
+  const [radiusInput, setRadiusInput] = useState(50)
   const [radiusUnit, setRadiusUnit] = useState("M")
   const [merchant_Name, setMerchant_Name] = useState("")
   const [merchantCountryCode, setMerchantCountryCode] = useState("")
   const [merchantCategory, setMerchantCategory] = useState("1750")
-
+  const [startIndex, setStartIndex] = useState(0)
   const [criteriaSelector, setCriteriaSelector] = useState(0);
 
   const searchButtonClick = () => {
     var result = [];
+    setSearchResults([])
     fetch(apiDomain + "/api/merchantLocator", {
       method: "POST",
       headers: {
@@ -29,14 +30,15 @@ const MerchantLocator = () => {
         merchantName: merchant_Name,
         countryCode: merchantCountryCode,
         categoryCode: criteriaSelector == 1 ? [merchantCategory] : [],
-        criteriaSelector : criteriaSelector
+        criteriaSelector : criteriaSelector,
+        startIndex : startIndex
       }
       )
     }).then(response => {
       return response.json();
     })
       .then((data) => {
-        if(data["merchantLocatorServiceResponse"]["status"]["statusCode"]=="CDI000"){
+        if("response" in data["merchantLocatorServiceResponse"]){
           data["merchantLocatorServiceResponse"]["response"].map(({ responseValues }) => {
             result.push({
               "name": responseValues["visaStoreName"],
