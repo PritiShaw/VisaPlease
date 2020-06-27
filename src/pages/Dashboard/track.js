@@ -5,6 +5,7 @@ import {
   getAllOverallScore,
   getAllPartScore,
   getAnswersLatestAttempt,
+  getUserDocument
 } from "../../utils/firestore.js";
 import Cookies from "universal-cookie";
 
@@ -15,12 +16,18 @@ class Track extends React.Component {
     overall_scores: null,
     part_scores: null,
     answers: null,
+    userName: "there"
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const cookies = new Cookies();
     const userid = cookies.get("userid");
+    if(! userid){
+      window.location = "/auth";
+    }
+    let userDetails = await getUserDocument(userid)
     this.setState({
+      userName : (userDetails && userDetails["firstName"])?userDetails["firstName"]:"there",
       overall_scores: getAllOverallScore(userid),
       part_scores: getAllPartScore(userid),
       answers: getAnswersLatestAttempt(userid),
@@ -69,7 +76,7 @@ class Track extends React.Component {
           <br></br>
           <br></br>
           <br></br>
-          <h1>Hi "name" !</h1>
+          <h1>Hi {this.state.userName} !</h1>
           <CanvasJSChart
             options={options}
             /* onRef = {ref => this.chart = ref} */

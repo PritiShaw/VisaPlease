@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Track from "./pages/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import logo from './logo.svg';
 import "./App.css";
@@ -15,7 +14,7 @@ const Application = () => {
   return (
     <Router>
       <Switch>
-        {/* <Route exact path="/" component={DashboardHome} />  */}
+        <Route exact path="/" component={Dashboard} /> 
         <Route path="/auth" component={Authentication} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/map" component={Map} />

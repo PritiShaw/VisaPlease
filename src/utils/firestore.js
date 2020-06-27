@@ -20,15 +20,23 @@ const generateUserDocument = async (user, additionalData) => {
   }
 };
 
+const getUserDocument = async (userid) => {
+  const userRef = firestore.doc(`users/${userid}`);
+  await userRef.get().then(function(doc) {
+    return doc.data()
+  }).catch(function(error) {
+    console.log(error)
+    return undefined
+  });
+};
+
+
 const storeRecoveryQuestionnaire = async (userid, data) => {
-  const time = Date.now();  
-  const userRef = firestore
-    .collection(ANSWER_COLLECTION)
-    .doc("responses")
-    .collection(userid)
-    .doc(time);
+  const time = new Date();
+  const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString()}`);
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
+  console.log(snapshot)
   if (!snapshot.exists) {
     try {
       await userRef.set({ ...data, createdAt: timestamp() });
@@ -36,7 +44,7 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
       return true;
     } catch (error) {
       console.error("Error updating user document", error);
-      alert("Failed to save");
+      alert("Failed to save, try again");
       return false;
     }
   }
@@ -112,6 +120,7 @@ const getAnswersLatestAttempt = async (userid) => {
 //};
 
 export {
+  getUserDocument,
   generateUserDocument,
   storeRecoveryQuestionnaire,
   getAllOverallScore,

@@ -45,7 +45,7 @@ const Dashboard = () => {
           </div>
           <div className="col-sm-9">
             <Switch>
-              {/* <Route path="/dashboard" exact component={Calculator} /> */}
+              <Route path="/" exact component={Track} />
               <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
               <Route path="/dashboard" component={Track} />

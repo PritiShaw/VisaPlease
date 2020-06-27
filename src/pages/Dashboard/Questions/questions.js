@@ -12,8 +12,7 @@ const Question1 = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (/*answer1.length > 0 && answer2.length > 0 && answer3.length > 0*/1) {
-
+    if (answer1.length > 0 && answer2.length > 0 && answer3.length > 0) {
       props.presentAns["company.name"] = answer1
       props.presentAns["company.address"] = answer2
       props.presentAns["company.type"] = answer3
@@ -62,7 +61,7 @@ const Question2 = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (/*answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0*/1) {
+    if (answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0) {
       props.presentAns["company.size"] = answer1
       props.presentAns["company.net_worth"] = answer2
       props.presentAns["company.type"] = answer3
@@ -135,7 +134,7 @@ const Question3 = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (/*answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0 && answer5.length > 0*/1) {
+    if (answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0 && answer5.length > 0) {
       props.presentAns["company.profit_last_year"] = answer1
       props.presentAns["company.investment_cost_last_year"] = answer2
       props.presentAns["company.units_sold_2months_ago"] = answer3
@@ -204,7 +203,7 @@ const Question4 = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (1/*answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0 && answer5.length > 0 && answer6.length > 0*/) {
+    if (answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0 && answer5.length > 0 && answer6.length > 0) {
       props.presentAns["company.monthly_cost_before_pandemic"] = answer1
       props.presentAns["company.revenue_before_pandemic"] = answer2
       props.presentAns["company.monthly_cash_before_pandemic"] = answer3
@@ -278,7 +277,7 @@ const Question4b = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (1/*answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0 && answer5.length > 0 && answer6.length*/) {
+    if (answer1.length > 0 && answer2.length > 0 && answer3.length > 0 && answer4.length > 0 && answer5.length > 0 && answer6.length) {
       props.presentAns["company.monthly_cost"] = answer1
       props.presentAns["company.mohtly_revenue"] = answer2
       props.presentAns["company.monthly_cash"] = answer3
@@ -350,7 +349,7 @@ const Question5 = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (1/*answer1.length > 0 && answer2.length > 0 && answer3.length > 0*/) {
+    if (answer1.length > 0 && answer2.length > 0 && answer3.length > 0) {
       props.presentAns["company.online_website"] = answer1
       props.presentAns["company.online_ordering"] = answer2
       props.presentAns["company.NoOfSocialPlatform"] = answer3

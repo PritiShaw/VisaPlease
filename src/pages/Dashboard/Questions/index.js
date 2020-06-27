@@ -29,9 +29,9 @@ const Questions = () => {
   const [groupNumber, setGroupNumber] = useState(1);
 
 
-  const submitAll = () => {
+  const submitAll = async () => {
     var answers_with_scores = calculateRecoveryScore(userid, answers);
-    if (storeRecoveryQuestionnaire(userid, answers_with_scores)) {
+    if (await storeRecoveryQuestionnaire(userid, answers_with_scores)) {
       history.push("/dashboard/");
       window.location.reload();
     }
