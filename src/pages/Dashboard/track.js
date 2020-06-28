@@ -22,12 +22,12 @@ class Track extends React.Component {
   async componentDidMount() {
     const cookies = new Cookies();
     const userid = cookies.get("userid");
-    if(! userid){
+    if (!userid) {
       window.location = "/auth";
     }
     let userDetails = await getUserDocument(userid)
     this.setState({
-      userName : (userDetails && userDetails["firstName"])?userDetails["firstName"]:"there",
+      userName: (userDetails && userDetails["firstName"]) ? userDetails["firstName"] : "there",
       overall_scores: getAllOverallScore(userid),
       part_scores: getAllPartScore(userid),
       answers: getAnswersLatestAttempt(userid),
@@ -71,18 +71,20 @@ class Track extends React.Component {
       ],
     };
     return (
-      <React.Fragment>
-        <Container maxWidth="sm">
-          <br></br>
-          <br></br>
-          <br></br>
-          <h1>Hi {this.state.userName} !</h1>
-          <CanvasJSChart
-            options={options}
+      <>
+        <React.Fragment>
+          <Container maxWidth="sm">
+            <br></br>
+            <br></br>
+            <br></br>
+            <h1>Hi {this.state.userName} !</h1>
+            <CanvasJSChart
+              options={options}
             /* onRef = {ref => this.chart = ref} */
-          />
-        </Container>
-      </React.Fragment>
+            />
+          </Container>
+        </React.Fragment>
+      </>
     );
   }
 }

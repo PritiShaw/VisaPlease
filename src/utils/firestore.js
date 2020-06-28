@@ -1,5 +1,6 @@
 import { firestore, auth } from "../firebaseConfig";
 import firebase from "firebase/app";
+import { apiDomain } from "../config.js";
 const USER_COLLECTION = "users";
 const ANSWER_COLLECTION = "questionnaire";
 
@@ -12,7 +13,7 @@ const generateUserDocument = async (user, additionalData) => {
     try {
       await userRef.set({
         email,
-        ...additionalData,
+        ...additionalData
       });
     } catch (error) {
       console.error("Error creating user document", error);
@@ -22,12 +23,14 @@ const generateUserDocument = async (user, additionalData) => {
 
 const getUserDocument = async (userid) => {
   const userRef = firestore.doc(`users/${userid}`);
-  await userRef.get().then(function (doc) {
-    return doc.data()
-  }).catch(function (error) {
-    console.log(error)
+  let ref = await userRef.get()
+  try {
+    return ref.data()
+  }
+  catch (err) {
+    console.log(err.message)
     return undefined
-  });
+  }
 };
 
 
@@ -96,6 +99,7 @@ const getAnswersLatestAttempt = async (userid) => {
   var ref = firestore
     .collection(ANSWER_COLLECTION)
     .doc(`responses`)
+
     .collection(userid);
   const latestsnap = await ref.orderBy("createdAt", "desc").limit(1).get();
   console.log(latestsnap);
@@ -118,6 +122,37 @@ const getAnswersLatestAttempt = async (userid) => {
 // });
 //};
 
+const merchantMeasurement = async (userid) => {
+  let data = await getUserDocument(userid);
+  console.log(data)
+  if (data == undefined)
+    return undefined
+
+  const storeID = data["visaStoreId"];
+  const categoryCode = data["categoryCode"];
+  const companyName = data["companyName"];
+  const countryCode = data["countryCode"];
+  fetch(apiDomain + "/api/merchantMeasurement", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      merchantCountryCode: countryCode,
+      merchantCategoryCode: categoryCode,
+    }
+    )
+  }).then(response => {
+    //console.log(response.json())
+    return response.json();
+  })
+    .then((data) => {
+      console.log(JSON.stringify(data))
+
+    })
+};
+
+
 export {
   getUserDocument,
   generateUserDocument,
@@ -125,4 +160,5 @@ export {
   getAllOverallScore,
   getAllPartScore,
   getAnswersLatestAttempt,
+  merchantMeasurement
 };
