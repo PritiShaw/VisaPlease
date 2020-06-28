@@ -36,7 +36,7 @@ const Dashboard = () => {
           <Link id="visa" className="navbar-brand visa" to={"/sign-in"}>
             VISA
           </Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link id="Login" className="nav-link" to="/dashboard/profile">Profile</Link>
@@ -50,7 +50,7 @@ const Dashboard = () => {
       </nav>
       <div>
         <div className="row w-100">
-          <div className="col-sm-3">
+          <div className="col-sm-3 col-12 d-none d-sm-block">
             <SidePanel />
           </div>
           <div className="col-sm-9">

@@ -1,1 +1,1 @@
-export const apiDomain = "" // use https://visa-please.vercel.app if using localhost
+export const apiDomain = "https://visa-please.vercel.app" // use https://visa-please.vercel.app if using localhost
