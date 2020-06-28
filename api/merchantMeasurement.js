@@ -11,44 +11,21 @@ const handler = async (request, response) => {
             "requestMessageId": "6da60e1b8b024532a2e0eacb1af58581"
         },
         "requestData": {
-            "naicsCodeList": [
-                ""
-            ],
-            "merchantCategoryCodeList": [
-                request.body.merchantCategoryCode
-            ],
-            "merchantCategmerchantCountryCodeoryGroupsCodeList": [
-                ""
-            ],
-            "postalCodeList": [
-                ""
-            ],
-            "msaList": [
-                "7362"
-            ],
-            "countrySubdivisionList": [
-                ""
-            ],
+            "naicsCodeList": [""],
+            "merchantCategoryCodeList": [request.body.merchantCategoryCode],
+            "merchantCategmerchantCountryCodeoryGroupsCodeList": [""],
+            "postalCodeList": [""],
+            "msaList": ["7362"],
+            "countrySubdivisionList": [""],
             "merchantCountry": request.body.merchantCountryCode,
-            "monthList": [
-                "201706"
-            ],
-            "accountFundingSourceList": [
-                "All"
-            ],
-            "eciIndicatorList": [
-                "All"
-            ],
-            "platformIDList": [
-                "All"
-            ],
-            "posEntryModeList": [
-                "All"
-            ],
+            "monthList": ["201706"],
+            "accountFundingSourceList": ["All"],
+            "eciIndicatorList": ["All"],
+            "platformIDList": ["All"],
+            "posEntryModeList": ["All"],
             "cardPresentIndicator": "CARDPRESENT",
-            "groupList": [
-                "STANDARD"
-            ]
+            "groupList": ["STANDARD"],
+            "merchantCategoryGroupsCodeList": [""]
         }
     };
     let headers = {

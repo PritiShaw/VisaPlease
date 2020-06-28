@@ -23,14 +23,14 @@ const generateUserDocument = async (user, additionalData) => {
 
 const getUserDocument = async (userid) => {
   const userRef = firestore.doc(`users/${userid}`);
-  userRef.get().then( async (doc) => {
-    let response = await doc.data()
-    console.log(response)
-    return response
-  }).catch(function (error) {
-    console.log(error)
+  let ref = await userRef.get()
+  try {
+    return ref.data()
+  }
+  catch (err) {
+    console.log(err.message)
     return undefined
-  });
+  }
 };
 
 
@@ -99,6 +99,7 @@ const getAnswersLatestAttempt = async (userid) => {
   var ref = firestore
     .collection(ANSWER_COLLECTION)
     .doc(`responses`)
+
     .collection(userid);
   const latestsnap = await ref.orderBy("createdAt", "desc").limit(1).get();
   console.log(latestsnap);
@@ -122,8 +123,8 @@ const getAnswersLatestAttempt = async (userid) => {
 //};
 
 const merchantMeasurement = async (userid) => {
-  const data = await getUserDocument(userid);
-  console.log(data,1)
+  let data = await getUserDocument(userid);
+  console.log(data)
   if (data == undefined)
     return undefined
 
@@ -142,7 +143,7 @@ const merchantMeasurement = async (userid) => {
     }
     )
   }).then(response => {
-    console.log(response.json())
+    //console.log(response.json())
     return response.json();
   })
     .then((data) => {

@@ -8,7 +8,6 @@ import {
   getUserDocument
 } from "../../utils/firestore.js";
 import Cookies from "universal-cookie";
-import {merchantMeasurement} from "../../utils/firestore.js"
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -85,12 +84,6 @@ class Track extends React.Component {
             />
           </Container>
         </React.Fragment>
-        <div className="button-search" className="col-sm-12">
-          <center>
-            <button type="button" className="btn btn-primary btn-lg w-25" onClick={async () => await console.log( merchantMeasurement(
-"sTCGjwoEsQU3csfADfnrMkafQ9d2"))}> Search</button>
-          </center>
-        </div>
       </>
     );
   }
