@@ -7,77 +7,47 @@ import {
   InfoWindow,
 } from "react-google-maps";
 
-import * as parksData from "../../src/data/data.json";
+import * as suppliersData from "../../src/data/data.json";
 
 function Map() {
-  const [selectedPark, setSelectedPark] = useState(null);
-
-  //     useEffect(() => {
-  //       const listener = e => {
-  //         if (e.key === "Escape") {
-  //           setSelectedPark(null);
-  //         }
-  //       };
-  //       window.addEventListener("keydown", listener);
-
-  //       return () => {
-  //         window.removeEventListener("keydown", listener);
-  //       };
-  //     }, []);
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
 
   return (
-    <GoogleMap defaultZoom={10} defaultCenter={{ lat: 45.4211, lng: -75.6903 }}>
-      {parksData.features.map((park) => (
+    <GoogleMap
+      defaultZoom={7}
+      defaultCenter={{ lat: 37.363922, lng: -121.929163 }}
+    >
+      {suppliersData.merchantLocatorServiceResponse.response.map((supplier) => (
         <Marker
-          key={park.properties.PARK_ID}
+          key={supplier.responseValues.visaStoreId}
           position={{
-            lat: park.geometry.coordinates[1],
-            lng: park.geometry.coordinates[0],
+            lat: supplier.responseValues.locationAddressLatitude,
+            lng: supplier.responseValues.locationAddressLongitude,
           }}
           onClick={() => {
-            setSelectedPark(park);
+            setSelectedSupplier(supplier);
           }}
         />
       ))}
 
-      {selectedPark && (
+      {selectedSupplier && (
         <InfoWindow
           position={{
-            lat: selectedPark.geometry.coordinates[1],
-            lng: selectedPark.geometry.coordinates[0],
+            lat: selectedSupplier.responseValues.locationAddressLatitude,
+
+            lng: selectedSupplier.responseValues.locationAddressLongitude,
           }}
           onCloseClick={() => {
-            setSelectedPark(null);
+            setSelectedSupplier(null);
           }}
         >
-          <div>park def</div>
+          <div>
+            <h2>{selectedSupplier.responseValues.visaStoreName}</h2>
+            <p>{selectedSupplier.responseValues.merchantStreetAddress}</p>
+          </div>
         </InfoWindow>
       )}
     </GoogleMap>
-    //             icon={{
-    //               url: `/skateboarding.svg`,
-    //               scaledSize: new window.google.maps.Size(25, 25)
-    //             }}
-    //           />
-    //         ))}
-
-    //         {selectedPark && (
-    //           <InfoWindow
-    //             onCloseClick={() => {
-    //               setSelectedPark(null);
-    //             }}
-    //             position={{
-    //               lat: selectedPark.geometry.coordinates[1],
-    //               lng: selectedPark.geometry.coordinates[0]
-    //             }}
-    //           >
-    //             <div>
-    //               <h2>{selectedPark.properties.NAME}</h2>
-    //               <p>{selectedPark.properties.DESCRIPTIO}</p>
-    //             </div>
-    //           </InfoWindow>
-    //         )}
-    //
   );
 }
 

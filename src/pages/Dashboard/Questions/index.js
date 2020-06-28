@@ -9,7 +9,7 @@ import {
   Question4,
   Question4b,
   Question5,
-  Question6
+  Question6,
 } from "./questions";
 import { ProgressBar } from "react-bootstrap";
 import { storeRecoveryQuestionnaire } from "../../../utils/firestore";
@@ -19,7 +19,6 @@ const Questions = () => {
   const cookies = new Cookies();
   const userid = cookies.get("userid");
 
-
   const history = useHistory();
   if (userid == undefined) {
     history.push("/auth/");
@@ -27,7 +26,6 @@ const Questions = () => {
   }
   const [answers, setAnswers] = useState({});
   const [groupNumber, setGroupNumber] = useState(1);
-
 
   const submitAll = async () => {
     var answers_with_scores = calculateRecoveryScore(userid, answers);
@@ -38,28 +36,62 @@ const Questions = () => {
   };
 
   const questionRenderer = () => {
-
     if (groupNumber === 1)
-      return <Question1 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question1
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 2)
-      return <Question2 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question2
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 3)
-      return <Question3 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question3
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 4)
-      return <Question4 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question4
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 4.5)
-      return <Question4b setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question4b
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 5)
-      return <Question5 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question5
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 6)
-      return <Question6 setGroupNumber={setGroupNumber} presentAns={answers} setAnswers={setAnswers} />
-
+      return (
+        <Question6
+          setGroupNumber={setGroupNumber}
+          presentAns={answers}
+          setAnswers={setAnswers}
+        />
+      );
     else if (groupNumber === 7)
       return (
         <div>
@@ -78,11 +110,17 @@ const Questions = () => {
   };
   return (
     <div>
-      {(groupNumber < 8) && <ProgressBar animated now={(groupNumber / 7) * 100} label={`Step ${groupNumber} of 7`} />}
-      <hr/>
+      {groupNumber < 8 && (
+        <ProgressBar
+          animated
+          now={(groupNumber / 7) * 100}
+          label={`Step ${groupNumber} of 7`}
+        />
+      )}
+      <hr />
       {questionRenderer()}
     </div>
-  )
+  );
 };
 
 export default Questions;

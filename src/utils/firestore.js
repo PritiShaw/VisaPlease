@@ -22,30 +22,40 @@ const generateUserDocument = async (user, additionalData) => {
 
 const getUserDocument = async (userid) => {
   const userRef = firestore.doc(`users/${userid}`);
-  await userRef.get().then(function (doc) {
-    return doc.data()
-  }).catch(function (error) {
-    console.log(error)
-    return undefined
-  });
+  await userRef
+    .get()
+    .then(function (doc) {
+      return doc.data();
+    })
+    .catch(function (error) {
+      console.log(error);
+      return undefined;
+    });
 };
 
-
 const storeRecoveryQuestionnaire = async (userid, data) => {
-  const time = new Date();
-  const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString("en-US")}`);
+  var currentdate = new Date();
+  var datetime =
+    currentdate.getDate() +
+    "." +
+    (currentdate.getMonth() + 1) +
+    "." +
+    currentdate.getFullYear();
+  console.log(datetime);
+  const userRef = firestore.doc(
+    `${ANSWER_COLLECTION}/responses/${userid}/${datetime}`
+  );
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
-  if (!snapshot.exists) {
-    try {
-      await userRef.set({ ...data, createdAt: timestamp() });
-      alert("Saved");
-      return true;
-    } catch (error) {
-      console.error("Error updating user document", error);
-      alert("Failed to save, try again");
-      return false;
-    }
+
+  try {
+    await userRef.set({ ...data, createdAt: timestamp() });
+    alert("Saved");
+    return true;
+  } catch (error) {
+    console.error("Error updating user document", error);
+    alert("Failed to save, try again");
+    return false;
   }
 };
 
