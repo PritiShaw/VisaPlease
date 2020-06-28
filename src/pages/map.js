@@ -51,6 +51,27 @@ function Map() {
   );
 }
 
+// function Locate() {
+//   const [selectedPosition, setSelectedPosition] = useState(null);
+//   return (
+//     <button
+//       className="locate"
+//       onClick={() => {
+//         navigator.geolocation.getCurrentPosition((position) => {
+//           setSelectedPosition(position);
+//         });
+//       }}
+//     >
+//       <Marker
+//         position={{
+//           lat: selectedPosition.coords.latitude,
+//           lng: selectedPosition.coords.longitude,
+//         }}
+//       />
+//       <img src="compass.svg" alt="compass - locate me" />
+//     </button>
+//   );
+// }
 const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 export default function App() {
