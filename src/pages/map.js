@@ -21,8 +21,8 @@ function Map() {
         <Marker
           key={supplier.responseValues.visaStoreId}
           position={{
-            lat: supplier.responseValues.locationAddressLatitude,
-            lng: supplier.responseValues.locationAddressLongitude,
+            lat: parseFloat(supplier.responseValues.locationAddressLatitude),
+            lng: parseFloat(supplier.responseValues.locationAddressLongitude),
           }}
           onClick={() => {
             setSelectedSupplier(supplier);
@@ -33,9 +33,13 @@ function Map() {
       {selectedSupplier && (
         <InfoWindow
           position={{
-            lat: selectedSupplier.responseValues.locationAddressLatitude,
+            lat: parseFloat(
+              selectedSupplier.responseValues.locationAddressLatitude
+            ),
 
-            lng: selectedSupplier.responseValues.locationAddressLongitude,
+            lng: parseFloat(
+              selectedSupplier.responseValues.locationAddressLongitude
+            ),
           }}
           onCloseClick={() => {
             setSelectedSupplier(null);
