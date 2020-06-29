@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
 import { apiDomain } from "../../config.js";
-import data from "../../data/data.json";
+import ResultMap from "./components/resultMap.js";
 
 const MerchantLocator = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const [radiusInput, setRadiusInput] = useState(50);
   const [radiusUnit, setRadiusUnit] = useState("M");
+  const [device_lat, setDevice_lat] = useState("37.363922");
+  const [device_long, setDevice_long] = useState("-121.929163");
   const [merchant_Name, setMerchant_Name] = useState("");
   const [merchantCountryCode, setMerchantCountryCode] = useState("");
   const [merchantCategory, setMerchantCategory] = useState(["1750"]);
@@ -29,8 +30,8 @@ const MerchantLocator = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        lat: "37.363922",
-        long: "-121.929163",
+        lat: device_lat,
+        long: device_long,
         radius: radiusInput,
         distanceUnit: radiusUnit,
         merchantName: merchant_Name,
@@ -39,12 +40,10 @@ const MerchantLocator = () => {
         criteriaSelector: criteriaSelector,
         startIndex: startIndex,
       }),
+    }).then((response) => {
+      return response.json();
     })
-      .then((response) => {
-        return response.json();
-      })
       .then((data) => {
-        console.log("hi");
         if ("response" in data["merchantLocatorServiceResponse"]) {
           data["merchantLocatorServiceResponse"]["response"].map(
             ({ responseValues }) => {
@@ -61,6 +60,8 @@ const MerchantLocator = () => {
                   responseValues["merchantState"],
                 distance: responseValues["distance"],
                 payment_Method: responseValues["paymentAcceptanceMethod"],
+                gps_lat: responseValues["locationAddressLatitude"],
+                gps_long: responseValues["locationAddressLongitude"],
               });
             }
           );
@@ -70,11 +71,8 @@ const MerchantLocator = () => {
   };
 
   return (
-    <div className="col-12 py-3 bg-light text-dark">
-      <div className="col-12">
-        <br></br>
-        <br></br>
-        <br></br>
+    <div className="col-12 mt-3 bg-light text-dark">
+      <div className="col-12 pt-5">
         <h2>Merchant Locator</h2>
       </div>
       <hr />
@@ -163,28 +161,11 @@ const MerchantLocator = () => {
           <div className="col-sm-12"></div>
         </div>
         <br />
-        {/*             
-        <div className="row">
-          <div className="col-sm-12" className="merchant-name">
-            
-            <Form>
-              <Form.Group >
-                <Form.Label>Using merchant name and merchant country code</Form.Label>
-                <Form.Control type="radio" placeholder="Company Name" />
-              </Form.Group>
-              <Form.Group >
-                <Form.Label>Using merchant category code</Form.Label>
-                <Form.Control type="radio" placeholder="Company Address" />
-              </Form.Group>
-            </Form> 
-          </div>
-        </div>
-*/}
         <div className="button-search" className="col-sm-12">
           <center>
             <button
               type="button"
-              className="btn btn-primary btn-lg w-25"
+              className="btn btn-primary w-25"
               onClick={() => searchButtonClick()}
             >
               Search
@@ -192,34 +173,14 @@ const MerchantLocator = () => {
           </center>
         </div>
       </div>
-      <div className="col-12 my-5">
+      <div className="col-12 my-5 pb-3">
         <h3>Result</h3>
-        <table className="table">
-          <tr>
-            <th>Name</th>
-            <th>Street Address</th>
-            <th>Distance</th>
-            <th>Payment Method</th>
-            <th>Visa storeID</th>
-          </tr>
-          {searchResults ? (
-            searchResults.map((result) => {
-              return (
-                <tr>
-                  <td>{result["name"]}</td>
-                  <td>{result["address"]}</td>
-                  <td>{result["distance"]}</td>
-                  <td>{result["payment_Method"].join(", ")}</td>
-                  <td>{result["storeId"]}</td>
-                </tr>
-              );
-            })
-          ) : (
-              <tr>
-                <td colSpan="5">No results found</td>
-              </tr>
-            )}
-        </table>
+        <hr />
+        {
+          (searchResults && searchResults.length > 0) ?
+            <ResultMap result={searchResults} center={[device_lat,device_long]}/> :
+            <h4 className="font-italics text-center">No results found</h4>
+        }
       </div>
     </div>
   );

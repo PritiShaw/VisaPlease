@@ -7,6 +7,7 @@ import Calculator from "./calculator";
 import Profile from "../Dashboard/Profile"
 import MerchantLocator from "./merchantLocator";
 import SidePanel from "./components/sidePanel";
+import ScoreDisplay from "./Display/ScoreDisplay";
 import "./calculator.css"
 const Dashboard = () => {
   const cookies = new Cookies();
@@ -33,8 +34,8 @@ const Dashboard = () => {
     <Router>
       <nav className="navbar navbar-expand-lg navbar-light border-bottom fixed-top">
         <div className="container">
-          <Link id="visa" className="navbar-brand visa" to={"/sign-in"}>
-            VISA
+          <Link id="visa" className="navbar-brand visa">
+            VRecover
           </Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
@@ -50,16 +51,18 @@ const Dashboard = () => {
       </nav>
       <div>
         <div className="row w-100">
-          <div className="col-sm-3">
+          <div className="col-sm-3 col-12 d-none d-sm-block">
             <SidePanel />
           </div>
           <div className="col-sm-9">
             <Switch>
               <Route path="/" exact component={Track} />
+              <Route path="/dashboard/ScoreDisplay" exact component={ScoreDisplay} />
               <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
-              <Route path="/dashboard" component={Track} />
               <Route path="/dashboard/profile" component={Profile} />
+              <Route path="/dashboard" component={Track} />
+             
             </Switch>
           </div>
         </div>
