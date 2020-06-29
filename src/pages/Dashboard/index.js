@@ -34,8 +34,8 @@ const Dashboard = () => {
     <Router>
       <nav className="navbar navbar-expand-lg navbar-light border-bottom fixed-top">
         <div className="container">
-          <Link id="visa" className="navbar-brand visa" to={"/sign-in"}>
-            VISA
+          <Link id="visa" className="navbar-brand visa">
+            VRecover
           </Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
@@ -60,8 +60,9 @@ const Dashboard = () => {
               <Route path="/dashboard/ScoreDisplay" exact component={ScoreDisplay} />
               <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
-              <Route path="/dashboard" component={Track} />
               <Route path="/dashboard/profile" component={Profile} />
+              <Route path="/dashboard" component={Track} />
+             
             </Switch>
           </div>
         </div>
