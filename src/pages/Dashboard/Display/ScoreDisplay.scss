@@ -1,0 +1,178 @@
+$primary-color: #5dc3be;
+$circle-bg: #4a4e4b;
+$circle-width: .14em;
+$circle-width-hover: 0.1em;
+$global-transition: all .25s ease-in;
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+// body {
+//   font-family: Montserrat;
+// }
+
+/**
+ * Extend Us
+ * ---------
+ */
+%rect-auto{
+  clip: rect(auto, auto, auto, auto);
+}
+
+%pie {
+  position: absolute;
+  border: $circle-width solid $primary-color;
+  width: 1 - (2 * $circle-width);
+  height: 1 - (2 * $circle-width);
+  clip: rect(0em, 0.5em, 1em, 0em);
+  border-radius: 50%;
+  transform: rotate(0deg);
+}
+
+%pie-fill {
+  transform: rotate(180deg);
+}
+
+.circle-percent {
+  *,
+  *::before,
+  *::after {
+    box-sizing: content-box;  
+  }
+  
+  position: relative;
+  font-size: 200px;
+  font-weight: bold;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: $circle-bg;
+  margin: 0 auto;
+  
+  > span {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    line-height: 5em;
+    font-size: 0.2em;
+    color: $circle-bg;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    transition: $global-transition;
+    
+    sup {
+      vertical-align: baseline;
+      font-size: .5em;
+      position: relative;
+      top: -.75em;
+      font-weight: normal;
+    }
+  }
+  
+  &::after {
+    position: absolute;
+    top: $circle-width;
+    left: $circle-width;
+    display: block;
+    content: " ";
+    border-radius: 50%;
+    background-color: #fff;
+    width: 1 - (2 * $circle-width);
+    height: 1 - (2 * $circle-width);
+    transition: $global-transition;
+  }
+  
+  .mask {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    clip: rect(0em, 1em, 1em, 0.5em); 
+  }
+  
+  // Visible Progress Bar
+  .bar {
+     @extend %pie;
+  }
+  
+
+  
+  @for $percentage from 51 through 100 {
+    &[data-percent='#{$percentage}'] .mask {
+      @extend %rect-auto;
+    }
+
+    &[data-percent='#{$percentage}'] .bar:after{
+      @extend %pie-fill;
+    }
+
+    &[data-percent='#{$percentage}'] .fill{
+      @extend %pie;
+      @extend %pie-fill;
+    }
+  }
+  
+  @for $percentage from 1 through 100 {
+    &[data-percent='#{$percentage}'] .bar {
+      transform: rotate((360/100*$percentage) + deg);
+    }
+  }
+  
+  &:hover{
+
+    cursor: default;
+
+    > span {
+      width: 3.33em;
+      line-height: 3.33em;
+      font-size: 0.3em;
+      color: $primary-color;
+    }
+
+    &:after{
+      top: $circle-width-hover;
+      left: $circle-width-hover;
+      width: 1 - (2 * $circle-width-hover);
+      height: 1 - (2 * $circle-width-hover);
+    }
+
+  }  
+}
+
+
+
+
+// DEMO STYLES
+.drivers-insured {
+  width: 360px;
+  margin: 0 auto;
+  text-align: center; 
+  padding: 2rem;
+  float:right;
+  header {
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    
+    span {
+        
+      color: $primary-color;
+    }
+  }
+}
+#sameline{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#recoveryScore{
+    font-size: 45px;
+    font-weight: 300;
+    font-style: Montserrat ;
+    color: #1a1f71;
+}
+#subScore{
+  font-size: 35px;
+  font-weight: 200;
+  font-style: Montserrat ;
+  color: #1a1f71;
+}

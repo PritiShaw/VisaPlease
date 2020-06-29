@@ -20,6 +20,7 @@
 }
 #margin-left{
     margin-left: 120px;
+     
 }
 #supplier{
     text-align: center;
@@ -36,7 +37,7 @@
     font-size: 23px;
     font-weight: 500;
 }
-#single{
+#single{ 
     max-width: 40%;
     
 }
@@ -48,4 +49,39 @@
 #next{
     float: right;
     margin-bottom: 40px;
+}
+#graph{
+    background-color: white;
+    padding-left: 10px;
+    border: black 2px solid;
+    
+}
+#main{
+    font-size: 35px;
+    font-weight: 500;
+    font-style: initial; 
+    text-align: center;
+    color:#1a1f71;
+}
+#sub{
+    font-size: 25px;
+    font-weight: 200;
+    font-style: initial; 
+    color:#1a1f71;
+}
+#subover{
+    font-size: 29px;
+    font-weight: 300;
+    font-style: initial; 
+    color:#1a1f71;
+}
+#buttn{
+    background-color: ivory;
+    border: #1a1f71 1px solid;
+    color: #1a1f71;
+    float: right;
+    font-weight: 500;
+}
+#graph-style{
+    padding: 20px;
 }
