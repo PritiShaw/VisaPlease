@@ -67,3 +67,4 @@ node_modules/
 .vscode/
 yarn.lock
 .vercel
+src/config.js
