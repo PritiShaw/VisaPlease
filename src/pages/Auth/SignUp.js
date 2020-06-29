@@ -32,7 +32,17 @@ const SignIn = () => {
 
   return (
     <div className="sign-up">
+      
       <div id="log">
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
         <h3>Sign Up</h3>
 
         <div className="form-group">
