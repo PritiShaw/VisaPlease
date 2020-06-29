@@ -31,18 +31,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-up">
+    <div className="sign-up mt-5">
       
-      <div id="log">
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <div id="log" className="pt-5">
         <h3>Sign Up</h3>
 
         <div className="form-group">
