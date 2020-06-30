@@ -13,7 +13,7 @@ const generateUserDocument = async (user, additionalData) => {
     try {
       await userRef.set({
         email,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.error("Error creating user document", error);
@@ -23,37 +23,42 @@ const generateUserDocument = async (user, additionalData) => {
 
 const getUserDocument = async (userid) => {
   const userRef = firestore.doc(`users/${userid}`);
-  let ref = await userRef.get()
+  let ref = await userRef.get();
   try {
-    return ref.data()
-  }
-  catch (err) {
-    console.log(err.message)
-    return undefined
+    return ref.data();
+  } catch (err) {
+    console.log(err.message);
+    return undefined;
   }
 };
 
-
 const storeRecoveryQuestionnaire = async (userid, data) => {
-  const time = new Date();
-  const userRef = firestore.doc(`${ANSWER_COLLECTION}/responses/${userid}/${time.getYear() + 1900}/${time.getMonth() + 1}/${time.getDate()} ${time.toLocaleTimeString("en-US")}`);
+  var currentdate = new Date();
+  var datetime =
+    currentdate.getDate() +
+    "." +
+    (currentdate.getMonth() + 1) +
+    "." +
+    currentdate.getFullYear();
+  console.log(datetime);
+  const userRef = firestore.doc(
+    `${ANSWER_COLLECTION}/responses/${userid}/${datetime}`
+  );
   const timestamp = firebase.firestore.FieldValue.serverTimestamp;
   const snapshot = await userRef.get();
-  if (!snapshot.exists) {
-    try {
-      await userRef.set({ ...data, createdAt: timestamp() });
-      alert("Saved");
-      return true;
-    } catch (error) {
-      console.error("Error updating user document", error);
-      alert("Failed to save, try again");
-      return false;
-    }
+
+  try {
+    await userRef.set({ ...data, createdAt: timestamp() });
+    alert("Saved");
+    return true;
+  } catch (error) {
+    console.error("Error updating user document", error);
+    alert("Failed to save, try again");
+    return false;
   }
 };
 
 //Returns a list of overall scores for all attempts
-
 const getAllOverallScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
@@ -64,7 +69,7 @@ const getAllOverallScore = async (userid) => {
       const overall_score = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
-        const data2 = data.overall_score;
+        const data2 = data.Overall_Recovery_Score;
         overall_score.push(data2);
 
         return overall_score;
@@ -84,7 +89,7 @@ const getAllPartScore = async (userid) => {
       const score = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
-        const data2 = data.partscore;
+        const data2 = data.SubScores_list;
 
         score.push(data2);
         console.log("hello");
@@ -110,24 +115,12 @@ const getAnswersLatestAttempt = async (userid) => {
     return latestAnswers;
   });
 };
-// .get()
-// .then((snapshot) => {
-//   // console.log(snapshot);
-//   const score = [];
-//   snapshot.docChanges().forEach(function (change) {
-//     if (change.type === "added") {
-//       console.log(change.doc.data);
-//     }
-//   });
-// });
-//};
 
+// Get salesVolumeGrowthMoM of merchant
 const merchantMeasurement = async (userid) => {
   var result;
   let data = await getUserDocument(userid);
-  console.log(data)
-  if (data == undefined)
-    return undefined
+  if (data == undefined) return undefined;
 
   const storeID = data["visaStoreId"];
   const categoryCode = data["categoryCode"];
@@ -157,7 +150,6 @@ const merchantMeasurement = async (userid) => {
   return result;
 };
 
-
 export {
   getUserDocument,
   generateUserDocument,
@@ -165,5 +157,5 @@ export {
   getAllOverallScore,
   getAllPartScore,
   getAnswersLatestAttempt,
-  merchantMeasurement
+  merchantMeasurement,
 };
