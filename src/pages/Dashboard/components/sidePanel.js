@@ -24,8 +24,9 @@ const sidePanel = (props) => {
         </li>
         <li>
           <Link to="/dashboard/profile" className="link">Profile</Link>
-        </li>dashboard
-        <li className="link mobile-link" onClick={() => props.logout()}>LogOut
+        </li>
+        <li className="link mobile-link" onClick={() => props.logout()}>
+          LogOut
         </li>
       </ul>
     </div>
