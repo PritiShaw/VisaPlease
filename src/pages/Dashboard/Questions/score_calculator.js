@@ -1,4 +1,5 @@
 import { merchantMeasurement } from "../../../utils/firestore";
+import { firestore } from "../../../firebaseConfig";
 
 const calculateRecoveryScore = async (userid,answers) => {
 
@@ -51,7 +52,7 @@ const calculatePerformanceScore = async (userid,answers) => {
 
     var monthly_sales_growth_merchant = (ans4 - ans3)/ans4 * 100;
 
-    var monthly_sales_growth_category = parseFloat(await merchantMeasurement(userid));
+    var monthly_sales_growth_category = 2.5;//parseFloat(await merchantMeasurement(userid));
     
     var salesVolumeScore1 = (monthly_sales_growth_merchant>=monthly_sales_growth_category) ? 70 : 0;
     var salesVolumeScore2 = (monthly_sales_growth_merchant>=0) ? 30 : 0;
@@ -130,10 +131,87 @@ const calculateTechSavvinessScore = async (userid,answers) => {
     return techSavvinessScore;    
 }
 
-const calculateSupplierScore = async (userid,answers) => {
-    // TODO: Implement this function
+const getGlobalShippingServiceStatus = async () => {
+    const userRef = firestore.doc(`ExternalDataResources/globalShippingServicesStatus`);
+    let ref = await userRef.get();
+    try {
+      return ref.data();
+    } catch (err) {
+      console.log(err.message);
+      return undefined;
+    }
+}
 
-    return 100;
+const calculateAccessibilityScore = async (ans2,ans3,ans4,ans5,ans6) => {
+
+    var accessibilityScore = 0;
+    if(ans2 === "No")
+        return 0;
+    else
+        accessibilityScore+=50;
+    if(ans3 === "No"){
+        accessibilityScore+=20;
+        if(ans6 === "Yes")
+            accessibilityScore+=30;
+    }
+    else{
+        if(ans4 === "Yes")
+            accessibilityScore+=20;
+        
+        let data = await getGlobalShippingServiceStatus();
+        if (data == undefined) return undefined;
+        console.log(data[ans5]);
+        if (data[ans5] === "Green")
+            accessibilityScore+=30;
+        else if(data[ans5] === "Orange")
+            accessibilityScore+=15;
+    }
+    accessibilityScore/=2;
+    return accessibilityScore;
+}
+
+const calculateReliabilityScore = async (ans2,ans8,ans9,ans10) => {
+
+    var reliabilityScore = 0;
+    if(ans2 === "No")
+        return 0;
+    if(ans8 === "Yes")
+    reliabilityScore+=50/3;
+    if(ans9 === "Yes")
+    reliabilityScore+=50/3;
+    if(ans10 === "Yes")
+    reliabilityScore+=50/3;
+
+    return reliabilityScore;
+}
+
+const calculateSupplierScore = async (userid,answers) => {
+    
+    var suppliers = answers["suppliers"];
+    var supplierScore = 0;
+    var i;
+    for(i=0;i<suppliers.length;i++)
+    {
+        var supplier = suppliers[i];
+
+        var ans1 = supplier["name"];
+        var ans2 = supplier["is_open"];
+        var ans3 = supplier["another_country"];
+        var ans4 = supplier["ships_worldwide"];
+        var ans5 = supplier["worldwide_courier"];
+        var ans6 = supplier["courier_ships_local"];
+        var ans7 = supplier["accessible_distance"];
+        var ans8 = supplier["courier_pandemic_support"];
+        var ans9 = supplier["suppliers_recovering"];
+        var ans10 = supplier["satisfy_future_requirements"];
+
+        var accessibilityScore = await calculateAccessibilityScore(ans2,ans3,ans4,ans5,ans6);
+        var reliabilityScore = await calculateReliabilityScore(ans2,ans8,ans9,ans10);
+        supplierScore += (accessibilityScore + reliabilityScore);
+    }
+    supplierScore = supplierScore/suppliers.length;
+
+    return supplierScore;
 }
 
 const calculateOverallScore = async (subscore1,subscore2,subscore3,subscore4,subscore5) => {
