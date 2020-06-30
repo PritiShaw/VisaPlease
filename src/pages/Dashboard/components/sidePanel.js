@@ -8,7 +8,7 @@ const sidePanel = (props) => {
     <div className="pt-5">
       <ul className="sidepanel">
         <li>
-          <NavLink to="/dashboard" className="link">Dashboard</Link>
+          <NavLink to="/dashboard" className="link">Dashboard</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/calculator" className="link">Score calculator</NavLink>
