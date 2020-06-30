@@ -19,6 +19,10 @@
     padding-top: 2.5em;
 }
 
+.sidepanel .active {
+    color: #faaa13;
+}
+
 @media(max-width:767px) {
     .sidepanel {
         width: 100%;
