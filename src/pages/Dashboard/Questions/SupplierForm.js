@@ -84,11 +84,9 @@ const SupplierForm = (props) => {
                     <Form.Label> Which global shipping service is being used by supplier?</Form.Label>
                     <Form.Control as="select" value={answer5} onChange={(e) => setAns5(e.target.value)}>
                         <option></option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Fedex</option>
+                        <option>UPS</option>
+                        <option>USPS</option>
                     </Form.Control>
                 </Form.Group>
 
