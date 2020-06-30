@@ -5,13 +5,13 @@ const calculateRecoveryScore = async (userid,answers) => {
 
     console.log("***Inside calculateRecoveryScore***");
 
-    var subscore1 = await calculateLoanScore(userid,answers);
-    var subscore2 = await calculatePerformanceScore(userid,answers);
-    var subscore3 = await calculateCashFlowScore(userid,answers);
-    var subscore4 = await calculateTechSavvinessScore(userid,answers);
-    var subscore5 = await calculateSupplierScore(userid,answers);
+    var subscore1 = Math.round(await calculateLoanScore(userid,answers));
+    var subscore2 = Math.round(await calculatePerformanceScore(userid,answers));
+    var subscore3 = Math.round(await calculateCashFlowScore(userid,answers));
+    var subscore4 = Math.round(await calculateTechSavvinessScore(userid,answers));
+    var subscore5 = Math.round(await calculateSupplierScore(userid,answers));
 
-    var overallRecoveryScore = await calculateOverallScore(subscore1,subscore2,subscore3,subscore4,subscore5);
+    var overallRecoveryScore = Math.round(await calculateOverallScore(subscore1,subscore2,subscore3,subscore4,subscore5));
 
     answers["Overall_Recovery_Score"] = overallRecoveryScore;
     answers["SubScores_list"] = [subscore1,subscore2,subscore3,subscore4,subscore5];
@@ -97,9 +97,15 @@ const calculateCashFlowScore = async (userid,answers) => {
     var ans11 = parseInt(answers["company.monthly_payment_deferrals_given_to_customer"]);
     var ans12 = parseInt(answers["company.monthly_payment_deferrals_received_from_customer"]);
 
-    var netCashFlowThisMonth = await calculateNetCashFlow(ans7,ans8,ans9,ans10,ans11,ans12);
+    var netCashFlowLastMonth = await calculateNetCashFlow(ans7,ans8,ans9,ans10,ans11,ans12);
 
-    var cashFlowScore = (netCashFlowThisMonth - netCashFlowBeforePandemic)/ netCashFlowThisMonth * 100;
+    var percentChangeinCashFlow = (netCashFlowLastMonth - netCashFlowBeforePandemic)/ netCashFlowLastMonth * 100;
+
+    var cashFlowScore = 0;
+    if(percentChangeinCashFlow > 0)
+        cashFlowScore += 30;
+    if(netCashFlowLastMonth > 0)
+        cashFlowScore += 70;
 
     return cashFlowScore;
 }
@@ -190,6 +196,8 @@ const calculateSupplierScore = async (userid,answers) => {
     var suppliers = answers["suppliers"];
     var supplierScore = 0;
     var i;
+    if(suppliers.length === 0)
+    return 0;
     for(i=0;i<suppliers.length;i++)
     {
         var supplier = suppliers[i];
