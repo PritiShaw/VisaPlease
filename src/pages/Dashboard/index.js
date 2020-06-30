@@ -21,13 +21,14 @@ const Dashboard = () => {
   const cookies = new Cookies();
   const userid = cookies.get("userid");
   const [firstName, setFirstName] = useState();
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     async function fetchInfo() {
       const userRef = firestore.doc(`users/${userid}`);
       const snapshot = await userRef.get();
-      const userData = snapshot.data();      
-      if(!userData)
+      const userData = snapshot.data();
+      if (!userData)
         window.location = "/auth"
       setFirstName(userData.firstName);
     }
@@ -45,11 +46,11 @@ const Dashboard = () => {
           <Link id="visa" className="navbar-brand visa">
             VRecover
           </Link>
+          <button class="navbar-toggler" type="button" onClick={() => setShowMenu(!showMenu)}><span>{showMenu ? "X" : "Menu"}</span></button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
-              
               <li className="nav-item">
-                <Link id="Login" className="nav-link" onClick={()=>logout()}>LogOut</Link>
+                <Link id="Login" className="nav-link" onClick={() => logout()}>LogOut</Link>
               </li>
             </ul>
           </div>
@@ -57,25 +58,25 @@ const Dashboard = () => {
       </nav>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-3 col-12 d-none d-sm-block px-0">
-            <SidePanel />
+          <div className={"col-sm-3 col-12 d-sm-block px-0 " + (showMenu ? "" : "d-none")}>
+            <SidePanel logout={logout}/>
           </div>
           <div className="col-sm-9 pt-5">
             <Switch>
-              
+
               <Route path="/dashboard/ScoreDisplay" exact component={ScoreDisplay} />
               <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
               <Route path="/dashboard/profile" component={Profile} />
               <Route path="/dashboard/track" component={Track} />
               <Route path="/dashboard/tips/general-tips" component={GeneralTips} />
-              <Route path="/dashboard/tips/tips-for-loan" component={TipsForLoan}/>
+              <Route path="/dashboard/tips/tips-for-loan" component={TipsForLoan} />
               <Route path="/dashboard/tips/tips-for-business-performance" exact component={TipsForBusinessPerformance} />
               <Route path="/dashboard/tips/tips-for-cash-flow" exact component={TipsForCashFlow} />
               <Route path="/dashboard/tips/tips-for-tech" exact component={TipsForTech} />
               <Route path="/dashboard/tips/tips-for-suppliers" exact component={TipsForSuppliers} />
               <Route path="/dashboard/tips" exact component={Tips} />
-             <Route path="/dashboard" component={Dash} />
+              <Route path="/dashboard" component={Dash} />
             </Switch>
           </div>
         </div>

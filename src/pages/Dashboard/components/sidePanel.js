@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 
 import "./sidePanel.css";
 
-const sidePanel = () => {
+const sidePanel = (props) => {
   return (
-    <div>
-    <br/><br/>
-    
+    <div className="pt-5">
       <ul className="sidepanel">
-      <li>
+        <li>
           <Link to="/dashboard" className="link">Dashboard</Link>
         </li>
         <li>
@@ -27,7 +25,9 @@ const sidePanel = () => {
         <li>
           <Link to="/dashboard/profile" className="link">Profile</Link>
         </li>
-        
+        <li className="link mobile-link" onClick={() => props.logout()}>
+          LogOut
+        </li>
       </ul>
     </div>
   );
