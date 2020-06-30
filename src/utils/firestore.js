@@ -9,12 +9,14 @@ const generateUserDocument = async (user, additionalData) => {
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
   if (!snapshot.exists) {
-    const { email, displayName, photoURL } = user;
+    const { email } = user;
     try {
-      await userRef.set({
+      let newDoc = {
         email,
         ...additionalData,
-      });
+      }
+      await userRef.set(newDoc);
+      console.log(newDoc,additionalData)
     } catch (error) {
       console.error("Error creating user document", error);
     }
@@ -122,9 +124,7 @@ const merchantMeasurement = async (userid) => {
   let data = await getUserDocument(userid);
   if (data == undefined) return undefined;
 
-  const storeID = data["visaStoreId"];
   const categoryCode = data["categoryCode"];
-  const companyName = data["companyName"];
   const countryCode = data["countryCode"];
   await fetch(apiDomain + "/api/merchantMeasurement", {
     method: "POST",
@@ -150,6 +150,34 @@ const merchantMeasurement = async (userid) => {
   return result;
 };
 
+const merchantLocatorRegister = async(c_code, m_name, m_postalCode) => {
+
+  const countryCode = c_code;
+  const merchantName = m_name;
+  const postalCode = m_postalCode;
+  const radius = "100";
+  const radiusUnit = "M";
+
+  await fetch(apiDomain + "/api/merchantLocatorRegister", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      merchantCountryCode: countryCode,
+      merchantName: merchantName,
+      merchantPostalCode: postalCode,
+      distance: radius,
+      distanceUnit: radiusUnit
+    }
+    )
+  }).then((response) => {
+      console.log(response)
+      return response.json();
+  })
+};
+
+
 export {
   getUserDocument,
   generateUserDocument,
@@ -158,4 +186,5 @@ export {
   getAllPartScore,
   getAnswersLatestAttempt,
   merchantMeasurement,
+  merchantLocatorRegister
 };

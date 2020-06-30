@@ -71,7 +71,7 @@ const MerchantLocator = () => {
   };
 
   return (
-    <div className="col-12 mt-3 bg-light text-dark">
+    <div className="col-12 mt-3">
       <div className="col-12 pt-5">
         <h2>Merchant Locator</h2>
       </div>
@@ -81,29 +81,32 @@ const MerchantLocator = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label>Radius</label>
-              <div className="input-group">
-                <input
-                  className="radius-input form-control"
-                  type="number"
-                  min="0"
-                  max="100"
-                  value={radiusInput}
-                  onChange={(e) => setRadiusInput(e.target.value)}
-                ></input>
-                <div class="input-group-append">
-                  <select
-                    className="radiusUnit-dropdown form-control"
-                    value={radiusUnit}
-                    onChange={(e) => setRadiusUnit(e.target.value)}
-                  >
-                    <option value="M">meter(m)</option>
-                    <option value="KM">kilometer(Km)</option>
-                  </select>
+          <div className="col-sm-12">
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label>Radius</label>
+                <div className="input-group">
+                  <input
+                    className="radius-input form-control"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={radiusInput}
+                    onChange={(e) => setRadiusInput(e.target.value)}
+                  ></input>
+                  <div class="input-group-append">
+                    <select
+                      className="radiusUnit-dropdown form-control"
+                      value={radiusUnit}
+                      onChange={(e) => setRadiusUnit(e.target.value)}
+                    >
+                      <option value="M">meter(m)</option>
+                      <option value="KM">kilometer(Km)</option>
+                    </select>
+                  </div>
                 </div>
               </div>
+              
             </div>
           </div>
           <div className="col-sm-12">
@@ -178,7 +181,7 @@ const MerchantLocator = () => {
         <hr />
         {
           (searchResults && searchResults.length > 0) ?
-            <ResultMap result={searchResults} center={[device_lat,device_long]}/> :
+            <ResultMap result={searchResults} center={[device_lat, device_long]} /> :
             <h4 className="font-italics text-center">No results found</h4>
         }
       </div>

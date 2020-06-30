@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
-import { generateUserDocument } from "../../utils/firestore";
+import { generateUserDocument, merchantLocatorRegister } from "../../utils/firestore";
 import "../Dashboard/calculator.css"
 
 const SignIn = () => {
@@ -25,9 +25,24 @@ const SignIn = () => {
         email,
         password
       );
-      await generateUserDocument(user, { firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode });
-      history.push("/dashboard")
-      window.location.reload()
+      let merchantLat = "0"
+      let merchantLong = "0"
+      let otherDetails = {firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode}
+      console.log(otherDetails)
+      let merchantDetails = await merchantLocatorRegister(countryCode, companyName, postalCode)
+      // if ("response" in merchantDetails ){
+      //   for( let merchant in merchantDetails["response"]){
+      //     if(merchant["responseValues"]["visaStoreId"]==visaStoreId){
+      //       merchantLat = merchantDetails["response"]["locationAddressLatitude"]
+      //       merchantLong = merchantDetails["response"]["locationAddressLongitude"] 
+      //       break
+      //     }
+      //   }
+      // }
+      await generateUserDocument(user, otherDetails);
+      setError("Registration Successfull");
+      // history.push("/dashboard")
+      // window.location.reload()
     } catch (err) {
       setError("Error Signing up with email and password");
     }
@@ -83,7 +98,7 @@ const SignIn = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button 
+              <button
                 type="submit"
                 className="btn btn-primary btn-block"
                 onClick={() => setPage(1)}
