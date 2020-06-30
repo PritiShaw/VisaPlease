@@ -13,6 +13,15 @@ overflow: auto;
   padding-top: 2.5em;
 }
 
+.sidepanel li a {
+  text-decoration: none;
+}
+
+.sidepanel li a:hover {
+  color: #fdbb0a;
+}
+
+
 .link {
   color: #FFF;
   margin: 10%;
