@@ -4,9 +4,6 @@ import { Container } from "react-bootstrap";
 import {Button} from "react-bootstrap"
 import "../calculator.css";
 
-
-
-
 const OverallRecoveryScoreArray=[ 59, 80, 81, 56,100,85,65,11,20,65, 59, 80, 81, 56,65, 59, 80, 81, 56,65];
 const CalculatedOn=['Jan 1', 'jan 7', 'jan 14',
 'jan 21', 'jan 28','Jan 1', 'jan 7', 'jan 14',

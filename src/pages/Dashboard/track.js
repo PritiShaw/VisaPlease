@@ -93,9 +93,11 @@ import Subscore5 from "./Graphs/SubScore5";
 import "./calculator.css"
 export default class Track extends React.Component{
   render(){
-    return(<div>
-      <br/><br/><br/><br/><br/>
+    return(
+  <div>
+      <br/><br/>
       <p id="main">Track Your Recovery Score</p>
+      
       <br/><br/>
       <OverallScores/>
       <br/><br/>
@@ -113,9 +115,6 @@ export default class Track extends React.Component{
             </div>)
   }
 }
-
-
-
 
 const CalculatedOn=['Jan 1', 'jan 7', 'jan 14',
 'jan 21', 'jan 28','Jan 1', 'jan 7', 'jan 14',

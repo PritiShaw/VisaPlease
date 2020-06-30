@@ -6,6 +6,14 @@ import Track from "./../Dashboard/track";
 import Calculator from "./calculator";
 import Profile from "../Dashboard/Profile"
 import MerchantLocator from "./merchantLocator";
+import Dash from "../Dashboard/Dash"
+import Tips from "../Dashboard/Tips"
+import GeneralTips from "../Dashboard/GeneralTips"
+import TipsForLoan from "../Dashboard/TipsForLoan"
+import TipsForBusinessPerformance from "../Dashboard/TipsForBusinessPerformance"
+import TipsForCashFlow from "../Dashboard/TipsForCashFlow"
+import TipsForTech from "../Dashboard/TipsForTech"
+import TipsForSuppliers from "../Dashboard/TipsForSuppliers"
 import SidePanel from "./components/sidePanel";
 import ScoreDisplay from "./Display/ScoreDisplay";
 import "./calculator.css"
@@ -39,9 +47,7 @@ const Dashboard = () => {
           </Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link id="Login" className="nav-link" to="/dashboard/profile">Profile</Link>
-              </li>
+              
               <li className="nav-item">
                 <Link id="Login" className="nav-link" onClick={()=>logout()}>LogOut</Link>
               </li>
@@ -56,13 +62,20 @@ const Dashboard = () => {
           </div>
           <div className="col-sm-9 pt-5">
             <Switch>
-              <Route path="/" exact component={Track} />
+              
               <Route path="/dashboard/ScoreDisplay" exact component={ScoreDisplay} />
               <Route path="/dashboard/calculator" component={Calculator} />
               <Route path="/dashboard/locator" component={MerchantLocator} />
               <Route path="/dashboard/profile" component={Profile} />
-              <Route path="/dashboard" component={Track} />
-             
+              <Route path="/dashboard/track" component={Track} />
+              <Route path="/dashboard/tips/general-tips" component={GeneralTips} />
+              <Route path="/dashboard/tips/tips-for-loan" component={TipsForLoan}/>
+              <Route path="/dashboard/tips/tips-for-business-performance" exact component={TipsForBusinessPerformance} />
+              <Route path="/dashboard/tips/tips-for-cash-flow" exact component={TipsForCashFlow} />
+              <Route path="/dashboard/tips/tips-for-tech" exact component={TipsForTech} />
+              <Route path="/dashboard/tips/tips-for-suppliers" exact component={TipsForSuppliers} />
+              <Route path="/dashboard/tips" exact component={Tips} />
+             <Route path="/dashboard" component={Dash} />
             </Switch>
           </div>
         </div>
