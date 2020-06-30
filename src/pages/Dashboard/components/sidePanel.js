@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./sidePanel.css";
 
@@ -8,22 +8,22 @@ const sidePanel = (props) => {
     <div className="pt-5">
       <ul className="sidepanel">
         <li>
-          <Link to="/dashboard" className="link">Dashboard</Link>
+          <NavLink to="/dashboard" className="link">Dashboard</Link>
         </li>
         <li>
-          <Link to="/dashboard/calculator" className="link">Score calculator</Link>
+          <NavLink to="/dashboard/calculator" className="link">Score calculator</NavLink>
         </li>
         <li>
-          <Link to="/dashboard/locator" className="link">Merchant locator</Link>
+          <NavLink to="/dashboard/locator" className="link">Merchant locator</NavLink>
         </li>
         <li>
-          <Link to="/dashboard/track" className="link">Track your progress</Link>
+          <NavLink to="/dashboard/track" className="link">Track your progress</NavLink>
         </li>
         <li>
-          <Link to="/dashboard/tips" className="link">Tips</Link>
+          <NavLink to="/dashboard/tips" className="link">Tips</NavLink>
         </li>
         <li>
-          <Link to="/dashboard/profile" className="link">Profile</Link>
+          <NavLink to="/dashboard/profile" className="link">Profile</NavLink>
         </li>
         <li className="link mobile-link" onClick={() => props.logout()}>
           LogOut
