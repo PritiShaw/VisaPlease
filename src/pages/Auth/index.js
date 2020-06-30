@@ -24,7 +24,7 @@ const Authentication = () => {
                     </div>
                 </nav>
 
-                <div className="auth-wrapper">
+                <div className="auth-wrapper pt-5">
                     <div className="auth-inner">
                         <Switch>
                             <Route path="/auth" exact component={Login} />
