@@ -1,4 +1,4 @@
-import { merchantMeasurement } from "../../../utils/firestore";
+import { merchantMeasurement, getUserDocument } from "../../../utils/firestore";
 import { firestore } from "../../../firebaseConfig";
 
 const calculateRecoveryScore = async (userid,answers) => {
@@ -30,10 +30,30 @@ const calculateLoanScore = async (userid,answers) => {
     return loanScore;    
 }
 
+const getIndustryROIAverage = async () => {
+    const userRef = firestore.doc(`ExternalDataResources/IndustryROIAverages`);
+    let ref = await userRef.get();
+    try {
+      return ref.data();
+    } catch (err) {
+      console.log(err.message);
+      return undefined;
+    }
+}
+
+const getIndustryNetMarginAverage = async () => {
+    const userRef = firestore.doc(`ExternalDataResources/IndustryNetMarginAverages`);
+    let ref = await userRef.get();
+    try {
+      return ref.data();
+    } catch (err) {
+      console.log(err.message);
+      return undefined;
+    }
+}
+
 const calculatePerformanceScore = async (userid,answers) => {
-    // TODO: Fetch the industry Average as in https://csimarket.com/screening/index.php?s=roi&pageS=1&fis=
-    // TODO: Fetch the industry Average as in http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/margin.html
-    console.log("***Inside calculatePerformanceScore***");
+    
     var ans1 = parseInt(answers["company.profit_last_year"]);
     var ans2 = parseInt(answers["company.investment_cost_last_year"]);
     var ans3 = parseInt(answers["company.units_sold_2months_ago"]);
@@ -42,8 +62,13 @@ const calculatePerformanceScore = async (userid,answers) => {
 
     var ROI = (ans1/ans2)*100;
 
-    // Refer TODO
-    var industryROIAverage = 10.00;
+    let userData = await getUserDocument(userid);
+    if (userData === undefined) return undefined;
+
+    let ROIData = await getIndustryROIAverage();
+    if (ROIData === undefined) return undefined;
+
+    var industryROIAverage = 10.00; //parseFloat(ROIData[userData["merchantCategoryCode"]]);
 
     var ROIScore1 = (ROI>=industryROIAverage) ? 70 : 0;
     var ROIScore2 = (ROI>=0) ? 30 : 0;
@@ -52,7 +77,7 @@ const calculatePerformanceScore = async (userid,answers) => {
 
     var monthly_sales_growth_merchant = (ans4 - ans3)/ans4 * 100;
 
-    var monthly_sales_growth_category = 2.5;//parseFloat(await merchantMeasurement(userid));
+    var monthly_sales_growth_category = parseFloat(await merchantMeasurement(userid));
     
     var salesVolumeScore1 = (monthly_sales_growth_merchant>=monthly_sales_growth_category) ? 70 : 0;
     var salesVolumeScore2 = (monthly_sales_growth_merchant>=0) ? 30 : 0;
@@ -61,8 +86,10 @@ const calculatePerformanceScore = async (userid,answers) => {
 
     var netMargin = (ans1 / ans5) * 100;
 
-    // Refer TODO
-    var industryNetMarginAverage = 10.00;
+    let NetMarginData = await getIndustryNetMarginAverage();
+    if (NetMarginData === undefined) return undefined;
+
+    var industryNetMarginAverage = 10.00; //parseFloat(NetMarginData[userData["merchantCategoryCode"]]);
 
     var netMarginScore1 = (netMargin>=industryNetMarginAverage) ? 70 : 0;
     var netMarginScore2 = (netMargin>=0) ? 30 : 0; 
@@ -98,10 +125,12 @@ const calculateCashFlowScore = async (userid,answers) => {
     var ans12 = parseInt(answers["company.monthly_payment_deferrals_received_from_customer"]);
 
     var netCashFlowLastMonth = await calculateNetCashFlow(ans7,ans8,ans9,ans10,ans11,ans12);
+ 
 
     var percentChangeinCashFlow = (netCashFlowLastMonth - netCashFlowBeforePandemic)/ netCashFlowLastMonth * 100;
 
     var cashFlowScore = 0;
+  
     if(percentChangeinCashFlow > 0)
         cashFlowScore += 30;
     if(netCashFlowLastMonth > 0)
@@ -111,8 +140,7 @@ const calculateCashFlowScore = async (userid,answers) => {
 }
 
 const calculateTechSavvinessScore = async (userid,answers) => {
-    // TODO: Fetch terminalType and lastTranDateRange from Locator API
-
+    
     var ans1 = answers["company.online_website"];
     var ans2 = answers["company.online_ordering"];
     var ans3 = parseInt(answers["company.NoOfSocialPlatform"]);
@@ -122,13 +150,14 @@ const calculateTechSavvinessScore = async (userid,answers) => {
 
     var socialMediaScore = (ans3 < 4) ? (25 * ans3) : 100;
     
-    // Refer TODO
-    var noOfTerminalTypes = 2;
+    let userData = await getUserDocument(userid);
+    if (userData === undefined) return undefined;
+
+    var noOfTerminalTypes = 2;//userData["terminalType"].length;
 
     var terminalScore = (noOfTerminalTypes < 3) ? (100/3 * noOfTerminalTypes) : 100;
 
-    // Refer TODO
-    var lastTranDateRange = "In last 365 days";
+    var lastTranDateRange = "In last 365 days"; //userData["lastTranDateRange"];
 
     var POSRecencyScore = (lastTranDateRange === "In last 365 days") ? 100 : 0;
 
@@ -166,7 +195,6 @@ const calculateAccessibilityScore = async (ans2,ans3,ans4,ans5,ans6) => {
         
         let data = await getGlobalShippingServiceStatus();
         if (data == undefined) return undefined;
-        console.log(data[ans5]);
         if (data[ans5] === "Green")
             accessibilityScore+=30;
         else if(data[ans5] === "Orange")
