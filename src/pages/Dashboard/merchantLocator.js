@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
 import { apiDomain } from "../../config.js";
 import ResultMap from "./components/resultMap.js";
+import {
+  getUserDocument
+} from "../../utils/firestore.js";
 
 const MerchantLocator = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -13,7 +17,24 @@ const MerchantLocator = () => {
   const [merchantCountryCode, setMerchantCountryCode] = useState("");
   const [merchantCategory, setMerchantCategory] = useState(["1750"]);
   const [startIndex, setStartIndex] = useState(0);
+  const [showMap, setShowMap] = useState(false);
   const [criteriaSelector, setCriteriaSelector] = useState(0);
+
+  const cookies = new Cookies();
+  const userid = cookies.get("userid");
+
+  useEffect(() => {
+    const updateMapCenter = async () =>{
+      let userDetails = await getUserDocument(userid)
+      setDevice_lat((userDetails && userDetails["latitude"]) ? userDetails["latitude"] : "37.363922")
+      setDevice_long((userDetails && userDetails["longitude"]) ? userDetails["longitude"] : "-121.929163")
+      setShowMap(true)
+    }
+    if (!userid) {
+      window.location = "/auth";
+    }
+    updateMapCenter()
+  }, [])
 
   const handleCategoryCode = (event) => {
     let newCategoryList = [];
@@ -21,6 +42,7 @@ const MerchantLocator = () => {
 
     setMerchantCategory(newCategoryList)
   }
+
   const searchButtonClick = () => {
     var result = [];
     setSearchResults([]);
@@ -71,7 +93,7 @@ const MerchantLocator = () => {
   };
 
   return (
-    <div className="col-12 mt-3 bg-light text-dark">
+    <div className="col-12 mt-3">
       <div className="col-12 pt-5">
         <h2>Search Suppliers Near Your Store</h2>
       </div>
@@ -88,10 +110,10 @@ const MerchantLocator = () => {
                 <input
                   className="radius-input form-control"
                   type="number"
-                  min="0"
+                  min="1"
                   max="100"
                   value={radiusInput}
-                  onChange={(e) => setRadiusInput(e.target.value)}
+                  onChange={(e) => e.target.value>0 && setRadiusInput(e.target.value)}
                 ></input>
                 <div class="input-group-append">
                   <select
@@ -104,6 +126,7 @@ const MerchantLocator = () => {
                   </select>
                 </div>
               </div>
+
             </div>
           </div>
           <div className="col-sm-12">
@@ -177,9 +200,10 @@ const MerchantLocator = () => {
         <h3>Result</h3>
         <hr />
         {
-          (searchResults && searchResults.length > 0) ?
-            <ResultMap result={searchResults} center={[device_lat,device_long]}/> :
-            <h4 className="font-italics text-center">No results found</h4>
+          showMap && <ResultMap result={searchResults} center={[parseFloat(device_lat), parseFloat(device_long)]}  radius={parseInt(radiusInput)} />
+          // (searchResults && searchResults.length > 0) ?
+          //   <ResultMap result={searchResults} center={[device_lat, device_long]} /> :
+          //   <h4 className="font-italics text-center">No results found</h4>
         }
       </div>
     </div>

@@ -4,7 +4,7 @@ import { apiDomain } from "../config.js";
 const USER_COLLECTION = "users";
 const ANSWER_COLLECTION = "questionnaire";
 
-const generateUserDocument = async (user, additionalData) => {
+const generateUserDocument = async (user, firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode, merchantLat, merchantLong) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
@@ -12,8 +12,16 @@ const generateUserDocument = async (user, additionalData) => {
     const { email, displayName, photoURL } = user;
     try {
       await userRef.set({
-        email,
-        ...additionalData,
+        email : email,
+        latitude: merchantLat,
+        longitude: merchantLong,
+        firstName: firstName,
+        lastName: lastName,
+        companyName: companyName,
+        countryCode: countryCode,
+        visaStoreId: visaStoreId,
+        categoryCode: categoryCode,
+        postalCode: postalCode
       });
     } catch (error) {
       console.error("Error creating user document", error);
@@ -122,9 +130,7 @@ const merchantMeasurement = async (userid) => {
   let data = await getUserDocument(userid);
   if (data == undefined) return undefined;
 
-  const storeID = data["visaStoreId"];
   const categoryCode = data["categoryCode"];
-  const companyName = data["companyName"];
   const countryCode = data["countryCode"];
   await fetch(apiDomain + "/api/merchantMeasurement", {
     method: "POST",
@@ -140,7 +146,7 @@ const merchantMeasurement = async (userid) => {
     return response.json();
   })
     .then((data) => {
-      if("response" in data ) {
+      if ("response" in data) {
         result = data["response"]["responseData"][0]["salesVolumeGrowthMoM"];
       }
       else {
@@ -150,6 +156,36 @@ const merchantMeasurement = async (userid) => {
   return result;
 };
 
+const merchantLocatorRegister = async (c_code, m_name, m_postalCode) => {
+
+  const countryCode = c_code;
+  const merchantName = m_name;
+  const postalCode = m_postalCode;
+  const radius = "100";
+  const radiusUnit = "M";
+
+  let response = await fetch(apiDomain + "/api/merchantLocatorRegister", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      merchantCountryCode: countryCode,
+      merchantName: merchantName,
+      merchantPostalCode: postalCode,
+      distance: radius,
+      distanceUnit: radiusUnit
+
+    }
+    )
+  })
+  if (response != undefined)
+    return response.json();
+  else
+    return undefined
+};
+
+
 export {
   getUserDocument,
   generateUserDocument,
@@ -158,4 +194,5 @@ export {
   getAllPartScore,
   getAnswersLatestAttempt,
   merchantMeasurement,
+  merchantLocatorRegister
 };

@@ -1,9 +1,9 @@
 import React from "react"
-import { Container } from "react-bootstrap";
+import Cookies from "universal-cookie";
 import {
   getUserDocument
 } from "../../utils/firestore.js";
-import Cookies from "universal-cookie";
+
 class Dash extends React.Component{
     state= {
         userName: "",

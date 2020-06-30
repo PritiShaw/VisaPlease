@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
-import { generateUserDocument } from "../../utils/firestore";
+import { generateUserDocument, merchantLocatorRegister } from "../../utils/firestore";
 import "../Dashboard/calculator.css"
 
 const SignIn = () => {
@@ -17,16 +17,31 @@ const SignIn = () => {
   const [categoryCode, setCategoryCode] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [page, setPage] = useState(0);
-
   const [error, setError] = useState(null);
+
   const registerAccount = async () => {
     try {
+      
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
-      await generateUserDocument(user, { firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode });
-      history.push("/dashboard")
+      let merchantDetails = await merchantLocatorRegister(countryCode, companyName, postalCode)
+      let merchantLat = "0"
+      let merchantLong = "0"
+      if ("response" in merchantDetails["merchantLocatorServiceResponse"]) {
+        for (let idx = 0; idx < merchantDetails["merchantLocatorServiceResponse"]["response"].length; idx++) {
+          let merchant = merchantDetails["merchantLocatorServiceResponse"]["response"][idx]["responseValues"]
+          if (merchant["visaStoreId"] == visaStoreId) {
+            merchantLat = merchant["locationAddressLatitude"]
+            merchantLong = merchant["locationAddressLongitude"]
+            break
+          }
+        }
+      }
+      await generateUserDocument(user, firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode, merchantLat, merchantLong);
+      alert("Registration Successful, please login");
+      history.push("/auth")
       window.location.reload()
     } catch (err) {
       setError("Error Signing up with email and password");
@@ -83,7 +98,7 @@ const SignIn = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button 
+              <button
                 type="submit"
                 className="btn btn-primary btn-block"
                 onClick={() => setPage(1)}
@@ -155,6 +170,8 @@ const SignIn = () => {
           <p className="forgot-password text-right">
             Already registered <Link to="/auth/login">sign in?</Link>
           </p>
+          <hr />
+          {error}
         </div>
       </div>
     </>
