@@ -125,10 +125,12 @@ const calculateCashFlowScore = async (userid,answers) => {
     var ans12 = parseInt(answers["company.monthly_payment_deferrals_received_from_customer"]);
 
     var netCashFlowLastMonth = await calculateNetCashFlow(ans7,ans8,ans9,ans10,ans11,ans12);
+ 
 
     var percentChangeinCashFlow = (netCashFlowLastMonth - netCashFlowBeforePandemic)/ netCashFlowLastMonth * 100;
 
     var cashFlowScore = 0;
+  
     if(percentChangeinCashFlow > 0)
         cashFlowScore += 30;
     if(netCashFlowLastMonth > 0)
