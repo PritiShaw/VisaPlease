@@ -73,17 +73,17 @@ const MerchantLocator = () => {
   return (
     <div className="col-12 mt-3 bg-light text-dark">
       <div className="col-12 pt-5">
-        <h2>Merchant Locator</h2>
+        <h2>Search Suppliers Near Your Store</h2>
       </div>
       <hr />
       <div className="col-12">
-        <p>To locate desired local suppliers</p>
+        <p>Locate Suppliers near your store either by their Name or Category Code</p>
       </div>
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group">
-              <label>Radius</label>
+              <label>Search Radius</label>
               <div className="input-group">
                 <input
                   className="radius-input form-control"
@@ -117,13 +117,13 @@ const MerchantLocator = () => {
                   <>
                     <input
                       className="form-control"
-                      placeholder="Merchant Name"
+                      placeholder="Supplier Name"
                       value={merchant_Name}
                       onChange={(e) => setMerchant_Name(e.target.value)}
                     />
                     <input
                       className="form-control"
-                      placeholder="Merchant Country code"
+                      placeholder="Supplier Country code"
                       value={merchantCountryCode}
                       onChange={(e) => setMerchantCountryCode(e.target.value)}
                     />
@@ -137,10 +137,10 @@ const MerchantLocator = () => {
           <div className="col-sm-5" onClick={() => setCriteriaSelector(1)}>
             <div className="form-group">
               {criteriaSelector == 0 ? (
-                <h3 className="my-4 text-center">Merchant Category</h3>
+                <h3 className="my-4 text-center">Supplier Category</h3>
               ) : (
                   <>
-                    <label>Merchant Category</label>
+                    <label>Supplier Category</label>
                     <select multiple
                       className="form-control selectpicker"
                       value={merchantCategory}

@@ -11,13 +11,13 @@ const sidePanel = (props) => {
           <NavLink to="/dashboard" exact className="link">Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/calculator" className="link">Score calculator</NavLink>
+          <NavLink to="/dashboard/calculator" className="link">Calculate Your Recovery Score </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/locator" className="link">Merchant locator</NavLink>
+          <NavLink to="/dashboard/locator" className="link">Search Local Suppliers</NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/track" className="link">Track your progress</NavLink>
+          <NavLink to="/dashboard/track" className="link">Track Your Progress</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/tips" className="link">Tips</NavLink>
