@@ -28,7 +28,7 @@ const Questions = () => {
   const [groupNumber, setGroupNumber] = useState(1);
 
   const submitAll = async () => {
-    var answers_with_scores = calculateRecoveryScore(userid, answers);
+    var answers_with_scores = await calculateRecoveryScore(userid, answers);
     if (await storeRecoveryQuestionnaire(userid, answers_with_scores)) {
       history.push("/dashboard/ScoreDisplay");
       window.location.reload();

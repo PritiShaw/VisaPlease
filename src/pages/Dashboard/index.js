@@ -49,12 +49,12 @@ const Dashboard = () => {
           </div>
         </div>
       </nav>
-      <div>
-        <div className="row w-100">
-          <div className="col-sm-3 col-12 d-none d-sm-block">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3 col-12 d-none d-sm-block px-0">
             <SidePanel />
           </div>
-          <div className="col-sm-9">
+          <div className="col-sm-9 pt-5">
             <Switch>
               <Route path="/" exact component={Track} />
               <Route path="/dashboard/ScoreDisplay" exact component={ScoreDisplay} />

@@ -59,7 +59,6 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
 };
 
 //Returns a list of overall scores for all attempts
-
 const getAllOverallScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
@@ -116,28 +115,18 @@ const getAnswersLatestAttempt = async (userid) => {
     return latestAnswers;
   });
 };
-// .get()
-// .then((snapshot) => {
-//   // console.log(snapshot);
-//   const score = [];
-//   snapshot.docChanges().forEach(function (change) {
-//     if (change.type === "added") {
-//       console.log(change.doc.data);
-//     }
-//   });
-// });
-//};
 
+// Get salesVolumeGrowthMoM of merchant
 const merchantMeasurement = async (userid) => {
+  var result;
   let data = await getUserDocument(userid);
-  console.log(data);
   if (data == undefined) return undefined;
 
   const storeID = data["visaStoreId"];
   const categoryCode = data["categoryCode"];
   const companyName = data["companyName"];
   const countryCode = data["countryCode"];
-  fetch(apiDomain + "/api/merchantMeasurement", {
+  await fetch(apiDomain + "/api/merchantMeasurement", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -145,15 +134,20 @@ const merchantMeasurement = async (userid) => {
     body: JSON.stringify({
       merchantCountryCode: countryCode,
       merchantCategoryCode: categoryCode,
-    }),
+    }
+    )
+  }).then(response => {
+    return response.json();
   })
-    .then((response) => {
-      //console.log(response.json())
-      return response.json();
-    })
     .then((data) => {
-      console.log(JSON.stringify(data));
-    });
+      if("response" in data ) {
+        result = data["response"]["responseData"][0]["salesVolumeGrowthMoM"];
+      }
+      else {
+        result = undefined;
+      }
+    })
+  return result;
 };
 
 export {

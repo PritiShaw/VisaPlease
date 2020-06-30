@@ -1,14 +1,16 @@
-export function calculateRecoveryScore(userid,answers){
+import { merchantMeasurement } from "../../../utils/firestore";
+
+const calculateRecoveryScore = async (userid,answers) => {
 
     console.log("***Inside calculateRecoveryScore***");
 
-    var subscore1 = calculateLoanScore(userid,answers);
-    var subscore2 = calculatePerformanceScore(userid,answers);
-    var subscore3 = calculateCashFlowScore(userid,answers);
-    var subscore4 = calculateTechSavvinessScore(userid,answers);
-    var subscore5 = calculateSupplierScore(userid,answers);
+    var subscore1 = await calculateLoanScore(userid,answers);
+    var subscore2 = await calculatePerformanceScore(userid,answers);
+    var subscore3 = await calculateCashFlowScore(userid,answers);
+    var subscore4 = await calculateTechSavvinessScore(userid,answers);
+    var subscore5 = await calculateSupplierScore(userid,answers);
 
-    var overallRecoveryScore = calculateOverallScore(subscore1,subscore2,subscore3,subscore4,subscore5);
+    var overallRecoveryScore = await calculateOverallScore(subscore1,subscore2,subscore3,subscore4,subscore5);
 
     answers["Overall_Recovery_Score"] = overallRecoveryScore;
     answers["SubScores_list"] = [subscore1,subscore2,subscore3,subscore4,subscore5];
@@ -16,21 +18,21 @@ export function calculateRecoveryScore(userid,answers){
     return answers;
 }
 
-export function calculateLoanScore(userid,answers){
-    var ans1 = (answers["company.size"] == "Yes")? 1 : 0;
-    var ans2 = (answers["company.net_worth"] == "Yes") ? 1 : 0;
-    var ans3 = (answers["company.type"] == "Yes") ? 1 : 0;
+const calculateLoanScore = async (userid,answers) => {
+
+    var ans1 = (answers["company.size"] === "Yes")? 1 : 0;
+    var ans2 = (answers["company.net_worth"] === "Yes") ? 1 : 0;
+    var ans3 = (answers["company.type"] === "Yes") ? 1 : 0;
 
     var loanScore = (ans1 + ans2 + ans3)/3 * 100;
 
     return loanScore;    
 }
 
-export function calculatePerformanceScore(userid,answers){
+const calculatePerformanceScore = async (userid,answers) => {
     // TODO: Fetch the industry Average as in https://csimarket.com/screening/index.php?s=roi&pageS=1&fis=
-    // TODO: Fetch monthly_sales_growth_category from Merchant Measurement API
     // TODO: Fetch the industry Average as in http://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/margin.html
-
+    console.log("***Inside calculatePerformanceScore***");
     var ans1 = parseInt(answers["company.profit_last_year"]);
     var ans2 = parseInt(answers["company.investment_cost_last_year"]);
     var ans3 = parseInt(answers["company.units_sold_2months_ago"]);
@@ -49,9 +51,8 @@ export function calculatePerformanceScore(userid,answers){
 
     var monthly_sales_growth_merchant = (ans4 - ans3)/ans4 * 100;
 
-    // Refer TODO
-    var monthly_sales_growth_category = 2.542;
-
+    var monthly_sales_growth_category = parseFloat(await merchantMeasurement(userid));
+    
     var salesVolumeScore1 = (monthly_sales_growth_merchant>=monthly_sales_growth_category) ? 70 : 0;
     var salesVolumeScore2 = (monthly_sales_growth_merchant>=0) ? 30 : 0;
 
@@ -72,13 +73,13 @@ export function calculatePerformanceScore(userid,answers){
     return performanceScore;
 }
 
-export function calculateNetCashFlow(cost,revenue,cashOnHand,outstandingDebt,deferralGiven,deferralReceived){
+const calculateNetCashFlow = async (cost,revenue,cashOnHand,outstandingDebt,deferralGiven,deferralReceived) => {
     var netDeferrals = deferralReceived - deferralGiven;
     var netCashFlow = cashOnHand - outstandingDebt + revenue - cost + netDeferrals;
     return netCashFlow;
 }
 
-export function calculateCashFlowScore(userid,answers){
+const calculateCashFlowScore = async (userid,answers) => {
     var ans1 = parseInt(answers["company.monthly_cost_before_pandemic"]);
     var ans2 = parseInt(answers["company.revenue_before_pandemic"]);
     var ans3 = parseInt(answers["company.monthly_cash_before_pandemic"]);
@@ -86,7 +87,7 @@ export function calculateCashFlowScore(userid,answers){
     var ans5 = parseInt(answers["company.monthly_payment_deferrals_given_to_customer_before_pandemic"]);
     var ans6 = parseInt(answers["company.monthly_payment_deferrals_received_from_customer_before_pandemic"]);
 
-    var netCashFlowBeforePandemic = calculateNetCashFlow(ans1,ans2,ans3,ans4,ans5,ans6);
+    var netCashFlowBeforePandemic = await calculateNetCashFlow(ans1,ans2,ans3,ans4,ans5,ans6);
 
     var ans7 = parseInt(answers["company.monthly_cost"]);
     var ans8 = parseInt(answers["company.mohtly_revenue"]);
@@ -95,22 +96,22 @@ export function calculateCashFlowScore(userid,answers){
     var ans11 = parseInt(answers["company.monthly_payment_deferrals_given_to_customer"]);
     var ans12 = parseInt(answers["company.monthly_payment_deferrals_received_from_customer"]);
 
-    var netCashFlowThisMonth = calculateNetCashFlow(ans7,ans8,ans9,ans10,ans11,ans12);
+    var netCashFlowThisMonth = await calculateNetCashFlow(ans7,ans8,ans9,ans10,ans11,ans12);
 
     var cashFlowScore = (netCashFlowThisMonth - netCashFlowBeforePandemic)/ netCashFlowThisMonth * 100;
 
     return cashFlowScore;
 }
 
-export function calculateTechSavvinessScore(userid,answers){
+const calculateTechSavvinessScore = async (userid,answers) => {
     // TODO: Fetch terminalType and lastTranDateRange from Locator API
 
     var ans1 = answers["company.online_website"];
     var ans2 = answers["company.online_ordering"];
     var ans3 = parseInt(answers["company.NoOfSocialPlatform"]);
 
-    var websiteScore = (ans1 == "Yes") ? 100 : 0;
-    var deliveryScore = (ans2 == "Yes") ? 100 : 0;
+    var websiteScore = (ans1 === "Yes") ? 100 : 0;
+    var deliveryScore = (ans2 === "Yes") ? 100 : 0;
 
     var socialMediaScore = (ans3 < 4) ? (25 * ans3) : 100;
     
@@ -122,22 +123,33 @@ export function calculateTechSavvinessScore(userid,answers){
     // Refer TODO
     var lastTranDateRange = "In last 365 days";
 
-    var POSRecencyScore = (lastTranDateRange == "In last 365 days") ? 100 : 0;
+    var POSRecencyScore = (lastTranDateRange === "In last 365 days") ? 100 : 0;
 
     var techSavvinessScore = (websiteScore + deliveryScore + socialMediaScore + terminalScore + POSRecencyScore) / 5;
 
     return techSavvinessScore;    
 }
 
-export function calculateSupplierScore(userid,answers){
+const calculateSupplierScore = async (userid,answers) => {
     // TODO: Implement this function
 
     return 100;
 }
 
-export function calculateOverallScore(subscore1,subscore2,subscore3,subscore4,subscore5){
+const calculateOverallScore = async (subscore1,subscore2,subscore3,subscore4,subscore5) => {
     
     var overallScore = (subscore1 + subscore2 + subscore3 + subscore4 + subscore5) / 5;
 
     return overallScore;
+}
+
+export{
+    calculateRecoveryScore,
+    calculateLoanScore,
+    calculatePerformanceScore,
+    calculateNetCashFlow,
+    calculateCashFlowScore,
+    calculateTechSavvinessScore,
+    calculateSupplierScore,
+    calculateOverallScore
 }
