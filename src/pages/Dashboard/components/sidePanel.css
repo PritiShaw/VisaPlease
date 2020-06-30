@@ -1,31 +1,40 @@
 .sidepanel {
-  list-style-type:none;
-  margin: 0;
-padding: 0;
-width: 20%;
-background-color: #1a1f71;
-position: fixed;
-height: 100%;
-overflow: auto;
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+    width: 20%;
+    ;
+    z-index: 1029;
+    background-color: #1a1f71;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.mobile-link {
+    display: none;
 }
 
 .sidepanel li {
-  padding-top: 2.5em;
+    padding-top: 2.5em;
 }
 
-.sidepanel li a {
-  text-decoration: none;
+@media(max-width:767px) {
+    .sidepanel {
+        width: 100%;
+    }
+    .mobile-link {
+        display: inline-block;
+    }
 }
-
-.sidepanel li a:hover {
-  color: #fdbb0a;
-}
-
 
 .link {
-  color: #FFF;
-  margin: 10%;
+    color: #FFF;
+    text-decoration: none !important;
+    cursor: pointer;
+    margin: 10%;
 }
+
 .link:hover {
-   color: #00F
+    color: #fdbb0a;
 }
