@@ -8,7 +8,7 @@ body {
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Fira Sans', sans-serif !important;
   background-color: #fdbb0a;
 }
 
@@ -88,4 +88,13 @@ body, html, .App, #root, .auth-wrapper {
 }
 .visa{
 font-weight: 1000;
+}
+
+.btn-visa {
+  color: white;
+  background-color: #1a1f71;
+}
+
+.btn-visa:hover {
+  color: #fdbb0a
 }

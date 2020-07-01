@@ -55,7 +55,7 @@ const SignIn = () => {
   return (
     <>
       <div className="sign-up">
-        <div>
+        <div  id="log">
           <h3>Sign Up</h3>
           {(page == 0) ? (
             <>
@@ -104,7 +104,7 @@ const SignIn = () => {
               </div>
               <button
                 type="submit"
-                className="btn btn-primary btn-block"
+                className="btn btn-visa btn-block"
                 onClick={() => setPage(1)}
               >
                 Next
@@ -164,7 +164,7 @@ const SignIn = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn-primary btn-block"
+                  className="btn btn-visa btn-block"
                   onClick={() => registerAccount()}
                 >
                   Sign Up
