@@ -22,13 +22,13 @@ class Profile extends React.Component{
         }
         let userDetails = await getUserDocument(userid)
         this.setState({
-          userName: (userDetails && userDetails["firstName"]) ? userDetails["firstName"] : "there",
-          lastName: (userDetails && userDetails["lastName"]) ? userDetails["lastName"] : "there",
-          email: (userDetails && userDetails["email"]) ? userDetails["email"] : "there",
-          countryCode: (userDetails && userDetails["countryCode"]) ? userDetails["countryCode"] : "there",
-          companyName: (userDetails && userDetails["companyName"]) ? userDetails["companyName"] : "there",
-          categoryCode: (userDetails && userDetails["categoryCode"]) ? userDetails["categoryCode"] : "there",
-          visaID: (userDetails && userDetails["visaStoreId"]) ? userDetails["visaStoreId"] : "there",
+          userName: (userDetails && userDetails["firstName"]) ? userDetails["firstName"] : "...",
+          lastName: (userDetails && userDetails["lastName"]) ? userDetails["lastName"] : "...",
+          email: (userDetails && userDetails["email"]) ? userDetails["email"] : "...",
+          countryCode: (userDetails && userDetails["countryCode"]) ? userDetails["countryCode"] : "...",
+          companyName: (userDetails && userDetails["companyName"]) ? userDetails["companyName"] : "...",
+          categoryCode: (userDetails && userDetails["categoryCode"]) ? userDetails["categoryCode"] : "...",
+          visaID: (userDetails && userDetails["visaStoreId"]) ? userDetails["visaStoreId"] : "...",
         });
       }
     render()

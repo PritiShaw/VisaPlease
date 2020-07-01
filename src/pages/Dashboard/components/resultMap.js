@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { Map, TileLayer, Marker, Popup, CircleMarker,Circle } from 'react-leaflet'
 
 const ResultMap = (props) => {
   const [center, setCenter] = useState(props.center)
-  const [zoom, setZoom] = useState(9)
+  const [zoom, setZoom] = useState(8)
   
   return (
     <Map center={center} zoom={zoom}>
@@ -11,8 +11,9 @@ const ResultMap = (props) => {
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <Circle center={center} radius={1000*props.radius} />
       {
-        props.result.map((res) => {
+        !!props.result && props.result.map((res) => {
           return <Marker position={[res.gps_lat, res.gps_long]}>
             <Popup>
               <b>{res.name}</b> <small><em>{res.storeId}</em></small><br/>
@@ -21,8 +22,8 @@ const ResultMap = (props) => {
             </Popup>
           </Marker>
         })
-      }
-      {/* {makeMarker()} */}
+      }      
+      <CircleMarker center={center} radius={1}/>
     </Map>
   );
 };
