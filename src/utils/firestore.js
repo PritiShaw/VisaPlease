@@ -250,6 +250,55 @@ const dynamicPredictor = async (userid) => {
   return res;
 };
 
+const averageCalculator = async (userid) => {
+  var scores = [];
+  var users = [];
+  await firestore
+    .collection("users")
+    .get()
+    .then((snapshot) => {
+      var catCode = null;
+      snapshot.forEach((doc) => {
+        if (doc.id == userid) {
+          const data = doc.data();
+          catCode = data.categoryCode;
+        }
+      });
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.categoryCode == catCode) users.push(doc.id);
+      });
+    });
+  var currentdate = new Date();
+  var datetime =
+    currentdate.getDate() +
+    "." +
+    (currentdate.getMonth() + 1) +
+    "." +
+    currentdate.getFullYear();
+  for (var i = 0; i < users.length; i++) {
+    await firestore
+      .collection(ANSWER_COLLECTION)
+      .doc(`responses`)
+      .collection(users[i])
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          if (doc.id == datetime) {
+            const data = doc.data().Overall_Recovery_Score;
+            scores.push(data);
+          }
+        });
+      })
+  }
+  var avg = 0;
+  for (var j = 0; j < scores.length; j++) {
+    avg = avg + scores[j];
+  }
+  avg = avg / scores.length;
+  return avg;
+};
+
 export {
   getUserDocument,
   generateUserDocument,
@@ -259,5 +308,6 @@ export {
   getAnswersLatestAttempt,
   merchantMeasurement,
   merchantLocatorRegister,
-  dynamicPredictor
+  dynamicPredictor,
+  averageCalculator
 };
