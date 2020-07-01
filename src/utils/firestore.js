@@ -21,6 +21,13 @@ const generateUserDocument = async (user, additionalData) => {
   }
 };
 
+
+
+
+
+
+
+
 const getUserDocument = async (userid) => {
   const userRef = firestore.doc(`users/${userid}`);
   let ref = await userRef.get();
@@ -54,11 +61,12 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
   } catch (error) {
     console.error("Error updating user document", error);
     alert("Failed to save, try again");
-    return false;
+    return false; 
   }
 };
 
 //Returns a list of overall scores for all attempts
+
 const getAllOverallScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
@@ -71,13 +79,36 @@ const getAllOverallScore = async (userid) => {
         const data = doc.data();
         const data2 = data.Overall_Recovery_Score;
         overall_score.push(data2);
-
-        return overall_score;
       });
+      console.log(overall_score[0])
+      return overall_score;
     });
 };
 
+const getAllDates = async (userid) => {
+  firestore
+    .collection(ANSWER_COLLECTION)
+    .doc(`responses`)
+    .collection(userid)
+    .get()
+    .then((snapshot) => {
+      const dates = [];
+      snapshot.forEach((doc) => {
+        const data = doc.id;
+        dates.push(data);
+      });
+      return dates;
+    });
+};
+
+
+
+
+
+
 //Returns an array of arrays of parameter scores for all attempts
+
+
 const getAllPartScore = async (userid) => {
   firestore
     .collection(ANSWER_COLLECTION)
@@ -92,11 +123,14 @@ const getAllPartScore = async (userid) => {
         const data2 = data.SubScores_list;
 
         score.push(data2);
-        console.log("hello");
-        return score;
       });
+      return score;
     });
 };
+
+
+
+
 
 //Function to return the answers of the users most recent attempt. To be used to fetch the answers from the database and calculate the scores.
 const getAnswersLatestAttempt = async (userid) => {
@@ -158,4 +192,5 @@ export {
   getAllPartScore,
   getAnswersLatestAttempt,
   merchantMeasurement,
+  getAllDates
 };

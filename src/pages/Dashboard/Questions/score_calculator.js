@@ -77,7 +77,7 @@ const calculatePerformanceScore = async (userid,answers) => {
 
     var monthly_sales_growth_merchant = (ans4 - ans3)/ans4 * 100;
 
-    var monthly_sales_growth_category = parseFloat(await merchantMeasurement(userid));
+    var monthly_sales_growth_category = 2.5;//parseFloat(await merchantMeasurement(userid));
     
     var salesVolumeScore1 = (monthly_sales_growth_merchant>=monthly_sales_growth_category) ? 70 : 0;
     var salesVolumeScore2 = (monthly_sales_growth_merchant>=0) ? 30 : 0;

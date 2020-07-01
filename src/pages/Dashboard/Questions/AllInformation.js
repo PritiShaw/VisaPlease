@@ -95,7 +95,7 @@ const AllInformation = (props) => {
             <br/><br/>
             {props.presentAns["suppliers"].map((i,index)=>
                 <div key={index}>
-                <p>{index+1}. {i.name}</p><br/>
+                <h4>{index+1}. {i.name}</h4><br/>
                 <p>Q.Is supplier's company open now?</p>
                 <p>Ans. {i.is_open}</p>
                 <p>Q.Is supplier is from another country?</p>

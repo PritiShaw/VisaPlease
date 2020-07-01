@@ -28,7 +28,13 @@ const SupplierForm = (props) => {
     }
     const addSupplier = (e) => {
         e.preventDefault();
-        if(answer1.length > 0 &&answer2.length > 0 &&answer3.length > 0 &&answer4.length > 0 &&answer5.length > 0 &&answer6.length > 0 &&answer7.length > 0 &&answer8.length > 0 &&answer9.length > 0 && answer10.length > 0)
+        if(!answer7.match(/^\d{1,}(\.\d{0,2})?$/))
+        {
+            alert("enter meters correctly.")
+        }
+        else
+        {
+        if(answer1.length > 0 &&answer2.length > 0 &&answer3.length > 0 &&answer4.length > 0 &&answer5.length > 0 &&answer6.length > 0 &&answer7.length > 0 &&answer8.length > 0 &&answer9.length > 0 && answer10.length > 0&& answer7>0)
         {       
         let supplier = {
             id:uuid(),
@@ -45,6 +51,7 @@ const SupplierForm = (props) => {
         }
         props.setSupplierList([...props.supplierList,supplier])
         clearForm()
+        }
         }
     }
 
@@ -107,7 +114,7 @@ const SupplierForm = (props) => {
 
                 <Form.Group >
                     <Form.Label>Within what distance is considered accessible for you to travel and buy your supplies?(in meters )</Form.Label>
-                    <Form.Control type="number" placeholder="In meters" value={answer7} onChange={(e) => setAns7(e.target.value)} />
+                    <Form.Control type="text" placeholder="In meters" value={answer7} onChange={(e) => setAns7(e.target.value)} />
                 </Form.Group>
                 <Form.Group >
                     <Form.Label>Is your supplier supporting you?</Form.Label>
