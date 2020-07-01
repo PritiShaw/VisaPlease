@@ -70,21 +70,20 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
 
 //Returns a list of overall scores for all attempts
 const getAllOverallScore = async (userid) => {
-  firestore
-    .collection(ANSWER_COLLECTION)
+  var overall_score = [];
+  await firestore
+    .collection("questionnaire")
     .doc(`responses`)
     .collection(userid)
     .get()
     .then((snapshot) => {
-      const overall_score = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
         const data2 = data.Overall_Recovery_Score;
         overall_score.push(data2);
-
-        return overall_score;
       });
     });
+  return overall_score;
 };
 
 //Returns an array of arrays of parameter scores for all attempts
