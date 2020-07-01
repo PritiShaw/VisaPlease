@@ -135,7 +135,7 @@ const MerchantLocator = () => {
           <div className="col-sm-5" onClick={() => setCriteriaSelector(0)}>
             <div className="form-group">
               {criteriaSelector == 1 ? (
-                <h3 className="my-4 text-center">Merchant Details</h3>
+                <h3 className="my-4 text-center">Supplier Details</h3>
               ) : (
                   <>
                     <input

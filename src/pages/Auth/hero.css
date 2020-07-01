@@ -1,20 +1,23 @@
 .animated-logo {
   font: 400 1em/1.5 "Neuton" !important;
-  background: #fdbb0a;
+  /* background: #fdbb0a; */
   color: rgba(255, 255, 255, 0.25);
   text-align: center;
   margin: 0;
 }
-/* .animated-logo {
-	margin-top: 20rem;
-} */
+.auth {
+  background: url(https://i.imgur.com/IrYJgGd.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 .animated-logo p {
   letter-spacing: 0.5em;
   display: inline-block;
   border: 4px double rgba(255, 255, 255, 0.25);
   border-color: #75787b;
   border-width: 4px 0;
-  width: 90%;
+  width: 80%;
   color: #1a1f71;
 }
 .animated-logo span {
@@ -27,7 +30,7 @@
 
   /* Clip Background Image */
 
-  background: url(https://gdurl.com/vLru) repeat-y;
+  background: url(https://i.imgur.com/W6xu56R.png) repeat-y;
   -webkit-background-clip: text;
   background-clip: text;
 

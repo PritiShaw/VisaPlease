@@ -8,7 +8,7 @@ import Hero from "./hero"
 const Authentication = () => {
     return (
         <Router>
-            <div className="App h-100">
+            <div className="App h-100 auth">
                 <div className="container-fluid h-100 ">
                     <div className="row h-100 d-flex align-items-center">
                         <div className="col-md-7">
