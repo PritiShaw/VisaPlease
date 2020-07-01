@@ -29,17 +29,21 @@ const SignIn = () => {
       let merchantDetails = await merchantLocatorRegister(countryCode, companyName, postalCode)
       let merchantLat = "0"
       let merchantLong = "0"
+      let merchantTerminalType = "0"
+      let merchantLastTranDateRange = "0"
       if ("response" in merchantDetails["merchantLocatorServiceResponse"]) {
         for (let idx = 0; idx < merchantDetails["merchantLocatorServiceResponse"]["response"].length; idx++) {
           let merchant = merchantDetails["merchantLocatorServiceResponse"]["response"][idx]["responseValues"]
           if (merchant["visaStoreId"] == visaStoreId) {
             merchantLat = merchant["locationAddressLatitude"]
             merchantLong = merchant["locationAddressLongitude"]
+            merchantTerminalType= merchant["terminalType"]
+            merchantLastTranDateRange = merchant["lastTranDateRange"]
             break
           }
         }
       }
-      await generateUserDocument(user, firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode, merchantLat, merchantLong);
+      await generateUserDocument(user, firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode, merchantLat, merchantLong, merchantTerminalType, merchantLastTranDateRange);
       alert("Registration Successful, please login");
       history.push("/auth")
       window.location.reload()

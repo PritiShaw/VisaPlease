@@ -4,7 +4,7 @@ import { apiDomain } from "../config.js";
 const USER_COLLECTION = "users";
 const ANSWER_COLLECTION = "questionnaire";
 
-const generateUserDocument = async (user, firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode, merchantLat, merchantLong) => {
+const generateUserDocument = async (user, firstName, lastName, companyName, countryCode, visaStoreId, categoryCode, postalCode, merchantLat, merchantLong, merchantTerminalType, merchantLastTranDateRange) => {
   if (!user) return;
   const userRef = firestore.doc(`users/${user.uid}`);
   const snapshot = await userRef.get();
@@ -21,7 +21,9 @@ const generateUserDocument = async (user, firstName, lastName, companyName, coun
         countryCode: countryCode,
         visaStoreId: visaStoreId,
         categoryCode: categoryCode,
-        postalCode: postalCode
+        postalCode: postalCode,
+        merchantTerminalType: merchantTerminalType,
+        LastTranDateRange:merchantLastTranDateRange
       });
     } catch (error) {
       console.error("Error creating user document", error);
