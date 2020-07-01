@@ -5,7 +5,7 @@ class GeneralTips extends React.Component {
         return(
               <div>
                   <br></br>
-                  <h4>Here are seven business tips from several successful small business owners that are worth paying attention to:</h4>
+                  <h4>Here are Five business tips from several successful small business owners that are worth paying attention to:</h4>
                   <h6>1. Build a support network</h6>
                   <p>As a busy business owner, It’s tough to find time to network, but getting better at networking and making contact can pay dividends in the future.</p>
                   <h6>2. Be very specific with your goals</h6>
