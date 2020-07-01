@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Form } from "react-bootstrap";
-
+import { uuid } from 'uuidv4'
 const SupplierForm = (props) => {
-    const [answer1, setAns1] = useState();
-    const [answer2, setAns2] = useState();
-    const [answer3, setAns3] = useState();
-    const [answer4, setAns4] = useState();
-    const [answer5, setAns5] = useState();
-    const [answer6, setAns6] = useState();
-    const [answer7, setAns7] = useState();
-    const [answer8, setAns8] = useState();
-    const [answer9, setAns9] = useState();
-    const [answer10, setAns10] = useState();
+    const [answer1, setAns1] = useState("");
+    const [answer2, setAns2] = useState("");
+    const [answer3, setAns3] = useState("");
+    const [answer4, setAns4] = useState("");
+    const [answer5, setAns5] = useState("");
+    const [answer6, setAns6] = useState("");
+    const [answer7, setAns7] = useState(0);
+    const [answer8, setAns8] = useState("");
+    const [answer9, setAns9] = useState("");
+    const [answer10, setAns10] = useState("");
 
     const clearForm = () => {
         setAns1("");
@@ -28,8 +28,11 @@ const SupplierForm = (props) => {
     }
     const addSupplier = (e) => {
         e.preventDefault();
+        if(answer1.length > 0 &&answer2.length > 0 &&answer3.length > 0 &&answer4.length > 0 &&answer5.length > 0 &&answer6.length > 0 &&answer7.length > 0 &&answer8.length > 0 &&answer9.length > 0 && answer10.length > 0)
+        {       
         let supplier = {
-            name: answer1,
+            id:uuid(),
+            name: answer1, 
             is_open: answer2,
             another_country: answer3,
             ships_worldwide: answer4,
@@ -42,6 +45,7 @@ const SupplierForm = (props) => {
         }
         props.setSupplierList([...props.supplierList,supplier])
         clearForm()
+        }
     }
 
     return (
@@ -87,6 +91,7 @@ const SupplierForm = (props) => {
                         <option>Fedex</option>
                         <option>UPS</option>
                         <option>USPS</option>
+                        <option>other</option>
                     </Form.Control>
                 </Form.Group>
 
@@ -101,11 +106,11 @@ const SupplierForm = (props) => {
                 </Form.Group>
 
                 <Form.Group >
-                    <Form.Label>Within what distance is considered accessible for you to travel and buy your supplies?(in meters)</Form.Label>
+                    <Form.Label>Within what distance is considered accessible for you to travel and buy your supplies?(in meters )</Form.Label>
                     <Form.Control type="number" placeholder="In meters" value={answer7} onChange={(e) => setAns7(e.target.value)} />
                 </Form.Group>
                 <Form.Group >
-                    <Form.Label>Did your supplier support you throughout the pandemic?</Form.Label>
+                    <Form.Label>Is your supplier supporting you?</Form.Label>
                     <Form.Control as="select" value={answer8} onChange={(e) => setAns8(e.target.value)}>
                         <option></option>
                         <option>Yes</option>
@@ -121,7 +126,7 @@ const SupplierForm = (props) => {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group >
-                    <Form.Label>Are your current supplier able to satisfy your future requirements?</Form.Label>
+                    <Form.Label>Have your suppliers been consistently providing high quality goods?</Form.Label>
                     <Form.Control as="select" value={answer10} onChange={(e) => setAns10(e.target.value)}>
                         <option></option>
                         <option>Yes</option>
