@@ -85,3 +85,9 @@
 #graph-style{
     padding: 20px;
 }
+#check{
+    float: right;
+}
+#forward{
+    float: left;
+}
