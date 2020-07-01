@@ -44,11 +44,13 @@ const SignIn = () => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary btn-block" onClick={() => signInWithEmailAndPasswordHandler()}>Submit</button>
-                {/* <button type="submit" className="btn btn-primary btn-block" onClick={() => googleSignIn()}>Login with Google</button> */}
+                <button type="submit" className="btn btn-visa btn-block" onClick={() => signInWithEmailAndPasswordHandler()}>Submit</button>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Dont have account?  <Link to="/auth/register">Register here</Link>
                 </p>
+                {/* <p className="forgot-password text-right">
+                    Forgot <a href="#">password?</a>
+                </p> */}
                 <hr />
                 {error}
             </div>
