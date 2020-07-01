@@ -15,7 +15,7 @@ class TipsForSuppliers extends React.Component {
                   <p>Sometimes vendors fail to change with their industries. When your vendor's rivals start coming in with bids for comparable goods that are lower than your existing supplier's, you need to investigate. </p>
                   <h6>3. Extra-sale costs.</h6>
                   <p>The number at the bottom of the invoice is only the beginning of the cost of dealing with suppliers. You have to lay out money beforehand to draw up specifications, issue request for proposals, evaluate them, check references, and otherwise qualify your suppliers. You have to place the order, negotiate the terms, inspect the goods when they arrive, and deal with any shortages, damage or other errors. </p>
-                  <Link to="/dashboard/tips"><button class="btn btn-dark" id="bd">Go back</button></Link>
+                  <Link to="/dashboard/score-analyser"><button class="btn btn-dark" id="bd">Go back</button></Link>
                   </div>
         )
     }

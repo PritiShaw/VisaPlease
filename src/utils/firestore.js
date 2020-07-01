@@ -205,7 +205,6 @@ const averageCalculator = async (userid) => {
         if (data.categoryCode == catCode) users.push(doc.id);
       });
     });
-  console.log(users);
   var currentdate = new Date();
   var datetime =
     currentdate.getDate() +
@@ -213,7 +212,6 @@ const averageCalculator = async (userid) => {
     (currentdate.getMonth() + 1) +
     "." +
     currentdate.getFullYear();
-  console.log(datetime);
   for (var i = 0; i < users.length; i++) {
     await firestore
       .collection(ANSWER_COLLECTION)
@@ -237,6 +235,70 @@ const averageCalculator = async (userid) => {
   return avg;
 };
 
+const dynamicPredictor = async (userid) => {
+  var overall_score = [];
+  var param1 = [];
+  var param2 = [];
+  var param3 = [];
+  var param4 = [];
+  var param5 = [];
+  var res = {
+    overall: "",
+    one: "",
+    two: "",
+    three: "",
+    four: "",
+    five: "",
+    count: 0
+  }
+  var ref =  firestore
+    .collection(ANSWER_COLLECTION)
+    .doc(`responses`)
+    .collection(userid);
+  const latestsnap = await ref.orderBy("createdAt", "desc").limit(3).get();
+  console.log(latestsnap);
+  latestsnap.forEach((doc) => {
+    const data = doc.data();
+    const data1 = data.Overall_Recovery_Score;
+    overall_score.push(data1);
+    const data2 = data.SubScores_list[0];
+    param1.push(data2);
+    const data3 = data.SubScores_list[1];
+    param2.push(data3);
+    const data4 = data.SubScores_list[2];
+    param3.push(data4);
+    const data5 = data.SubScores_list[3];
+    param4.push(data5);
+    const data6 = data.SubScores_list[4];
+    param5.push(data6);
+  });
+  if (
+    overall_score[0] < overall_score[1] &&
+    overall_score[1] < overall_score[2]
+  ) {
+    res["overall"]="yes"; res["count"] = res["count"] +1;
+  }
+
+  if (param1[0] < param1[1] && param1[1] < param1[2]) {
+    res["one"]="yes"; res["count"] = res["count"] +1;
+  }
+  if (param2[0] < param2[1] && param2[1] < param2[2]) {
+    res["two"]="yes"; res["count"] = res["count"] +1;
+  }
+
+  if (param3[0] < param3[1] && param3[1] < param3[2]) {
+    res["three"]="yes"; res["count"] = res["count"] +1;
+  }
+
+  if (param4[0] < param4[1] && param4[1] < param4[2]) {
+    res["four"]="yes"; res["count"] = res["count"] +1;
+  }
+  if (param5[0] < param5[1] && param5[1] < param5[2]) {
+    res["five"]="yes"; res["count"] = res["count"] +1;
+  }
+  return res;
+};
+
 export {
   getUserDocument,
   generateUserDocument,
@@ -247,4 +309,5 @@ export {
   merchantMeasurement,
   merchantLocatorRegister,
   averageCalculator
+  dynamicPredictor
 };

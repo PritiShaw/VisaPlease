@@ -16,7 +16,7 @@ class TipsForBusinessPerformance extends React.Component {
                   <p>It is a common trap: A person gets excited by a small business idea, quits his or her day job—and then runs out of money and fails.</p>
                   <h6>5. Avoid Distractions at All Costs</h6>
                   <p>Keeping yourself organized and on-task is the real key to small business success.</p>
-                  <Link to="/dashboard/tips"><button class="btn btn-dark" id="bd">Go back</button></Link>
+                  <Link to="/dashboard/score-analyser"><button class="btn btn-dark" id="bd">Go back</button></Link>
                   </div>
         )
     }
