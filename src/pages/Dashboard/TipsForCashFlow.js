@@ -17,7 +17,7 @@ class TipsForCashFlow extends React.Component {
                    <p>Instead of purchasing more items that aren’t going to sell, it may be best to make markdowns. We know it’s difficult to cut down on inventory options. However, it’ll be better for your bottom line to try and sell what’s left of this inventory, and then focus on other inventory options in the future.</p>
                    <h6>5. Conduct Credit Checks for Customers</h6>
                    <p>There will come a time when a customer isn’t going to want to pay you in cash. If they are one-time customers and are looking to pay for a product or service with a credit card, that’s pretty standard. However, if they’re paying a large amount or for a recurring product or service, be sure to conduct credit checks beforehand. If your client has very poor credit, it’s safe to assume that you aren’t going to be getting your payments in a timely fashion.</p>
-                  <Link to="/dashboard/tips"><button class="btn btn-dark" id="bd">Go back</button></Link>
+                  <Link to="/dashboard/score-analyser"><button class="btn btn-dark" id="bd">Go back</button></Link>
                   </div>
         )
     }

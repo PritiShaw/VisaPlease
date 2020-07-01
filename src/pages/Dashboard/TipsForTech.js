@@ -16,7 +16,7 @@ class TipsForTech extends React.Component {
                   <p>What is the first thing you do when you are looking for a business? A quick Google search, right? Finding your business is easier than ever today. Make sure that your business is set up on Google. This way anybody can find your address and phone number. </p>
                   <h6>5. Invest in Email Marketting</h6>
                   <p>Email has been around for decades and is still just as impactful as ever, especially on mobile. Seventy-nine percent of people use their cell phones for reading email and the mobile email open rate has increased 180% over the last three years! If you are one of those people that have been told that email is dead, then I’m sorry to say that you were told wrong. </p>
-                  <Link to="/dashboard/tips"><button class="btn btn-dark" id="bd">Go back</button></Link>
+                  <Link to="/dashboard/score-analyser"><button class="btn btn-dark" id="bd">Go back</button></Link>
                   </div>
         )
     }

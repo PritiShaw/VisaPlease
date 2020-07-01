@@ -18,7 +18,7 @@ class GeneralTips extends React.Component {
                   <p>Finding your niche and continually innovating around that niche is a path to success.</p>
                   
                   
-                  <Link to="/dashboard/tips"><button class="btn btn-dark" id="bd">Go back</button></Link>
+                  <Link to="/dashboard/score-analyser"><button class="btn btn-dark" id="bd">Go back</button></Link>
                   </div>
         )
     }

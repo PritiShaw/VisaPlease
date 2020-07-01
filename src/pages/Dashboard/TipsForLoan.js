@@ -17,7 +17,7 @@ class TipsForLoan extends React.Component {
                    <p>For you to get a loan backed by the SBA, you must ensure that you have each and every document pertaining to your business. You must present the annual financial documents for the past several years. This is to assess the position of your investment and whether it has the ability to repay the loan you have applied for.</p>
                    <h6>5. Thorough Interview Preparation</h6>
                    <p>Most of the time, lenders could call you for an oral interview before giving you a business loan. It is good to present yourself in a very professional manner. Be in a position to back up the information contained in your loan request form with tangible facts. This will obviously make the lender grant you the loan without fearing default in your repayments.</p>
-                  <Link to="/dashboard/tips"><button class="btn btn-dark" id="bd">Go back</button></Link>
+                  <Link to="/dashboard/score-analyser"><button class="btn btn-dark" id="bd">Go back</button></Link>
                   </div>
         )
     }

@@ -20,7 +20,7 @@ const sidePanel = (props) => {
           <NavLink to="/dashboard/track" className="link">Track Your Progress</NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/tips" className="link">Tips</NavLink>
+          <NavLink to="/dashboard/score-analyser" className="link">Score Analyser</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/profile" className="link">Profile</NavLink>
