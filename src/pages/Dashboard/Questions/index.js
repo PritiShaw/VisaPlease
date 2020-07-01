@@ -67,19 +67,20 @@ const Questions = () => {
           </center>
           <br/><br/>
           <button
-              id="forward"
-              className="btn btn-success w-25"
-              onClick={() => submitAll()}
-            >
-              Yes Calculate score
-            </button>
-            <button
               id="check"
               className="btn btn-success w-25"
               onClick={()=>setGroupNumber(1)}
             >
-              No Go back and Check
+              Edit Information
             </button>
+          <button
+              id="forward"
+              className="btn btn-success w-25"
+              onClick={() => submitAll()}
+            >
+              Proceed
+            </button>
+            
         </div>
       );
     else return <h3>Internal Error</h3>;

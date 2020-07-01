@@ -107,6 +107,22 @@ const getAllPartScore = async (userid) => {
     });
 };
 
+const getAllDates = async (userid) => {
+  var dates = [];
+  await firestore
+    .collection(ANSWER_COLLECTION)
+    .doc(`responses`)
+    .collection(userid)
+    .get()
+    .then((snapshot) => {      
+      snapshot.forEach((doc) => {
+        const data = doc.id;
+        dates.push(data);
+      });
+    });
+  return dates;
+};
+
 //Function to return the answers of the users most recent attempt. To be used to fetch the answers from the database and calculate the scores.
 const getAnswersLatestAttempt = async (userid) => {
   var latestAnswers = [];
@@ -305,6 +321,7 @@ export {
   storeRecoveryQuestionnaire,
   getAllOverallScore,
   getAllPartScore,
+  getAllDates,
   getAnswersLatestAttempt,
   merchantMeasurement,
   merchantLocatorRegister,
