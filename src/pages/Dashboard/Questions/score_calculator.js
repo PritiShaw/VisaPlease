@@ -68,7 +68,7 @@ const calculatePerformanceScore = async (userid,answers) => {
     let ROIData = await getIndustryROIAverage();
     if (ROIData === undefined) return undefined;
 
-    var industryROIAverage = 10.00; //parseFloat(ROIData[userData["merchantCategoryCode"]]);
+    var industryROIAverage = parseFloat(ROIData[userData["categoryCode"]]);
 
     var ROIScore1 = (ROI>=industryROIAverage) ? 70 : 0;
     var ROIScore2 = (ROI>=0) ? 30 : 0;
@@ -89,7 +89,7 @@ const calculatePerformanceScore = async (userid,answers) => {
     let NetMarginData = await getIndustryNetMarginAverage();
     if (NetMarginData === undefined) return undefined;
 
-    var industryNetMarginAverage = 10.00; //parseFloat(NetMarginData[userData["merchantCategoryCode"]]);
+    var industryNetMarginAverage = parseFloat(NetMarginData[userData["categoryCode"]]);
 
     var netMarginScore1 = (netMargin>=industryNetMarginAverage) ? 70 : 0;
     var netMarginScore2 = (netMargin>=0) ? 30 : 0; 
@@ -153,11 +153,11 @@ const calculateTechSavvinessScore = async (userid,answers) => {
     let userData = await getUserDocument(userid);
     if (userData === undefined) return undefined;
 
-    var noOfTerminalTypes = 2;//userData["terminalType"].length;
+    var noOfTerminalTypes = userData["merchantTerminalType"].length;
 
     var terminalScore = (noOfTerminalTypes < 3) ? (100/3 * noOfTerminalTypes) : 100;
 
-    var lastTranDateRange = "In last 365 days"; //userData["lastTranDateRange"];
+    var lastTranDateRange = userData["LastTranDateRange"];
 
     var POSRecencyScore = (lastTranDateRange === "In last 365 days") ? 100 : 0;
 
