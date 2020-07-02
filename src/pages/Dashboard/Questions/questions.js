@@ -84,7 +84,7 @@ class Question1 extends React.Component{
         
         
         <hr/>
-        <Button id="margin-left" variant="primary" type="submit" size="lg" className="float-right">
+        <Button id="margin-left" variant="primary" type="submit" className="float-right">
           Next
           </Button>
         <br/><br/>
@@ -213,11 +213,11 @@ class Question2 extends React.Component{
   </Form.Group>
   
         <hr/>
-        <Button onClick={(e)=>this.prevQues(e)} variant="primary" type="submit" size="lg">
+        <Button onClick={(e)=>this.prevQues(e)} variant="primary" type="submit" >
           Prev
         </Button>
 
-        <Button id="margin-left" variant="primary" type="submit" size="lg" className="float-right">
+        <Button id="margin-left" variant="primary" type="submit" className="float-right">
           Next
           </Button>
 <br/><br/>
@@ -362,11 +362,11 @@ class Question3 extends React.Component{
         
   
         <hr/>
-        <Button onClick={(e)=>this.prevQues(e)} variant="primary" type="submit" size="lg">
+        <Button onClick={(e)=>this.prevQues(e)} variant="primary" type="submit" >
           Prev
         </Button>
 
-        <Button id="margin-left" variant="primary" type="submit" size="lg" className="float-right">
+        <Button id="margin-left" variant="primary" type="submit"  className="float-right">
           Next
           </Button>
         <br/><br/>
@@ -510,11 +510,11 @@ class Question4 extends React.Component{
         
   
         <hr/>
-        <Button onClick={(e)=>this.prevQues(e)} variant="primary" type="submit" size="lg">
+        <Button onClick={(e)=>this.prevQues(e)} variant="primary" type="submit" >
           Prev
         </Button>
 
-        <Button id="margin-left" variant="primary" type="submit" size="lg" className="float-right">
+        <Button id="margin-left" variant="primary" type="submit" className="float-right">
           Next
           </Button>
 <br/><br/>
@@ -606,10 +606,10 @@ class Question5 extends React.Component{
     </Form.Group>
 
 <hr/>
-      <Button onClick={this.prevQues} variant="primary" type="submit" size="lg">
+      <Button onClick={this.prevQues} variant="primary" type="submit" >
        Prev
       </Button>
-      <Button id="margin-left" variant="primary" type="submit" size="lg" className="float-right">
+      <Button id="margin-left" variant="primary" type="submit" className="float-right">
         Next
       </Button>
       <br/><br/>
@@ -671,10 +671,10 @@ class Question6 extends React.Component{
       <SupplierForm setSupplierList={this.setSupplierList} supplierList={this.state.supplierList} />
       <hr/>
       
-      <Button variant="primary"  size="lg" onClick={(e)=>this.prevQues(e)}>
+      <Button variant="primary"   onClick={(e)=>this.prevQues(e)}>
         Prev
       </Button>
-      <Button className="float-right" variant="primary"  size="lg" onClick={()=>this.save()}>
+      <Button className="float-right" variant="primary" onClick={()=>this.save()}>
         Next
       </Button>
     </div>
