@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 import {
   getUserDocument
 } from "../../utils/firestore.js";
-
+import DashOverAll from "./Display/DashOverAll"
 class Dash extends React.Component{
     state= {
         userName: "",
@@ -26,8 +26,10 @@ class Dash extends React.Component{
         return(
                 <div>
                 <br/><br/><br/>
-                <h4>Hi {this.state.userName} {this.state.lastName} ! </h4>
-                <h6>some more content about our app</h6>
+                <h1>Welcome {this.state.userName} {this.state.lastName} ! </h1>
+                <DashOverAll/>
+                <hr/>
+                
                </div>
         )
     }

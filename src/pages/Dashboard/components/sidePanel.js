@@ -11,7 +11,7 @@ const sidePanel = (props) => {
           <NavLink to="/dashboard" exact className="link">Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/calculator" className="link">Calculate Your Recovery Score </NavLink>
+          <NavLink to="/dashboard/calculator" className="link">Calculate Recovery Score </NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/locator" className="link">Search Local Suppliers</NavLink>

@@ -1,103 +1,102 @@
 import React from 'react';
-import {Line,Bar} from 'react-chartjs-2';
-import { Container } from "react-bootstrap";
-import {Button} from "react-bootstrap"
-import "../calculator.css";
 
-const OverallRecoveryScoreArray=[ 59, 80, 81, 56,100,85,65,11,20,65, 59, 80, 81, 56,65, 59, 80, 81, 56,65];
-const CalculatedOn=['Jan 1', 'jan 7', 'jan 14',
-'jan 21', 'jan 28','Jan 1', 'jan 7', 'jan 14',
-'jan 21', 'jan 28','Jan 1', 'jan 7', 'jan 14',
-'jan 21', 'jan 28','Jan 1', 'jan 7', 'jan 14',
-'jan 21', 'jan 28'];
-const state1 = {
-  labels: CalculatedOn,
-  datasets: [
-    {
-      label: 'Overall Recovery score',
-      fill: false,
-      lineTension: 0,
-      backgroundColor: '#000000',
-      borderColor: '#1a1f71',
-      borderWidth: 2,
-      data: OverallRecoveryScoreArray
+import "../calculator.css";
+import {getAllOverallScore,getAllDates} from "../../../utils/firestore"
+import Cookies from "universal-cookie";
+import OverallScoresHelp from "./OverAllScoreHelp";
+import { PureComponent } from "react";
+import { firestore, auth } from "../../../firebaseConfig";
+import firebase from "firebase/app";
+import { Roller } from "react-awesome-spinners";
+
+ 
+class OverallScore extends React.Component {
+    constructor(){
+      super();
+      this.state = { scoreArray:[],arrayLength:0 ,dateArray:[]}
     }
-  ] 
-}
-const state2 = {
-  labels: CalculatedOn,
-  datasets: [
-    {
-      label: 'Overall Recovery score',
-      fill: false,
-      lineTension: 0.5,
-      backgroundColor:'#1a1f71' ,
-      borderColor: '#000000',
-      borderWidth: 2,
-      data: OverallRecoveryScoreArray
-    }
-  ] 
-}
-export default class OverallScores extends React.Component {
-  state={
-    line:"bar"
+    
+    async componentDidMount() {
+        const cookies = new Cookies();
+        const userid = cookies.get("userid");
+        
+       let scores = await getAllOverallScore(userid);
+       let dates = await getAllDates(userid);
+       this.setState({
+           scoreArray:scores,
+            dateArray:dates,
+           arrayLength:scores.length
+       });
+      }
+render () {
+  if(this.state.arrayLength==0)
+  {
+          console.log("ram")
+        return( 
+          <div id="ring">
+            <Roller/>
+          </div>
+      )
   }
-  handleGraph=()=>{
-    this.setState((prevState)=>{
-      if(prevState.line=="bar")return{line:"line"}
-      return{line:"bar"}
-    })
-  }
-  render() {
-    if(this.state.line=="bar"){
+  else
+  {
+    console.log("shyam")
     return (
-      <Container maxWidth="sm">
-      <p id="subover">Overall Recovery Score</p>
-      <div id="graph" >
-      <Button id="buttn" onClick={this.handleGraph} variant="success">{this.state.line=="bar"?"Switch to bar graph":"Switch to line graph"}</Button>
-      <br/><br/>
-      <Line id="graph-style"
-          data={state1}
-          options={{
-            title:{
-              display:true,
-              text:'Overall Recovery score',
-              fontSize:20
-            },
-            legend:{
-              display: false,
-              position:'right'
-            }
-          }}
-        />
-      </div>
-      </Container>
-    );}
-    else
-          {
-            return (
-              <Container maxWidth="sm">
-              <p id="subover">Overall Recovery Score</p>
-              <div id="graph" >
-              <Button id="buttn" onClick={this.handleGraph} variant="success">{this.state.line=="bar"?"Switch to bar graph":"Switch to line graph"}</Button>
-              <br/><br/>
-                <Bar id="graph-style"
-                  data={state2}
-                  options={{
-                    title:{
-                      display:true,
-                      text:'Overall Recovery score',
-                      fontSize:20
-                    },
-                    legend:{
-                      display:false,
-                      position:'right'
-                    }
-                  }}
-                />
-              </div>
-              </Container>
-            );
-          }
+          <div>
+          <OverallScoresHelp ArrayOfScores={this.state.scoreArray.slice(this.state.scoreArray.length-20,this.state.scoreArray.length)} DateArray={this.state.dateArray}/>
+          </div>
+      )
   }
 }
+}
+export default OverallScore;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const Track=()=> {
+//   const [attemptDoc, setAttemptDoc] = React.useState([]);
+
+//   React.useEffect(() => {
+//     const cookie = new Cookies();
+//     const userid = cookie.get("userid");
+//     const fetchData = async () => {
+//       const db = firebase.firestore();
+//       const data = await db
+//         .collection("questionnaire")
+//         .doc("responses")
+//         .collection(userid)
+//         .get();
+//       setAttemptDoc(data.docs.map((doc) => doc.data()));
+//     };
+//     fetchData();
+//   }, []);
+
+//   return (
+//     <ul>
+//       {attemptDoc.map((attempt) => (
+//         <li> {attempt.Overall_Recovery_Score}</li>
+//       ))}
+//     </ul>
+//   );
+// }
+
+// export default Track
+

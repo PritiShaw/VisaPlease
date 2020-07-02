@@ -91,3 +91,11 @@
 #forward{
     float: left;
 }
+
+#ConvertToBlue{
+    color: #FFFFFF;
+}
+#ring{
+    margin-left: 400px;
+    margin-top: 120px;
+}

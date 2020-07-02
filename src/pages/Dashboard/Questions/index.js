@@ -80,7 +80,8 @@ const Questions = () => {
             >
               Proceed
             </button>
-            
+            <br/>
+            <hr/>
         </div>
       );
     else return <h3>Internal Error</h3>;

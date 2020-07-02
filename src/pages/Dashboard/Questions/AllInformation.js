@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import { uuid } from 'uuidv4'
 const AllInformation = (props) => {
         return(
-            <div>
+            <div id="ConvertToBlue">
             <h4>Check the information entered</h4>
             <br/><br/>
             <h4>General criteria for emergency loan(%)</h4>

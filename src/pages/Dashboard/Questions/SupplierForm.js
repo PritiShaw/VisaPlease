@@ -9,7 +9,7 @@ const SupplierForm = (props) => {
     const [answer4, setAns4] = useState("");
     const [answer5, setAns5] = useState("");
     const [answer6, setAns6] = useState("");
-    const [answer7, setAns7] = useState(0);
+    const [answer7, setAns7] = useState("");
     const [answer8, setAns8] = useState("");
     const [answer9, setAns9] = useState("");
     const [answer10, setAns10] = useState("");
