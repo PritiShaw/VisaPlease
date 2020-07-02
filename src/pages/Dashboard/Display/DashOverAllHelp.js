@@ -1,20 +1,20 @@
 
 import React from 'react';
 import "./ScoreDisplay.scss"
-export default class Subscore4Display extends React.Component {
+export default class DashOverAllHelp extends React.Component {
     render() {
-        const x=45;
-      return (
+        const x=this.props.ArrayOfScores[this.props.ArrayOfScores.length-1];
+      return ( 
           <div>
                 <br/><br/><br/>
-                <div id="sameline">
+                <div> 
 
                     <div >
-                        <br/><br/><br/><br/>
-                        <p id="subScore">d)Based on Tech-savviness of business</p>
+                        <br/><br/>
+                        <p id="Overall">Your Last Score</p>
                     </div>  
 
-                    <div className="drivers-insured">
+                    <div id="driver" className="drivers-insured">
                         <div className="circle-percent" data-percent={x}>
                             <span>{x}<sup>%</sup></span>
                             <div className="mask">
@@ -23,7 +23,8 @@ export default class Subscore4Display extends React.Component {
                             </div>
                         </div>
                     </div>
-
+                    <hr/>
+                    <h4>The average recovery of this category merchant is:{this.props.Average}%</h4>
                 </div>
         </div>
            );

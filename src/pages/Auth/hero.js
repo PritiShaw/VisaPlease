@@ -7,12 +7,12 @@ const frontPage = () => {
     return (
         <div className="animated-logo">
             <p>
-                COVID-19 SPECIAL EDITION
+                Small Business, Big Recovery.
                 <span>
                     VRecover
                 </span>
                 <b>
-                    &mdash; Powered by Visa &mdash;
+                    &mdash; Powered by Visa API &mdash;
                 </b>
             </p>
         </div>

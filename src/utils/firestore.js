@@ -67,62 +67,89 @@ const storeRecoveryQuestionnaire = async (userid, data) => {
     return false;
   }
 };
-
-//Returns a list of overall scores for all attempts
 const getAllOverallScore = async (userid) => {
   var overall_score = [];
-  await firestore
+  var ref = await firestore
     .collection("questionnaire")
     .doc(`responses`)
-    .collection(userid)
-    .get()
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const data2 = data.Overall_Recovery_Score;
-        overall_score.push(data2);
-      });
-    });
+    .collection(userid);
+  const latestsnap = await ref.orderBy("createdAt").get();
+  latestsnap.forEach((doc) => {
+    const data = doc.data();
+    const data2 = data.Overall_Recovery_Score;
+    overall_score.push(data2);
+  });
+  console.log(overall_score);
   return overall_score;
 };
 
+
 //Returns an array of arrays of parameter scores for all attempts
+// const getAllPartScore = async (userid) => {
+//   var score = [];
+//   await firestore
+//     .collection(ANSWER_COLLECTION)
+//     .doc(`responses`)
+//     .collection(userid)
+//     .get()
+//     .then((snapshot) => {
+//       snapshot.forEach((doc) => {
+//         const data = doc.data();
+//         const data2 = data.SubScores_list;
+//         score.push(data2);
+//         console.log(score);
+//       });
+      
+//     });
+//     return score;
+// };
+
 const getAllPartScore = async (userid) => {
-  firestore
-    .collection(ANSWER_COLLECTION)
-    .doc(`responses`)
-    .collection(userid)
-    .get()
-    .then((snapshot) => {
-      // console.log(snapshot);
-      const score = [];
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const data2 = data.SubScores_list;
+  const score = [];
+  var ref = await firestore
+    .collection("questionnaire")
+    .doc("responses")
+    .collection(userid);
+  // console.log(snapshot);
+  const latestsnap = await ref.orderBy("createdAt").get();
+  latestsnap.forEach((doc) => {
+    const data = doc.data();
+    const data2 = data.SubScores_list;
 
-        score.push(data2);
-        console.log("hello");
-        return score;
-      });
-    });
+    score.push(data2);
+  });
+  console.log(score);
+  return score;
 };
-
+// const getAllDates = async (userid) => {
+//   var dates = [];
+//   await firestore
+//     .collection(ANSWER_COLLECTION)
+//     .doc(`responses`)
+//     .collection(userid)
+//     .get()
+//     .then((snapshot) => {      
+//       snapshot.forEach((doc) => {
+//         const data = doc.id;
+//         dates.push(data);
+//       });
+//     });
+//   return dates;
+// };
 const getAllDates = async (userid) => {
-  var dates = [];
-  await firestore
-    .collection(ANSWER_COLLECTION)
+  const dates = [];
+  var ref = await firestore
+    .collection("questionnaire")
     .doc(`responses`)
-    .collection(userid)
-    .get()
-    .then((snapshot) => {      
-      snapshot.forEach((doc) => {
-        const data = doc.id;
-        dates.push(data);
-      });
-    });
+    .collection(userid);
+  const latestsnap = await ref.orderBy("createdAt").get();
+  latestsnap.forEach((doc) => {
+    const data = doc.data();
+    dates.push(data.createdAt);
+  });
+  console.log(dates);
   return dates;
 };
-
 //Function to return the answers of the users most recent attempt. To be used to fetch the answers from the database and calculate the scores.
 const getAnswersLatestAttempt = async (userid) => {
   var latestAnswers = [];
@@ -312,6 +339,7 @@ const averageCalculator = async (userid) => {
     avg = avg + scores[j];
   }
   avg = avg / scores.length;
+  console.log("avg"+avg);
   return avg;
 };
 

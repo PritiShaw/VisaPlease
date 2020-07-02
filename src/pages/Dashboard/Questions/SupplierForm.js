@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { Form } from 'react-bootstrap'
 import { uuid } from 'uuidv4'
-const SupplierForm = props => {
-  const [answer1, setAns1] = useState('')
-  const [answer2, setAns2] = useState('')
-  const [answer3, setAns3] = useState('')
-  const [answer4, setAns4] = useState('')
-  const [answer5, setAns5] = useState('')
-  const [answer6, setAns6] = useState('')
-  const [answer7, setAns7] = useState(0)
-  const [answer8, setAns8] = useState('')
-  const [answer9, setAns9] = useState('')
-  const [answer10, setAns10] = useState('')
+const SupplierForm = (props) => {
+  const [answer1, setAns1] = useState("");
+  const [answer2, setAns2] = useState("");
+  const [answer3, setAns3] = useState("");
+  const [answer4, setAns4] = useState("");
+  const [answer5, setAns5] = useState("");
+  const [answer6, setAns6] = useState("");
+  const [answer7, setAns7] = useState("");
+  const [answer8, setAns8] = useState("");
+  const [answer9, setAns9] = useState("");
+  const [answer10, setAns10] = useState("");
 
   const clearForm = () => {
     setAns1('')
