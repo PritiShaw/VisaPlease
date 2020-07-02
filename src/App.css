@@ -11,6 +11,10 @@ body {
   font-family: 'Fira Sans', sans-serif !important;
   background-color: #fdbb0a;
 }
+#profile {
+  width:70%;
+  background-color: white;
+}
 
 h1,h2,h3,h4,h5,h6,label,span {
   font-weight: 800;

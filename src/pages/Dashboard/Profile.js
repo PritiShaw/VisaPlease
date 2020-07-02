@@ -36,7 +36,7 @@ class Profile extends React.Component{
         return(
                 <div>
                 <br/><br/><br/>
-                <table class="table table-striped table-secondary">
+                <table class="table table-striped" id="profile">
   
   <thead>
     <tr>
