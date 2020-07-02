@@ -8,7 +8,15 @@
 .auth {
   background: url(https://i.imgur.com/IrYJgGd.png);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+}
+
+@media (max-width: 768px) { 
+  .auth{
+    background: url(https://i.imgur.com/AgNmeb5.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 .animated-logo p {
@@ -30,7 +38,8 @@
 
   /* Clip Background Image */
 
-  background: url(https://i.imgur.com/W6xu56R.png) repeat-y;
+  background: url(https://i.imgur.com/oPbaVA0.gif) repeat-y;
+  background-size: cover;
   -webkit-background-clip: text;
   background-clip: text;
 

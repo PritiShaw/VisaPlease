@@ -47,7 +47,7 @@ const Dashboard = () => {
             VRecover
           </Link>
           <button class="navbar-toggler" type="button" onClick={() => setShowMenu(!showMenu)}><span>{showMenu ? "X" : "Menu"}</span></button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link id="Login" className="nav-link" onClick={() => logout()}>LogOut</Link>
@@ -59,7 +59,7 @@ const Dashboard = () => {
       <div className="container-fluid">
         <div className="row">
           <div className={"col-sm-3 col-12 d-sm-block px-0 " + (showMenu ? "" : "d-none")}>
-            <SidePanel logout={logout}/>
+            <SidePanel logout={logout} setShowMenu={setShowMenu}/>
           </div>
           <div className="col-sm-9 pt-5">
             <Switch>

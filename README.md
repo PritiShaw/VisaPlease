@@ -25,6 +25,5 @@ VRecover allows small business merchants to check their recovery score from pand
 - Fetch merchant related data needed for calculating the recovery score
 
 ### **Where to find our Application**
-We value your time. To save you from the complexity of running the code, you can find our application hosted at the following link:
-(https://vrecover.vercel.app/auth)
+We value your time. To save you from the complexity of running the code, you can find our application hosted at [vrecover.vercel.app](https://vrecover.vercel.app/auth)
 

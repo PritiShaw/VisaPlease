@@ -36,32 +36,32 @@ class Profile extends React.Component{
         return(
                 <div>
                 <br/><br/><br/>
-                <table class="table table-striped" id="profile">
+                <table class="table table-striped bg-light">
   
   <thead>
     <tr>
-      <th scope="row"><h4>Name</h4></th>
-      <td><h4>{this.state.userName} {this.state.lastName}</h4></td>
+      <th scope="row">Name</th>
+      <td>{this.state.userName} {this.state.lastName}</td>
     </tr>
     <tr>
-      <th scope="row"><h4>Email</h4></th>
-      <td><h4>{this.state.email}</h4></td>
+      <th scope="row">Email</th>
+      <td>{this.state.email}</td>
     </tr>
     <tr>
-      <th scope="row"><h4>Country Code</h4></th>
-      <td><h4>{this.state.countryCode}</h4></td>
+      <th scope="row">Country Code</th>
+      <td>{this.state.countryCode}</td>
     </tr>
     <tr>
-      <th scope="row"><h4>Company Name</h4></th>
-      <td><h4>{this.state.companyName}</h4></td>
+      <th scope="row">Company Name</th>
+      <td>{this.state.companyName}</td>
     </tr>
     <tr>
-      <th scope="row"><h4>Merchant Category Code</h4></th>
-      <td><h4>{this.state.categoryCode}</h4></td>
+      <th scope="row">Merchant Category Code</th>
+      <td>{this.state.categoryCode}</td>
     </tr>
     <tr>
-      <th scope="row"><h4>Visa Store ID</h4></th>
-      <td><h4>{this.state.visaID}</h4></td>
+      <th scope="row">Visa Store ID</th>
+      <td>{this.state.visaID}</td>
     </tr>
   </thead>
 </table>
